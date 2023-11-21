@@ -1,5 +1,5 @@
 /**
- * canActivate method to determine whether the user is allowed to access a route.
+ * canActivate method to determine whether the user is allowed to access a route. **Deprecated, lets find latest uses**
  * Checks if the user is logged in using the authentication service.
  * If the user is logged in, allows access; otherwise, redirects to the login page and denies access.
  *

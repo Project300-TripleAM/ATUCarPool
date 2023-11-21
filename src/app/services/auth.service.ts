@@ -3,9 +3,12 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
+//user auth service
 export class AuthService {
+  //Flag for log in state
   private isAuthenticated = false;
   private dummyUser = { username: 'dummyuser', password: 'password' };
+  //username state storage
   private loggedInUserName!: string;
 
   constructor() {}
@@ -13,11 +16,12 @@ export class AuthService {
   login(username: string, password: string): boolean {
     // Dummy authentication logic (replace this with actual authentication where we have it running)
     if (username === this.dummyUser.username && password === this.dummyUser.password) {
-      this.isAuthenticated = true;
+      this.isAuthenticated = true; //flag = true. we are log in
       this.loggedInUserName = username;
       return true;
-    } else {
-      this.isAuthenticated = false;
+
+    } else { //failed log in
+      this.isAuthenticated = false; 
       return false;
     }
   }
