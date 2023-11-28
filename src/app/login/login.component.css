@@ -8,3 +8,9 @@
   .login-actions {
     justify-content: space-between;
   }
+
+  .error-message {
+    color: red;
+    font-size: 14px; /* Adjust the font size as needed */
+    margin-top: 5px; /* Adjust the margin as needed */
+  }
