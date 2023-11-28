@@ -1,6 +1,8 @@
+// dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
-//couldnt find google namespacework around
+import { Router } from '@angular/router'; // Import the Router class
+// Couldn't find google namespace, workaround:
 declare var google: any;
 
 @Component({
@@ -16,6 +18,12 @@ export class DashboardComponent implements OnInit {
   private marker: any;
   private apiKey = environment.apiKey;
 
+  // Define the routes property
+  public routes: { id: number; origin: string; destination: string }[] = [];
+
+  // Inject the Router service in the constructor
+  constructor(private router: Router) {}
+
   ngOnInit() {
     (window as any).initMap = this.initMap.bind(this);
 
@@ -29,6 +37,7 @@ export class DashboardComponent implements OnInit {
     script.defer = true;
     document.head.appendChild(script);
   }
+
   initMap(): void {
     const initialPosition = { lat: 54.278422, lng: -8.460434 };
 
@@ -46,18 +55,16 @@ export class DashboardComponent implements OnInit {
     this.directionsService = new google.maps.DirectionsService();
     this.directionsRenderer = new google.maps.DirectionsRenderer({ map: this.map, suppressMarkers: true });
 
-    // route data
-    const routes = [
+    // Define and populate the route data
+    this.routes = [
       { id: 1, origin: 'Bury St, Ballina, Co. Mayo, F26 K597', destination: 'Ash Ln, Ballytivnan, Sligo' },
       { id: 2, origin: 'Providence Rd, Foxford, Co. Mayo, F26 H9E4', destination: 'Ash Ln, Ballytivnan, Sligo' },
     ];
 
-    //Draw routes on the map
-    routes.forEach(route => {
+    // Draw routes on the map
+    this.routes.forEach(route => {
       this.drawRoute(route);
     });
-
-
   }
 
   drawRoute(route: { id: number, origin: string, destination: string }): void {
@@ -78,7 +85,7 @@ export class DashboardComponent implements OnInit {
 
         routePolyline.setMap(this.map);
 
-        //Add a click event listener to the polyline
+        // Add a click event listener to the polyline
         routePolyline.addListener('click', () => {
           this.selectedRoute = route;
           this.displaySelectedRoute();
@@ -86,8 +93,17 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
   displaySelectedRoute(): void {
     // Implement logic to display details of the selected route
     console.log('Selected Route:', this.selectedRoute);
+  }
+
+  logOut(): void {
+    // Clear the user token from local storage
+    localStorage.removeItem('userToken');
+    
+    // Use the Angular router to navigate to the login page
+    this.router.navigate(['/login']); // Ensure you have a 'login' route configured
   }
 }
