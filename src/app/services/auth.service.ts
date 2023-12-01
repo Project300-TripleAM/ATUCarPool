@@ -1,37 +1,30 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthenticated = false;
+  private isAuthenticated = new BehaviorSubject<boolean>(false);
   private dummyUser = { username: 'dummyuser', password: 'password' };
-  private loggedInUserName: string | null = null;
 
   constructor() {}
 
   login(username: string, password: string): boolean {
     if (username === this.dummyUser.username && password === this.dummyUser.password) {
-      this.isAuthenticated = true;
-      this.loggedInUserName = username;
+      this.isAuthenticated.next(true);
       return true;
     } else {
-      this.isAuthenticated = false;
-      this.loggedInUserName = null;
+      this.isAuthenticated.next(false);
       return false;
     }
   }
 
   logout(): void {
-    this.isAuthenticated = false;
-    this.loggedInUserName = null;
+    this.isAuthenticated.next(false);
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn(): BehaviorSubject<boolean> {
     return this.isAuthenticated;
-  }
-
-  getLoggedInUserName(): string {
-    return this.loggedInUserName || '';
   }
 }

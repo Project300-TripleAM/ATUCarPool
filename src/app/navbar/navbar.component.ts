@@ -1,27 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  username: string = '';
-  password: string = '';
-  isLoggedIn: boolean = false; // Add this property to track login status
+  isLoggedIn: boolean = false;
+  private authSubscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.checkLoginStatus(); // Check login status on component initialization
+    this.authSubscription = this.authService.isLoggedIn().subscribe(
+      (loggedIn: boolean) => {
+        this.isLoggedIn = loggedIn;
+        this.changeDetector.detectChanges();
+      }
+    );
   }
 
-  checkLoginStatus() {
-    this.isLoggedIn = this.authService.isLoggedIn();
+  ngOnDestroy() {
+    this.authSubscription.unsubscribe();
   }
 
   toggleSidenav() {
@@ -30,25 +39,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  login() {
-    if (this.authService.login(this.username, this.password)) {
-      console.log('Login successful');
-      this.checkLoginStatus(); // Update login status
-      this.router.navigate(['/dashboard']);
-    } else {
-      console.log('Login failed');
-    }
-  }
-
   logout() {
     this.authService.logout();
-    this.checkLoginStatus(); // Update login status
     this.router.navigate(['/login']);
   }
-  register() {
-    // Registration logic once we implement registration form logic
-    console.log('Redirecting to registration page');
-  }
 }
-
-  
