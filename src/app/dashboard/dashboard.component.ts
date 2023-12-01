@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Router } from '@angular/router'; // Import the Router class
-// Couldn't find google namespace, workaround:
 declare var google: any;
 
 @Component({
@@ -16,16 +15,12 @@ export class DashboardComponent implements OnInit {
   private map: any;
   private marker: any;
   private apiKey = environment.apiKey;
-
-  // Define the routes property
   public routes: { id: number; origin: string; destination: string }[] = [];
 
-  // Inject the Router service in the constructor
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     (window as any).initMap = this.initMap.bind(this);
-
     this.loadGoogleMapsScript();
   }
 
@@ -39,20 +34,20 @@ export class DashboardComponent implements OnInit {
 
   initMap(): void {
     const initialPosition = { lat: 54.278422, lng: -8.460434 };
-
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
       center: initialPosition,
     });
-
     this.marker = new google.maps.Marker({
       map: this.map,
       position: initialPosition,
       title: 'ATU, Sligo'
     });
-
     this.directionsService = new google.maps.DirectionsService();
-    this.directionsRenderer = new google.maps.DirectionsRenderer({ map: this.map, suppressMarkers: true });
+    this.directionsRenderer = new google.maps.DirectionsRenderer({
+      map: this.map,
+      suppressMarkers: true
+    });
 
     // Define and populate the route data
     this.routes = [
@@ -64,6 +59,9 @@ export class DashboardComponent implements OnInit {
     this.routes.forEach(route => {
       this.drawRoute(route);
     });
+
+    // Manually trigger change detection to update the view
+    this.cdr.detectChanges();
   }
 
   drawRoute(route: { id: number, origin: string, destination: string }): void {
@@ -73,11 +71,11 @@ export class DashboardComponent implements OnInit {
       travelMode: 'DRIVING'
     };
 
-    this.directionsService.route(request, (result: { routes: { overview_path: any; }[]; }, status: string) => {
+    this.directionsService.route(request, (result: any, status: string) => {
       if (status === 'OK') {
         const routePolyline = new google.maps.Polyline({
           path: result.routes[0].overview_path,
-          strokeColor: '#FF0000', // Choose a color for the route
+          strokeColor: '#FF0000', // Red color for the route
           strokeOpacity: 1.0,
           strokeWeight: 2
         });
@@ -103,6 +101,6 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('userToken');
     
     // Use the Angular router to navigate to the login page
-    this.router.navigate(['/login']); // Ensure you have a 'login' route configured
+    this.router.navigate(['/login']);
   }
 }
