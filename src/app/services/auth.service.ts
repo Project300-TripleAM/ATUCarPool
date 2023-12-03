@@ -3,6 +3,7 @@ import { CognitoUser, CognitoUserPool, AuthenticationDetails, CognitoUserAttribu
 import { AuthData } from './auth-data';
 import { UserData } from './user-data';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -79,11 +80,6 @@ logout(): void {
   // user is found, sign them out
   if (cognitoUser) {
     cognitoUser.signOut();
-  }
-  //Reset flag and username
-  this.isAuthenticated = false;
-  this.loggedInUserName = '';
-}
 
 //user registration
 register(username: string, password: string, email: string, name: string, gender: string, birthdate: string, phoneNumber: string): Promise<void> {

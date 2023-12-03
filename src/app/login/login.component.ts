@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   username!: string;
   password!: string;
   errorMessage: string = '';
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login(username: string, password: string): void {
     this.authService.login(username, password)
@@ -31,7 +30,6 @@ export class LoginComponent {
     console.log('Logged out');
   }
   register() {
-    //registration logic once we implement regestration form logic
     console.log('Redirecting to registration page');
     this.router.navigate(['/registration']);
   }
