@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CognitoUser, CognitoUserPool, AuthenticationDetails, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { AuthData } from './auth-data';
 import { UserData } from './user-data';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -111,8 +112,8 @@ register(username: string, password: string, email: string, name: string, gender
   });
 }
   //checks user is logged in
-  isLoggedIn(): boolean {
-    return this.isAuthenticated;
+  isLoggedIn(): Observable<boolean> {//fixed error by adding Observable<boolean>
+    return of(this.isAuthenticated); //fixed error by adding 'of(this.isAuthenticated)
   }
   
 //returns the logged in user
