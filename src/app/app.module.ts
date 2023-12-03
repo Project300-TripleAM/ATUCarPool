@@ -16,7 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { ReactiveFormsModule } from '@angular/forms'; // Remove 'FormsModule' import
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Remove 'FormsModule' import
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Remove 'FormsModule' im
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
