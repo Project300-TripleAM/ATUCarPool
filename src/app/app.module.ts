@@ -11,13 +11,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './services/auth.service';
-import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'; // Remove 'FormsModule' import
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,13 +34,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
-
+    MatSidenavModule,
     ReactiveFormsModule
-
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

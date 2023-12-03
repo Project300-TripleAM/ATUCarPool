@@ -80,7 +80,8 @@ logout(): void {
   // user is found, sign them out
   if (cognitoUser) {
     cognitoUser.signOut();
-
+  }
+}
 //user registration
 register(username: string, password: string, email: string, name: string, gender: string, birthdate: string, phoneNumber: string): Promise<void> {
   //attribute list for user registration init
