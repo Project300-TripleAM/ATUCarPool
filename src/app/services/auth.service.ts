@@ -114,6 +114,7 @@ register(username: string, password: string, email: string, name: string, gender
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
+  
 //returns the logged in user
   getLoggedInUserName(): string {
     return this.loggedInUserName; 
