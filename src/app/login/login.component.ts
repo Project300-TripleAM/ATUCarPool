@@ -14,19 +14,21 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    if (this.authService.login(this.username, this.password)) {
-      // Redirect to the dashboard
-
-      console.log('Login successful');
-      this.router.navigate(['/dashboard']);
-    } else {
-      // Display error message
-      this.errorMessage = 'Invalid username or password';
-      console.log('Login failed');
-    }
+  login(username: string, password: string): void {
+    this.authService.login(username, password)
+      .then(() => {
+        console.log('Login successful');
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
+      });
   }
 
+  logout(): void {
+    this.authService.logout();
+    console.log('Logged out');
+  }
   register() {
     console.log('Redirecting to registration page');
     this.router.navigate(['/registration']);
