@@ -1,0 +1,32 @@
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .registration-card {
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .registration-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .registration-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .registration-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .registration-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
