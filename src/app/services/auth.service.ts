@@ -119,7 +119,7 @@ getUserDetails(): { username: string, email: string, name: string } | null {
     return {
       username: this.loggedInUserName,
       email: this.loggedInUserEmail,
-      name: this.loggedInUserName,
+      name: this.loggedInUserName, //can use UserName here for now, can be modified later
     };
   }
   return null;
