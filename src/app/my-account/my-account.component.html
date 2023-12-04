@@ -1,6 +1,9 @@
-<div *ngIf="user">
+<div class="account-container">
+    <h4>Welcome to Your ATUCarPool Account, from here you can see your information, recent trips and upcoming trips</h4>
+ <div *ngIf="user">
     <h2>Welcome, {{ user.name }}</h2>
     <p>Username: {{ user.username }}</p>
     <p>Email: {{ user.email }}</p>
   </div>
+</div>
   
