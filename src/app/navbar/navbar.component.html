@@ -1,21 +1,15 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button (click)="toggleSidenav()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="spacer"></span>
-    <button mat-button *ngIf="!isLoggedIn" routerLink="/login">Login</button>
-    <button mat-button *ngIf="!isLoggedIn" routerLink="/register">Register</button>
-    <button mat-button *ngIf="isLoggedIn" routerLink="/my-account">My Account</button>
-    <button mat-button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
-  </mat-toolbar>
+  <button mat-icon-button (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+
+  <button mat-button *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+  <button mat-button *ngIf="!isLoggedIn" routerLink="/registration">Register</button>
   
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="over">
-      <!-- Sidenav content can go here -->
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <!-- Main content of your application -->
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+  <!-- Only show "My Account" and "Logout" if user is logged in -->
+  <ng-container *ngIf="isLoggedIn">
+    <button mat-button routerLink="/my-account">My Account</button>
+    <button mat-button (click)="logout()">Logout</button>
+  </ng-container>
+</mat-toolbar>

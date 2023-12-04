@@ -42,7 +42,16 @@ export class RegistrationComponent {
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
     });
+
+     // Disable the button initially
+     this.disableRegisterButton();
   }
+
+  private disableRegisterButton(): void {
+    this.registrationForm.markAllAsTouched(); // Mark all form controls as touched to trigger validation
+    this.registrationForm.disable();
+  }
+
 
   register() {
     if (!this.passwordsMatch()) {
@@ -52,6 +61,9 @@ export class RegistrationComponent {
 
     // Registration logic here
     console.log(`Registering with Full Name: ${this.fullName}, Email: ${this.email}, Password: ${this.password}`);
+
+    // Redirect to dashboard after registering 
+    this.router.navigate(['/dashboard']);
   }
 
   goToLogin() {
