@@ -1,0 +1,31 @@
+// Import the Angular Material theming functions
+@import '@angular/material/theming';
+
+// Define a custom color palette for your app
+$black-base: mat-palette($mat-grey, 900); // Use grey palette and define 900 as default hue for black
+$grey-base: mat-palette($mat-grey, 500); // Use grey palette and define 500 as default hue for grey
+$white-base: mat-palette($mat-grey, 50); // Use grey palette and define 50 as default hue for white
+
+// Define primary, accent and warn palettes
+$my-app-primary: $black-base;
+$my-app-accent: $grey-base;
+$my-app-warn: $white-base;
+
+// Create the theme object
+$my-app-theme: mat-light-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    )
+  )
+);
+
+// Include the base styles for core and each component used in your app
+@include angular-material-theme($my-app-theme);
+
+// Define custom styles if needed, for example for a toolbar
+.my-custom-toolbar {
+  @include mat-toolbar-theme($my-app-theme);
+}

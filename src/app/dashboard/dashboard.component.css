@@ -16,7 +16,7 @@
 
 /* Style for table headers */
 .table th {
-    background-color: #673ab7; /* Angular Material Deep Purple 500 */
+    background-color: #000000; /* Black background for headers */
     color: white;
     text-align: left;
     padding: 8px;
@@ -28,11 +28,7 @@
     text-align: left; /* Align text to the left */
     padding: 8px; /* Add some padding */
     border-bottom: 1px solid #ddd; /* Add a bottom border to each cell */
-}
-
-/* Add zebra striping for rows */
-.table tr:nth-child(odd) {
-    background-color: #f2f2f2; /* Light grey background for odd rows */
+    background-color: white; /* Set the background color to white */
 }
 
 /* Add hover effect for rows - Optional */
