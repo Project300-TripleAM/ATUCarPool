@@ -6,38 +6,49 @@
       </mat-card-header>
       
       <mat-card-content class="registration-content">
-      <mat-form-field class="registration-form-field">
-        <input matInput placeholder="Full Name" aria-label="Full Name" formControlName="fullName">
-        <mat-error *ngIf="registrationForm.get('fullName')?.hasError('required')">Full name is required</mat-error>
-        <mat-error *ngIf="registrationForm.get('fullName')?.hasError('containsNumbers')">Numbers are not allowed</mat-error>
-      </mat-form-field>
-      
+        <mat-form-field class="registration-form-field">
+          <input matInput placeholder="Username" aria-label="Username" formControlName="username">
+          <mat-error *ngIf="registrationForm.get('username')?.hasError('required')">User name is required</mat-error>
+        </mat-form-field>
 
-      <mat-form-field class="registration-form-field">
-        <input matInput placeholder="Email" aria-label="Email" formControlName="email">
-        <mat-error *ngIf="registrationForm.get('email')?.hasError('required') || registrationForm.get('email')?.hasError('invalidEmailFormat')">
-          {{ registrationForm.get('email')?.hasError('required') ? 'Email is required' : 'Invalid email format' }}
-        </mat-error>
-      </mat-form-field>
-      
-      <!---
-      <mat-form-field class="registration-form-field">
-        <input matInput placeholder="Email" aria-label="Email" formControlName="email">
-        <mat-error *ngIf="registrationForm.get('email')?.hasError('required')">Email is required</mat-error>
-        <mat-error *ngIf="registrationForm.get('email')?.hasError('invalidEmailFormat')">Invalid email format</mat-error>
-      </mat-form-field>
-    -->
-  
-      <mat-form-field class="registration-form-field">
-        <input matInput type="password" placeholder="Password" aria-label="Password" formControlName="password">
-        <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">Password is required</mat-error>
-      </mat-form-field>
-      
-      <mat-form-field class="registration-form-field">
-        <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
-        <mat-error *ngIf="!passwordsMatch()" class="text-danger">Passwords do not match</mat-error>
-      </mat-form-field>
-    </mat-card-content>
+        <mat-form-field class="registration-form-field">
+          <input matInput placeholder="Full Name" aria-label="Full Name" formControlName="fullName">
+          <mat-error *ngIf="registrationForm.get('fullName')?.hasError('required')">Full name is required</mat-error>
+          <mat-error *ngIf="registrationForm.get('fullName')?.hasError('containsNumbers')">Numbers are not allowed</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput placeholder="Email" aria-label="Email" formControlName="email">
+          <mat-error *ngIf="registrationForm.get('email')?.hasError('required') || registrationForm.get('email')?.hasError('invalidEmailFormat')">
+            {{ registrationForm.get('email')?.hasError('required') ? 'Email is required' : 'Invalid email format' }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput type="password" placeholder="Password" aria-label="Password" formControlName="password">
+          <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+          <mat-error *ngIf="!passwordsMatch()" class="text-danger">Passwords do not match</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput placeholder="Gender" aria-label="Gender" formControlName="gender">
+          <mat-error *ngIf="registrationForm.get('gender')?.hasError('required')">Gender is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput type="date" placeholder="Birthdate" aria-label="Birthdate" formControlName="birthdate">
+          <mat-error *ngIf="registrationForm.get('birthdate')?.hasError('required')">Birthdate is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="registration-form-field">
+          <input matInput placeholder="Phone Number" aria-label="Phone Number" formControlName="phoneNumber">
+          <mat-error *ngIf="registrationForm.get('phoneNumber')?.hasError('required')">Phone Number is required</mat-error>
+        </mat-form-field>
+      </mat-card-content>
   
       <mat-card-actions class="registration-actions">
         <button mat-raised-button color="primary" (click)="register()" [disabled]="!registrationForm.valid">Register</button>
@@ -45,5 +56,4 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  
-  </form>
+</form>

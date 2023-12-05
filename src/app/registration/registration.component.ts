@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -25,33 +25,32 @@ function validateEmailFormat(control: AbstractControl): { [key: string]: any } |
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup = new FormGroup({});
+  username?: string;
   fullName?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
+  gender?: string;
+  birthdate?: string;
+  phonenumber?: string;
+
 
   constructor(private router: Router) {}
 
-  // Validation
   ngOnInit(): void {
     this.registrationForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
       fullName: new FormControl('', [Validators.required, nameValidator]),
       email: new FormControl('', [Validators.required, validateEmailFormat]),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      birthdate: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required]),
     });
-
-     // Disable the button initially
-     this.disableRegisterButton();
   }
-
-  private disableRegisterButton(): void {
-    this.registrationForm.markAllAsTouched(); // Mark all form controls as touched to trigger validation
-    this.registrationForm.disable();
-  }
-
 
   register() {
     if (!this.passwordsMatch()) {
@@ -60,10 +59,7 @@ export class RegistrationComponent {
     }
 
     // Registration logic here
-    console.log(`Registering with Full Name: ${this.fullName}, Email: ${this.email}, Password: ${this.password}`);
-
-    // Redirect to dashboard after registering 
-    this.router.navigate(['/dashboard']);
+    console.log(`Registering with Full Name: ${this.registrationForm.get('fullName')?.value}, Email: ${this.registrationForm.get('email')?.value}, Password: ${this.registrationForm.get('password')?.value}`);
   }
 
   goToLogin() {
@@ -71,14 +67,13 @@ export class RegistrationComponent {
   }
 
   // Method to detect if passwords match.
- passwordsMatch(): boolean {
-  const passwordControl = this.registrationForm.get('password');
-  const confirmPasswordControl = this.registrationForm.get('confirmPassword');
+  passwordsMatch(): boolean {
+    const passwordControl = this.registrationForm.get('password');
+    const confirmPasswordControl = this.registrationForm.get('confirmPassword');
 
-  return (
-    passwordControl && confirmPasswordControl &&
-    passwordControl.value === confirmPasswordControl.value
-  ) as boolean;
-}
-
+    return (
+      passwordControl && confirmPasswordControl &&
+      passwordControl.value === confirmPasswordControl.value
+    ) as boolean;
+  }
 }
