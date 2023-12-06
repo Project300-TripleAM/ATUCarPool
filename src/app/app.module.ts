@@ -26,8 +26,8 @@ import { MyAccountComponent } from './my-account/my-account.component'; // Remov
     LoginComponent,
     RegistrationComponent,
     DashboardComponent,
-    NavbarComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +40,7 @@ import { MyAccountComponent } from './my-account/my-account.component'; // Remov
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-navbar-&-dashboard-table
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
     FormsModule
 
   ],

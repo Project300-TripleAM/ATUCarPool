@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from '../services/auth.service';
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
