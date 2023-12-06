@@ -23,6 +23,7 @@ export class AuthService {
 
   //Store thje logged in user
   private loggedInUserName!: string;
+  private loggedInUserEmail!: string;
 
   constructor() {}
 
@@ -105,12 +106,25 @@ register(username: string, password: string, email: string, name: string, gender
         //whenregistration is successful, set authentication flag to true and store the username
         this.isAuthenticated = true;
         this.loggedInUserName = username;
+        this.loggedInUserEmail = email;
         //Resolve the Promise
         resolve();
       }
     });
   });
 }
+
+getUserDetails(): { username: string, email: string, name: string } | null {
+  if (this.isAuthenticated) {
+    return {
+      username: this.loggedInUserName,
+      email: this.loggedInUserEmail,
+      name: this.loggedInUserName, //can use UserName here for now, can be modified later
+    };
+  }
+  return null;
+}
+
   //checks user is logged in
   isLoggedIn(): Observable<boolean> {//fixed error by adding Observable<boolean>
     return of(this.isAuthenticated); //fixed error by adding 'of(this.isAuthenticated)
