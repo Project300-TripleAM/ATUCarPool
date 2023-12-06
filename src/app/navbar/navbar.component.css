@@ -1,4 +1,18 @@
 .spacer {
     flex: 1 1 auto;
   }
+
+ 
+.navbar-button {
+  background-color: #858484; /* Light grey background color */
+  color: #000; /* Text color */
+  margin: 0 8px; /* Add some margin for spacing */
+}
+
+/* Increase specificity */
+mat-toolbar .navbar-button {
+  color: #000 !important; /* Black text color */
+}
+
+
   
