@@ -17,13 +17,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { MyAccountComponent } from './my-account/my-account.component'; // Remove 'FormsModule' import
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +37,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+navbar-&-dashboard-table
     ReactiveFormsModule
+
+    FormsModule
 
   ],
   providers: [AuthService],

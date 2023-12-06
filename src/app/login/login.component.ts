@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+// login.component.ts
+
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,24 +9,26 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username!: string;
   password!: string;
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    if (this.authService.login(this.username, this.password)) {
-      // Redirect to the dashboard
+  ngOnInit(): void {
+    this.disableLoginButton();
+  }
 
-      console.log('Login successful');
-      this.router.navigate(['/dashboard']);
-    } else {
-      // Display error message
-      this.errorMessage = 'Invalid username or password';
-      console.log('Login failed');
-    }
+  login(username: string, password: string): void {
+    this.authService.login(username, password)
+      .then(() => {
+        console.log('Login successful');
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
+      });
   }
 
   register() {
@@ -37,5 +41,20 @@ export class LoginComponent {
     this.username = '';
     this.password = '';
     this.errorMessage = '';
+  }
+
+  areLoginFieldsValid(): boolean {
+    // Check if both username and password are truthy values
+    return !!this.username && !!this.password;
+  }
+  
+  private disableLoginButton(): void {
+    // Disable the "Login" button if login fields are not valid
+    if (!this.areLoginFieldsValid()) {
+      const loginButton = document.querySelector('#loginButton') as HTMLButtonElement | null;
+      if (loginButton) {
+        loginButton.disabled = true;
+      }
+    }
   }
 }

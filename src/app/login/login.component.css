@@ -1,57 +1,27 @@
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #a2a1a1; /* Angular Material-like grey background */
-}
 
-.login-card {
-  width: 300px;
-  margin-top: 40px; /* Additional space from the top */
-  padding: 20px;
-  background-color: white; /* Keeping the card white for contrast */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border-radius: 8px; /* Rounded corners */
-}
 
-.full-width {
-  width: 100%;
-}
 
-.error-message {
-  color: #d32f2f; /* Standard red for error messages */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  margin-top: 10px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-actions {
+    justify-content: space-between;
+  }
 
-.login-actions {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-  width: 100%;
-}
-
-.login-actions div {
-  width: 48%;
-}
-
+  /* Add this CSS to your component's CSS file or a global stylesheet */
 .app-header {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: transparent; /* Keeping the header background transparent */
+  top: 20px; /* Adjust the top position as needed */
+  left: 20px; /* Adjust the left position as needed */
 }
 
 .app-name {
-  font-size: 36px;
+  font-size: 36px; /* Adjust the font size as needed */
   font-weight: bold;
-  color: #007bff; /* Blue for the app name */
+  color: #007bff; /* Adjust the color as needed */
   margin: 0;
   padding: 0;
-  justify-content: left;
-  align-items: center;
-}

@@ -1,4 +1,4 @@
-<!-- Remove mat-form-field wrapping around mat-card -->
+
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header>
@@ -23,7 +23,7 @@
     </mat-card-content>
 
     <mat-card-actions class="login-actions">
-      <button mat-raised-button color="primary" (click)="login()">Login</button>
+      <button id="loginButton" mat-raised-button color="primary" (click)="login(username, password)" [disabled]="!areLoginFieldsValid()">Login</button>
       <button mat-button (click)="register()">Register</button>
     </mat-card-actions>
   </mat-card>
