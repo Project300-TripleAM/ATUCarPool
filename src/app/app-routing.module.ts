@@ -5,6 +5,7 @@ import { MyAccountComponent } from './my-account/my-account.component'
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './services/authguard.service';
+import { FaqComponent } from './faq/faq.component';
 
 //Declare routing for app
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent,canActivate: [AuthGuard] },
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, //boolean canactivate to determine if this route can be accessed
+  { path: 'faq', component: FaqComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

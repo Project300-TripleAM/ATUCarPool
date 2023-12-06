@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MyAccountComponent } from './my-account/my-account.component'; // Remove 'FormsModule' import
+import { MyAccountComponent } from './my-account/my-account.component';
+import { FaqComponent } from './faq/faq.component'; // Remove 'FormsModule' import
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MyAccountComponent } from './my-account/my-account.component'; // Remov
     RegistrationComponent,
     DashboardComponent,
     MyAccountComponent,
-    NavbarComponent
+    NavbarComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
