@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+.app-header {
+  text-align: left; /* left the header text */
+  padding: 10px 0; /* Add some padding above and below the header */
+  background-color: #a2a1a1; /* Adjust the color to fit your app's theme */
+  color: rgb(0, 0, 0); /* This will be the color of the text */
+}
+
+.app-name {
+  font-family: 'Nunito', sans-serif; /* This is a more rounded, friendly font */
+  font-size: 2.5em; /* Increase the size of the text */
+  font-weight: 700; /* Make the font bold */
+  letter-spacing: 1px; /* Adjust letter spacing */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
+  margin: 0; /* Remove default margin */
+}
+
+/* Optionally, add a logo before the app name */
+.app-name::before {
+  /*content: url('path-to-your-logo.png'); /* Add the path to your logo */
+  vertical-align: middle; /* Align the logo with the middle of the text */
+  margin-right: 10px; /* Add some space between the logo and the text */
+}

@@ -1,41 +1,40 @@
 #map {
     height: 80%;
-    width: 100%;  
-}
-
-.spacer {
-    flex: 1 1 auto;
+    width: 100%;
+    border: 1px solid #ddd; /* New border for definition */
+    margin-bottom: 20px; /* Space between map and table */
+    border-radius: 8px; /* Rounded corners */
 }
 
 /* Styles for the table to ensure visibility and basic formatting */
 .table {
     width: 100%;
-    margin-top: 20px; /* Adds space between the map and the table */
-    border-collapse: collapse; /* Removes the space between borders */
+    margin-top: 20px; 
+    border-collapse: separate; 
+    border-spacing: 0 8px; /* Spacing between rows */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 /* Style for table headers */
 .table th {
-    background-color: #673ab7; /* Angular Material Deep Purple 500 */
+    background-color: #424242; 
     color: white;
     text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px 8px; /* Increased padding */
+    border-bottom: none; /* Remove border-bottom */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
 }
 
 /* Style for table data cells */
 .table td {
-    text-align: left; /* Align text to the left */
-    padding: 8px; /* Add some padding */
-    border-bottom: 1px solid #ddd; /* Add a bottom border to each cell */
+    text-align: left;
+    padding: 12px 8px; /* Increased padding */
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+    border-radius: 0; /* Round corners for cells */
 }
 
-/* Add zebra striping for rows */
-.table tr:nth-child(odd) {
-    background-color: #f2f2f2; /* Light grey background for odd rows */
-}
-
-/* Add hover effect for rows - Optional */
+/* Add hover effect for rows */
 .table tr:hover {
-    background-color: #ddd; /* Light grey background on hover */
+    background-color: #f2f2f2; /* Subtle grey for hover */
 }

@@ -53,6 +53,9 @@ export class DashboardComponent implements OnInit {
     this.routes = [
       { id: 1, origin: 'Bury St, Ballina, Co. Mayo, F26 K597', destination: 'Ash Ln, Ballytivnan, Sligo' },
       { id: 2, origin: 'Providence Rd, Foxford, Co. Mayo, F26 H9E4', destination: 'Ash Ln, Ballytivnan, Sligo' },
+      { id: 3, origin: 'Castlebar, Co. Mayo', destination: 'Ash Ln, Ballytivnan, Sligo' },
+      { id: 4, origin: 'Enniskillen, Co. Fermanagh, Northern Ireland', destination: 'Ash Ln, Ballytivnan, Sligo' },
+      { id: 5, origin: 'Donegal Town, Co. Donegal', destination: 'Ash Ln, Ballytivnan, Sligo' }
     ];
 
     // Draw routes on the map

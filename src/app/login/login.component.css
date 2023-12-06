@@ -1,5 +1,7 @@
 .login-container {
 
+
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,36 +25,3 @@
   color: #007bff; /* Adjust the color as needed */
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-card {
-  width: 300px;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.error-message {
-  color: red;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px; /* Adjust the font size as needed */
-  margin-top: 5px; /* Adjust the margin as needed */
-}
-
-.login-actions {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 16px;
-  width: 100%;
-}
-
-.login-actions div {
-  width: 48%;
-}

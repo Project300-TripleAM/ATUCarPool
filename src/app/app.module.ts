@@ -15,9 +15,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { MyAccountComponent } from './my-account/my-account.component'; // Remove 'FormsModule' import
+
 
 @NgModule({
   declarations: [
@@ -39,8 +40,11 @@ import { MyAccountComponent } from './my-account/my-account.component'; // Remov
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    ReactiveFormsModule,
+navbar-&-dashboard-table
+    ReactiveFormsModule
+
     FormsModule
+
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
