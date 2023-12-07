@@ -4,6 +4,7 @@
   </button>
   <span class="spacer"></span>
   <button mat-button routerLink="/faq" class="navbar-button">FAQ</button>
+  <button mat-button *ngIf="!isLoggedIn" routerLink="/dashboard" class="navbar-button">Dashboard</button>
   <button mat-button *ngIf="!isLoggedIn" routerLink="/login" class="navbar-button">Login</button>
   <button mat-button *ngIf="!isLoggedIn" routerLink="/registration" class="navbar-button">Register</button>
   <button mat-button *ngIf="isLoggedIn" routerLink="/dashboard" class="navbar-button">Dashboard</button>
