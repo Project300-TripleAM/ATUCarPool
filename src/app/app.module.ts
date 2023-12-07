@@ -18,7 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MyAccountComponent } from './my-account/my-account.component';
-import { FaqComponent } from './faq/faq.component'; // Remove 'FormsModule' import
+import { FaqComponent } from './faq/faq.component'; 
 
 
 @NgModule({
