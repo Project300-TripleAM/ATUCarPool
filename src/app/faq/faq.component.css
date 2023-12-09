@@ -5,16 +5,18 @@
   
   .faq-item {
     margin-bottom: 20px; /* Adds space between FAQ items */
+    color: white;
     text-align: left;
   }
   
   .faq-item h2 {
     font-size: 1.5rem; /* Larger font size for questions */
-    color: #007bff; /* Optional: Use primary color for questions */
+    color: #c9c9c9; /* Optional: Use primary color for questions */
   }
   
   .faq-item p {
     font-size: 1rem; /* Standard font size for answers */
     text-align: justify; /* Justifies the text for better readability */
+    font-style: italic;
   }
   
