@@ -1,0 +1,227 @@
+# this is an auto generated file. This will be overwritten
+
+query GetDriver($id: ID!) {
+  getDriver(id: $id) {
+    id
+    name
+    email
+    phone
+    carType
+    vehicles {
+      nextToken
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+query ListDrivers(
+  $filter: ModelDriverFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetRider($id: ID!) {
+  getRider(id: $id) {
+    id
+    name
+    email
+    phone
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    vehiclePassengersId
+    __typename
+  }
+}
+
+query ListRiders(
+  $filter: ModelRiderFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRiders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetVehicle($id: ID!) {
+  getVehicle(id: $id) {
+    id
+    make
+    model
+    year
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    passengers {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverVehiclesId
+    __typename
+  }
+}
+
+query ListVehicles(
+  $filter: ModelVehicleFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listVehicles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      make
+      model
+      year
+      createdAt
+      updatedAt
+      driverVehiclesId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetTrip($id: ID!) {
+  getTrip(id: $id) {
+    id
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    startTime
+    endTime
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverTripsId
+    riderTripsId
+    __typename
+  }
+}
+
+query ListTrips(
+  $filter: ModelTripFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      driverTripsId
+      riderTripsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    trip {
+      id
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      driverTripsId
+      riderTripsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    tripCommentsId
+    __typename
+  }
+}
+
+query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      updatedAt
+      tripCommentsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}

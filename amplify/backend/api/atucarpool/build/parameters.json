@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "atucarpool",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-atucarpool-dev-123910-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/ec074f2db3d5228f474b4b472554497c2421f7c9"
+}

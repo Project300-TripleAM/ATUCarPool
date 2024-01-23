@@ -1,0 +1,370 @@
+# this is an auto generated file. This will be overwritten
+
+subscription OnCreateDriver($filter: ModelSubscriptionDriverFilterInput) {
+  onCreateDriver(filter: $filter) {
+    id
+    name
+    email
+    phone
+    carType
+    vehicles {
+      nextToken
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnUpdateDriver($filter: ModelSubscriptionDriverFilterInput) {
+  onUpdateDriver(filter: $filter) {
+    id
+    name
+    email
+    phone
+    carType
+    vehicles {
+      nextToken
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnDeleteDriver($filter: ModelSubscriptionDriverFilterInput) {
+  onDeleteDriver(filter: $filter) {
+    id
+    name
+    email
+    phone
+    carType
+    vehicles {
+      nextToken
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+
+subscription OnCreateRider($filter: ModelSubscriptionRiderFilterInput) {
+  onCreateRider(filter: $filter) {
+    id
+    name
+    email
+    phone
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    vehiclePassengersId
+    __typename
+  }
+}
+
+subscription OnUpdateRider($filter: ModelSubscriptionRiderFilterInput) {
+  onUpdateRider(filter: $filter) {
+    id
+    name
+    email
+    phone
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    vehiclePassengersId
+    __typename
+  }
+}
+
+subscription OnDeleteRider($filter: ModelSubscriptionRiderFilterInput) {
+  onDeleteRider(filter: $filter) {
+    id
+    name
+    email
+    phone
+    trips {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    vehiclePassengersId
+    __typename
+  }
+}
+
+subscription OnCreateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
+  onCreateVehicle(filter: $filter) {
+    id
+    make
+    model
+    year
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    passengers {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverVehiclesId
+    __typename
+  }
+}
+
+subscription OnUpdateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
+  onUpdateVehicle(filter: $filter) {
+    id
+    make
+    model
+    year
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    passengers {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverVehiclesId
+    __typename
+  }
+}
+
+subscription OnDeleteVehicle($filter: ModelSubscriptionVehicleFilterInput) {
+  onDeleteVehicle(filter: $filter) {
+    id
+    make
+    model
+    year
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    passengers {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverVehiclesId
+    __typename
+  }
+}
+
+subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
+  onCreateTrip(filter: $filter) {
+    id
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    startTime
+    endTime
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverTripsId
+    riderTripsId
+    __typename
+  }
+}
+
+subscription OnUpdateTrip($filter: ModelSubscriptionTripFilterInput) {
+  onUpdateTrip(filter: $filter) {
+    id
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    startTime
+    endTime
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverTripsId
+    riderTripsId
+    __typename
+  }
+}
+
+subscription OnDeleteTrip($filter: ModelSubscriptionTripFilterInput) {
+  onDeleteTrip(filter: $filter) {
+    id
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    startTime
+    endTime
+    comments {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    driverTripsId
+    riderTripsId
+    __typename
+  }
+}
+
+subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
+  onCreateComment(filter: $filter) {
+    id
+    trip {
+      id
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      driverTripsId
+      riderTripsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    tripCommentsId
+    __typename
+  }
+}
+
+subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
+  onUpdateComment(filter: $filter) {
+    id
+    trip {
+      id
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      driverTripsId
+      riderTripsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    tripCommentsId
+    __typename
+  }
+}
+
+subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
+  onDeleteComment(filter: $filter) {
+    id
+    trip {
+      id
+      startTime
+      endTime
+      createdAt
+      updatedAt
+      driverTripsId
+      riderTripsId
+      __typename
+    }
+    content
+    createdAt
+    updatedAt
+    tripCommentsId
+    __typename
+  }
+}
