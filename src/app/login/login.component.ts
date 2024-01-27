@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,9 +11,9 @@ export class LoginComponent {
   password!: string;
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor( private router: Router) {}
 
-  login(username: string, password: string): void {
+  /* login(username: string, password: string): void {
     this.authService.login(username, password)
       .then(() => {
         console.log('Login successful');
@@ -39,5 +38,5 @@ export class LoginComponent {
     this.username = '';
     this.password = '';
     this.errorMessage = '';
-  }
+  } */
 }
