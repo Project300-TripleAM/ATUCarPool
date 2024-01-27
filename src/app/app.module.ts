@@ -10,14 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthService } from './services/auth.service';
-import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Amplify } from 'aws-amplify';
+import awsconfig from 'src/amplifyconfiguration.json';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+
+Amplify.configure(awsconfig);
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,12 +39,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule
-
-    ReactiveFormsModule
-
+    MatSidenavModule,
+    ReactiveFormsModule,
+    AmplifyAuthenticatorModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

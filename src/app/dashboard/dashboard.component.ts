@@ -62,6 +62,8 @@ export class DashboardComponent implements OnInit {
 
     // Manually trigger change detection to update the view
     this.cdr.detectChanges();
+    //get out location
+    this.getCurrentLocation();
   }
 
   drawRoute(route: { id: number, origin: string, destination: string }): void {
@@ -90,7 +92,25 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
+  getCurrentLocation() {
+    // Check if geolocation is supported
+    if (navigator.geolocation) {
+      // Get current position
+      navigator.geolocation.getCurrentPosition(position => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        // Update marker position and map center to current position
+        this.marker.setPosition(pos);
+        this.map.setCenter(pos);
+      }, error => {
+        console.error('Error getting current location:', error);
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }
   displaySelectedRoute(): void {
     // Implement logic to display details of the selected route
     console.log('Selected Route:', this.selectedRoute);
