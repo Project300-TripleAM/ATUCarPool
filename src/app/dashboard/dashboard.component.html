@@ -1,19 +1,37 @@
-<div id="map" style="height: 400px;"></div>
+<div id="map" style="height: 400px; width: 100%;"></div>
 
-<!-- Table to display routes -->
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Origin</th>
-      <th>Destination</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let route of routes">
-      <td>{{ route.id }}</td>
-      <td>{{ route.origin }}</td>
-      <td>{{ route.destination }}</td>
-    </tr>
-  </tbody>
-</table>
+<!-- Display routes and route information -->
+<div *ngIf="!selectedRoute">
+  <!-- Table to display routes -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of routes">
+        <td>{{ route.id }}</td>
+        <td>{{ route.origin }}</td>
+        <td>{{ route.destination }}</td>
+        <td><button class="btn btn-primary" (click)="selectRoute(route.id)">Select Route</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Route information -->
+<div *ngIf="selectedRoute">
+  <h3>Route Information</h3>
+  <p>ID: {{ selectedRoute.id }}</p>
+  <p>Origin: {{ selectedRoute.origin }}</p>
+  <p>Destination: {{ selectedRoute.destination }}</p>
+  <!-- You can add more route details here -->
+  <button class="btn btn-primary" (click)="checkLiftAvailability(selectedRoute)">Check Availability</button>
+  <button class="btn btn-secondary" (click)="goBack()">Back</button>
+</div>
+
+

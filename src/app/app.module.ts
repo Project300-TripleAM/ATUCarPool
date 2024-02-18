@@ -15,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyAccountComponent } from './my-account/my-account.component';
-import { FaqComponent } from './faq/faq.component'; 
+import { FaqComponent } from './faq/faq.component';
+import { MapComponent } from './map/map.component'; 
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FaqComponent } from './faq/faq.component';
     DashboardComponent,
     MyAccountComponent,
     NavbarComponent,
-    FaqComponent
+    FaqComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

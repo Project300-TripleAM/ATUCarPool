@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Router } from '@angular/router'; // Import the Router class
+import { Router } from '@angular/router';
 declare var google: any;
 
 @Component({
@@ -11,10 +11,11 @@ declare var google: any;
 export class DashboardComponent implements OnInit {
   private directionsService: any;
   private directionsRenderer: any;
-  private selectedRoute: any;
+  public selectedRoute: any;
   private map: any;
   private marker: any;
   private apiKey = environment.apiKey;
+  private routePolylines: any[] = [];
   public routes: { id: number; origin: string; destination: string }[] = [];
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
@@ -37,11 +38,19 @@ export class DashboardComponent implements OnInit {
     this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
       center: initialPosition,
+      styles: [
+        /* Add your custom map styles here */
+        {
+          featureType: 'poi',
+          stylers: [{ visibility: 'off' }] // Hide points of interest
+        }
+      ],
     });
     this.marker = new google.maps.Marker({
       map: this.map,
       position: initialPosition,
-      title: 'ATU, Sligo'
+      title: 'ATU, Sligo',
+      icon: 'assets/marker.png' // Custom marker icon
     });
     this.directionsService = new google.maps.DirectionsService();
     this.directionsRenderer = new google.maps.DirectionsRenderer({
@@ -85,18 +94,38 @@ export class DashboardComponent implements OnInit {
 
         routePolyline.setMap(this.map);
 
+        // Store the route polyline
+        this.routePolylines.push({ id: route.id, polyline: routePolyline });
+
         // Add a click event listener to the polyline
         routePolyline.addListener('click', () => {
-          this.selectedRoute = route;
-          this.displaySelectedRoute();
+          this.selectRoute(route.id);
         });
       }
     });
   }
 
-  displaySelectedRoute(): void {
-    // Implement logic to display details of the selected route
-    console.log('Selected Route:', this.selectedRoute);
+  removeOtherRoutes(selectedRouteId: number): void {
+    this.routePolylines.forEach(route => {
+      if (route.id !== selectedRouteId) {
+        route.polyline.setMap(null); // Remove the polyline from the map
+      } else {
+        route.polyline.setMap(this.map); // Show the selected route on the map
+      }
+    });
+  }
+
+  selectRoute(routeId: number): void {
+    // Set the selected route
+    this.selectedRoute = this.routes.find(route => route.id === routeId);
+    // Remove other routes from the map
+    this.removeOtherRoutes(routeId);
+  }
+
+  checkLiftAvailability(route: { id: number, origin: string, destination: string }): void {
+    // Implement logic to check lift availability for the selected route
+    console.log('Checking Lift Availability for Route:', route);
+    // You can open a modal or redirect to another page to show lift availability details
   }
 
   logOut(): void {
@@ -106,4 +135,9 @@ export class DashboardComponent implements OnInit {
     // Use the Angular router to navigate to the login page
     this.router.navigate(['/login']);
   }
+  goBack(): void {
+    // Reset the selected route
+    this.selectedRoute = null;
+  }
+  
 }
