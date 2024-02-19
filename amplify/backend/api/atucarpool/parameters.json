@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "atucarpool",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authatucarpool504a02dc",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

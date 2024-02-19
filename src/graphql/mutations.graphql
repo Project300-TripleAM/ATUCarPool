@@ -250,14 +250,17 @@ mutation CreateTrip(
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
@@ -290,14 +293,17 @@ mutation UpdateTrip(
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
@@ -330,86 +336,212 @@ mutation DeleteTrip(
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
 
-mutation CreateComment(
-  $input: CreateCommentInput!
-  $condition: ModelCommentConditionInput
+mutation CreateRoute(
+  $input: CreateRouteInput!
+  $condition: ModelRouteConditionInput
 ) {
-  createComment(input: $input, condition: $condition) {
+  createRoute(input: $input, condition: $condition) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
     __typename
   }
 }
 
-mutation UpdateComment(
-  $input: UpdateCommentInput!
-  $condition: ModelCommentConditionInput
+mutation UpdateRoute(
+  $input: UpdateRouteInput!
+  $condition: ModelRouteConditionInput
 ) {
-  updateComment(input: $input, condition: $condition) {
+  updateRoute(input: $input, condition: $condition) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
     __typename
   }
 }
 
-mutation DeleteComment(
-  $input: DeleteCommentInput!
-  $condition: ModelCommentConditionInput
+mutation DeleteRoute(
+  $input: DeleteRouteInput!
+  $condition: ModelRouteConditionInput
 ) {
-  deleteComment(input: $input, condition: $condition) {
+  deleteRoute(input: $input, condition: $condition) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
+    __typename
+  }
+}
+
+mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
+    __typename
+  }
+}
+
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
+    __typename
+  }
+}
+
+mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
     __typename
   }
 }

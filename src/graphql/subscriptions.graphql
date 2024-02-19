@@ -220,14 +220,17 @@ subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
@@ -257,14 +260,17 @@ subscription OnUpdateTrip($filter: ModelSubscriptionTripFilterInput) {
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
@@ -294,77 +300,203 @@ subscription OnDeleteTrip($filter: ModelSubscriptionTripFilterInput) {
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
 
-subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
-  onCreateComment(filter: $filter) {
+subscription OnCreateRoute($filter: ModelSubscriptionRouteFilterInput) {
+  onCreateRoute(filter: $filter) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
     __typename
   }
 }
 
-subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
-  onUpdateComment(filter: $filter) {
+subscription OnUpdateRoute($filter: ModelSubscriptionRouteFilterInput) {
+  onUpdateRoute(filter: $filter) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
     __typename
   }
 }
 
-subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
-  onDeleteComment(filter: $filter) {
+subscription OnDeleteRoute($filter: ModelSubscriptionRouteFilterInput) {
+  onDeleteRoute(filter: $filter) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
+    __typename
+  }
+}
+
+subscription OnCreateUser(
+  $filter: ModelSubscriptionUserFilterInput
+  $owner: String
+) {
+  onCreateUser(filter: $filter, owner: $owner) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
+    __typename
+  }
+}
+
+subscription OnUpdateUser(
+  $filter: ModelSubscriptionUserFilterInput
+  $owner: String
+) {
+  onUpdateUser(filter: $filter, owner: $owner) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
+    __typename
+  }
+}
+
+subscription OnDeleteUser(
+  $filter: ModelSubscriptionUserFilterInput
+  $owner: String
+) {
+  onDeleteUser(filter: $filter, owner: $owner) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
     __typename
   }
 }

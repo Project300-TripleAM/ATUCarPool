@@ -76,7 +76,7 @@
               {
                 "Ref": "referencetotransformerrootstackVehicleNestedStackVehicleNestedStackResourceCF681F40OutputstransformerrootstackVehicleVehicleTableA47F84A2Ref"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -159,7 +159,7 @@
               {
                 "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripTable453C3121Ref"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -242,7 +242,7 @@
               {
                 "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripTable453C3121Ref"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -325,23 +325,23 @@
               {
                 "Ref": "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderTable827C24DCRef"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "TripCommentsDataResolverFnTripCommentsDataResolverFnAppSyncFunctionB087DB1E": {
+    "RouteTripsDataResolverFnRouteTripsDataResolverFnAppSyncFunction5EAEDE40": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "DataSourceName": {
-          "Ref": "referencetotransformerrootstackCommentNestedStackCommentNestedStackResource199283FBOutputstransformerrootstackCommentCommentDataSourceA0E54655Name"
+          "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripDataSourceECF8A10EName"
         },
-        "Name": "TripCommentsDataResolverFn",
+        "Name": "RouteTripsDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -355,7 +355,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Trip.comments.req.vtl"
+              "/resolvers/Route.trips.req.vtl"
             ]
           ]
         },
@@ -371,26 +371,26 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Trip.comments.res.vtl"
+              "/resolvers/Route.trips.res.vtl"
             ]
           ]
         }
       }
     },
-    "TripcommentsResolver": {
+    "RoutetripsResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "comments",
-        "TypeName": "Trip",
+        "FieldName": "trips",
+        "TypeName": "Route",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
             {
               "Fn::GetAtt": [
-                "TripCommentsDataResolverFnTripCommentsDataResolverFnAppSyncFunctionB087DB1E",
+                "RouteTripsDataResolverFnRouteTripsDataResolverFnAppSyncFunction5EAEDE40",
                 "FunctionId"
               ]
             }
@@ -400,15 +400,223 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Trip\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"comments\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Route\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"trips\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "referencetotransformerrootstackCommentNestedStackCommentNestedStackResource199283FBOutputstransformerrootstackCommentCommentTable5427FDE2Ref"
+                "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripTable453C3121Ref"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
+    "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
+        },
+        "Name": "Userdriverauth0Function",
+        "FunctionVersion": "2018-05-29",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.driver.auth.1.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson({})"
+      }
+    },
+    "UserDriverDataResolverFnUserDriverDataResolverFnAppSyncFunction4F6E138D": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverDataSource526375F9Name"
+        },
+        "Name": "UserDriverDataResolverFn",
+        "FunctionVersion": "2018-05-29",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.driver.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.driver.res.vtl"
+            ]
+          ]
+        }
+      }
+    },
+    "UserdriverResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "FieldName": "driver",
+        "TypeName": "User",
+        "Kind": "PIPELINE",
+        "PipelineConfig": {
+          "Functions": [
+            {
+              "Fn::GetAtt": [
+                "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032",
+                "FunctionId"
+              ]
+            },
+            {
+              "Fn::GetAtt": [
+                "UserDriverDataResolverFnUserDriverDataResolverFnAppSyncFunction4F6E138D",
+                "FunctionId"
+              ]
+            }
+          ]
+        },
+        "RequestMappingTemplate": {
+          "Fn::Join": [
+            "",
+            [
+              "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"driver\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              {
+                "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+              {
+                "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverTableC69EC46CRef"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+            ]
+          ]
+        },
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+      }
+    },
+    "UserRiderDataResolverFnUserRiderDataResolverFnAppSyncFunctionF8CEE0F0": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "DataSourceName": {
+          "Ref": "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderDataSource08BEA347Name"
+        },
+        "Name": "UserRiderDataResolverFn",
+        "FunctionVersion": "2018-05-29",
+        "RequestMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.rider.req.vtl"
+            ]
+          ]
+        },
+        "ResponseMappingTemplateS3Location": {
+          "Fn::Join": [
+            "",
+            [
+              "s3://",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
+              },
+              "/",
+              {
+                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
+              },
+              "/resolvers/User.rider.res.vtl"
+            ]
+          ]
+        }
+      }
+    },
+    "UserriderResolver": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": {
+          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+        },
+        "FieldName": "rider",
+        "TypeName": "User",
+        "Kind": "PIPELINE",
+        "PipelineConfig": {
+          "Functions": [
+            {
+              "Fn::GetAtt": [
+                "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032",
+                "FunctionId"
+              ]
+            },
+            {
+              "Fn::GetAtt": [
+                "UserRiderDataResolverFnUserRiderDataResolverFnAppSyncFunctionF8CEE0F0",
+                "FunctionId"
+              ]
+            }
+          ]
+        },
+        "RequestMappingTemplate": {
+          "Fn::Join": [
+            "",
+            [
+              "$util.qr($ctx.stash.put(\"typeName\", \"User\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"rider\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              {
+                "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+              {
+                "Ref": "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderTable827C24DCRef"
+              },
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -491,7 +699,7 @@
               {
                 "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverTableC69EC46CRef"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -574,7 +782,7 @@
               {
                 "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverTableC69EC46CRef"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -657,23 +865,23 @@
               {
                 "Ref": "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderTable827C24DCRef"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "CommentTripDataResolverFnCommentTripDataResolverFnAppSyncFunctionDF2B0A13": {
+    "TripRouteDataResolverFnTripRouteDataResolverFnAppSyncFunction5ADFFACF": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "DataSourceName": {
-          "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripDataSourceECF8A10EName"
+          "Ref": "referencetotransformerrootstackRouteNestedStackRouteNestedStackResource0DAFAD40OutputstransformerrootstackRouteRouteDataSource298D77DEName"
         },
-        "Name": "CommentTripDataResolverFn",
+        "Name": "TripRouteDataResolverFn",
         "FunctionVersion": "2018-05-29",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
@@ -687,7 +895,7 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Comment.trip.req.vtl"
+              "/resolvers/Trip.route.req.vtl"
             ]
           ]
         },
@@ -703,26 +911,26 @@
               {
                 "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
               },
-              "/resolvers/Comment.trip.res.vtl"
+              "/resolvers/Trip.route.res.vtl"
             ]
           ]
         }
       }
     },
-    "CommenttripResolver": {
+    "TriprouteResolver": {
       "Type": "AWS::AppSync::Resolver",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "FieldName": "trip",
-        "TypeName": "Comment",
+        "FieldName": "route",
+        "TypeName": "Trip",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
             {
               "Fn::GetAtt": [
-                "CommentTripDataResolverFnCommentTripDataResolverFnAppSyncFunctionDF2B0A13",
+                "TripRouteDataResolverFnTripRouteDataResolverFnAppSyncFunction5ADFFACF",
                 "FunctionId"
               ]
             }
@@ -732,15 +940,15 @@
           "Fn::Join": [
             "",
             [
-              "$util.qr($ctx.stash.put(\"typeName\", \"Comment\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"trip\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+              "$util.qr($ctx.stash.put(\"typeName\", \"Trip\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"route\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
               "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
               {
-                "Ref": "referencetotransformerrootstackTripNestedStackTripNestedStackResource27FDC0C9OutputstransformerrootstackTripTripTable453C3121Ref"
+                "Ref": "referencetotransformerrootstackRouteNestedStackRouteNestedStackResource0DAFAD40OutputstransformerrootstackRouteRouteTableB37C56C3Ref"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -776,16 +984,19 @@
     "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderTable827C24DCRef": {
       "Type": "String"
     },
-    "referencetotransformerrootstackCommentNestedStackCommentNestedStackResource199283FBOutputstransformerrootstackCommentCommentDataSourceA0E54655Name": {
-      "Type": "String"
-    },
-    "referencetotransformerrootstackCommentNestedStackCommentNestedStackResource199283FBOutputstransformerrootstackCommentCommentTable5427FDE2Ref": {
+    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverDataSource526375F9Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverTableC69EC46CRef": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackRouteNestedStackRouteNestedStackResource0DAFAD40OutputstransformerrootstackRouteRouteDataSource298D77DEName": {
+      "Type": "String"
+    },
+    "referencetotransformerrootstackRouteNestedStackRouteNestedStackResource0DAFAD40OutputstransformerrootstackRouteRouteTableB37C56C3Ref": {
       "Type": "String"
     }
   }

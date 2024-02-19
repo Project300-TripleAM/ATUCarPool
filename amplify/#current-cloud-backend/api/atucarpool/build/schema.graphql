@@ -1,3 +1,18 @@
+type User @aws_cognito_user_pools {
+  id: ID!
+  userSub: String!
+  username: String!
+  email: String!
+  phone: String
+  driver: Driver
+  rider: Rider
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  userDriverId: ID
+  userRiderId: ID
+  owner: String
+}
+
 type Driver {
   id: ID!
   name: String!
@@ -39,20 +54,26 @@ type Trip {
   rider: Rider
   startTime: AWSDateTime!
   endTime: AWSDateTime
-  comments(filter: ModelCommentFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCommentConnection
+  route: Route
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   driverTripsId: ID
   riderTripsId: ID
+  routeTripsId: ID
 }
 
-type Comment {
+type Route {
   id: ID!
-  trip: Trip
-  content: String!
+  origin: Location!
+  destination: Location!
+  trips(filter: ModelTripFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTripConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
-  tripCommentsId: ID
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
 }
 
 input ModelStringInput {
@@ -205,6 +226,127 @@ enum ModelSortDirection {
   DESC
 }
 
+type ModelUserConnection @aws_cognito_user_pools {
+  items: [User]!
+  nextToken: String
+}
+
+input ModelUserFilterInput {
+  id: ModelIDInput
+  userSub: ModelStringInput
+  username: ModelStringInput
+  email: ModelStringInput
+  phone: ModelStringInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+  userDriverId: ModelIDInput
+  userRiderId: ModelIDInput
+}
+
+type Query {
+  getDriver(id: ID!): Driver
+  listDrivers(filter: ModelDriverFilterInput, limit: Int, nextToken: String): ModelDriverConnection
+  getRider(id: ID!): Rider
+  listRiders(filter: ModelRiderFilterInput, limit: Int, nextToken: String): ModelRiderConnection
+  getVehicle(id: ID!): Vehicle
+  listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection
+  getTrip(id: ID!): Trip
+  listTrips(filter: ModelTripFilterInput, limit: Int, nextToken: String): ModelTripConnection
+  getRoute(id: ID!): Route
+  listRoutes(filter: ModelRouteFilterInput, limit: Int, nextToken: String): ModelRouteConnection
+  getUser(id: ID!): User @aws_cognito_user_pools
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_cognito_user_pools
+}
+
+input ModelUserConditionInput {
+  userSub: ModelStringInput
+  username: ModelStringInput
+  email: ModelStringInput
+  phone: ModelStringInput
+  and: [ModelUserConditionInput]
+  or: [ModelUserConditionInput]
+  not: ModelUserConditionInput
+  userDriverId: ModelIDInput
+  userRiderId: ModelIDInput
+}
+
+input CreateUserInput {
+  id: ID
+  userSub: String!
+  username: String!
+  email: String!
+  phone: String
+  userDriverId: ID
+  userRiderId: ID
+}
+
+input UpdateUserInput {
+  id: ID!
+  userSub: String
+  username: String
+  email: String
+  phone: String
+  userDriverId: ID
+  userRiderId: ID
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+type Mutation {
+  createDriver(input: CreateDriverInput!, condition: ModelDriverConditionInput): Driver
+  updateDriver(input: UpdateDriverInput!, condition: ModelDriverConditionInput): Driver
+  deleteDriver(input: DeleteDriverInput!, condition: ModelDriverConditionInput): Driver
+  createRider(input: CreateRiderInput!, condition: ModelRiderConditionInput): Rider
+  updateRider(input: UpdateRiderInput!, condition: ModelRiderConditionInput): Rider
+  deleteRider(input: DeleteRiderInput!, condition: ModelRiderConditionInput): Rider
+  createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
+  updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
+  deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
+  createTrip(input: CreateTripInput!, condition: ModelTripConditionInput): Trip
+  updateTrip(input: UpdateTripInput!, condition: ModelTripConditionInput): Trip
+  deleteTrip(input: DeleteTripInput!, condition: ModelTripConditionInput): Trip
+  createRoute(input: CreateRouteInput!, condition: ModelRouteConditionInput): Route
+  updateRoute(input: UpdateRouteInput!, condition: ModelRouteConditionInput): Route
+  deleteRoute(input: DeleteRouteInput!, condition: ModelRouteConditionInput): Route
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
+}
+
+input ModelSubscriptionUserFilterInput {
+  id: ModelSubscriptionIDInput
+  userSub: ModelSubscriptionStringInput
+  username: ModelSubscriptionStringInput
+  email: ModelSubscriptionStringInput
+  phone: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUserFilterInput]
+  or: [ModelSubscriptionUserFilterInput]
+}
+
+type Subscription {
+  onCreateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["createDriver"])
+  onUpdateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["updateDriver"])
+  onDeleteDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["deleteDriver"])
+  onCreateRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["createRider"])
+  onUpdateRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["updateRider"])
+  onDeleteRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["deleteRider"])
+  onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["createVehicle"])
+  onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["updateVehicle"])
+  onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["deleteVehicle"])
+  onCreateTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["createTrip"])
+  onUpdateTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["updateTrip"])
+  onDeleteTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["deleteTrip"])
+  onCreateRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["createRoute"])
+  onUpdateRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["updateRoute"])
+  onDeleteRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["deleteRoute"])
+  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_cognito_user_pools
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_cognito_user_pools
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_cognito_user_pools
+}
+
 type ModelDriverConnection {
   items: [Driver]!
   nextToken: String
@@ -219,19 +361,6 @@ input ModelDriverFilterInput {
   and: [ModelDriverFilterInput]
   or: [ModelDriverFilterInput]
   not: ModelDriverFilterInput
-}
-
-type Query {
-  getDriver(id: ID!): Driver
-  listDrivers(filter: ModelDriverFilterInput, limit: Int, nextToken: String): ModelDriverConnection
-  getRider(id: ID!): Rider
-  listRiders(filter: ModelRiderFilterInput, limit: Int, nextToken: String): ModelRiderConnection
-  getVehicle(id: ID!): Vehicle
-  listVehicles(filter: ModelVehicleFilterInput, limit: Int, nextToken: String): ModelVehicleConnection
-  getTrip(id: ID!): Trip
-  listTrips(filter: ModelTripFilterInput, limit: Int, nextToken: String): ModelTripConnection
-  getComment(id: ID!): Comment
-  listComments(filter: ModelCommentFilterInput, limit: Int, nextToken: String): ModelCommentConnection
 }
 
 input ModelDriverConditionInput {
@@ -264,24 +393,6 @@ input DeleteDriverInput {
   id: ID!
 }
 
-type Mutation {
-  createDriver(input: CreateDriverInput!, condition: ModelDriverConditionInput): Driver
-  updateDriver(input: UpdateDriverInput!, condition: ModelDriverConditionInput): Driver
-  deleteDriver(input: DeleteDriverInput!, condition: ModelDriverConditionInput): Driver
-  createRider(input: CreateRiderInput!, condition: ModelRiderConditionInput): Rider
-  updateRider(input: UpdateRiderInput!, condition: ModelRiderConditionInput): Rider
-  deleteRider(input: DeleteRiderInput!, condition: ModelRiderConditionInput): Rider
-  createVehicle(input: CreateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
-  updateVehicle(input: UpdateVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
-  deleteVehicle(input: DeleteVehicleInput!, condition: ModelVehicleConditionInput): Vehicle
-  createTrip(input: CreateTripInput!, condition: ModelTripConditionInput): Trip
-  updateTrip(input: UpdateTripInput!, condition: ModelTripConditionInput): Trip
-  deleteTrip(input: DeleteTripInput!, condition: ModelTripConditionInput): Trip
-  createComment(input: CreateCommentInput!, condition: ModelCommentConditionInput): Comment
-  updateComment(input: UpdateCommentInput!, condition: ModelCommentConditionInput): Comment
-  deleteComment(input: DeleteCommentInput!, condition: ModelCommentConditionInput): Comment
-}
-
 input ModelSubscriptionDriverFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
@@ -290,24 +401,6 @@ input ModelSubscriptionDriverFilterInput {
   carType: ModelSubscriptionStringInput
   and: [ModelSubscriptionDriverFilterInput]
   or: [ModelSubscriptionDriverFilterInput]
-}
-
-type Subscription {
-  onCreateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["createDriver"])
-  onUpdateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["updateDriver"])
-  onDeleteDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["deleteDriver"])
-  onCreateRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["createRider"])
-  onUpdateRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["updateRider"])
-  onDeleteRider(filter: ModelSubscriptionRiderFilterInput): Rider @aws_subscribe(mutations: ["deleteRider"])
-  onCreateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["createVehicle"])
-  onUpdateVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["updateVehicle"])
-  onDeleteVehicle(filter: ModelSubscriptionVehicleFilterInput): Vehicle @aws_subscribe(mutations: ["deleteVehicle"])
-  onCreateTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["createTrip"])
-  onUpdateTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["updateTrip"])
-  onDeleteTrip(filter: ModelSubscriptionTripFilterInput): Trip @aws_subscribe(mutations: ["deleteTrip"])
-  onCreateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["createComment"])
-  onUpdateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["updateComment"])
-  onDeleteComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_subscribe(mutations: ["deleteComment"])
 }
 
 type ModelRiderConnection {
@@ -434,6 +527,7 @@ input ModelTripFilterInput {
   not: ModelTripFilterInput
   driverTripsId: ModelIDInput
   riderTripsId: ModelIDInput
+  routeTripsId: ModelIDInput
 }
 
 input ModelTripConditionInput {
@@ -444,6 +538,7 @@ input ModelTripConditionInput {
   not: ModelTripConditionInput
   driverTripsId: ModelIDInput
   riderTripsId: ModelIDInput
+  routeTripsId: ModelIDInput
 }
 
 input CreateTripInput {
@@ -452,6 +547,7 @@ input CreateTripInput {
   endTime: AWSDateTime
   driverTripsId: ID
   riderTripsId: ID
+  routeTripsId: ID
 }
 
 input UpdateTripInput {
@@ -460,6 +556,7 @@ input UpdateTripInput {
   endTime: AWSDateTime
   driverTripsId: ID
   riderTripsId: ID
+  routeTripsId: ID
 }
 
 input DeleteTripInput {
@@ -474,47 +571,47 @@ input ModelSubscriptionTripFilterInput {
   or: [ModelSubscriptionTripFilterInput]
 }
 
-type ModelCommentConnection {
-  items: [Comment]!
+input LocationInput {
+  latitude: Float!
+  longitude: Float!
+}
+
+type ModelRouteConnection {
+  items: [Route]!
   nextToken: String
 }
 
-input ModelCommentFilterInput {
+input ModelRouteFilterInput {
   id: ModelIDInput
-  content: ModelStringInput
-  and: [ModelCommentFilterInput]
-  or: [ModelCommentFilterInput]
-  not: ModelCommentFilterInput
-  tripCommentsId: ModelIDInput
+  and: [ModelRouteFilterInput]
+  or: [ModelRouteFilterInput]
+  not: ModelRouteFilterInput
 }
 
-input ModelCommentConditionInput {
-  content: ModelStringInput
-  and: [ModelCommentConditionInput]
-  or: [ModelCommentConditionInput]
-  not: ModelCommentConditionInput
-  tripCommentsId: ModelIDInput
+input ModelRouteConditionInput {
+  and: [ModelRouteConditionInput]
+  or: [ModelRouteConditionInput]
+  not: ModelRouteConditionInput
 }
 
-input CreateCommentInput {
+input CreateRouteInput {
   id: ID
-  content: String!
-  tripCommentsId: ID
+  origin: LocationInput!
+  destination: LocationInput!
 }
 
-input UpdateCommentInput {
+input UpdateRouteInput {
   id: ID!
-  content: String
-  tripCommentsId: ID
+  origin: LocationInput
+  destination: LocationInput
 }
 
-input DeleteCommentInput {
+input DeleteRouteInput {
   id: ID!
 }
 
-input ModelSubscriptionCommentFilterInput {
+input ModelSubscriptionRouteFilterInput {
   id: ModelSubscriptionIDInput
-  content: ModelSubscriptionStringInput
-  and: [ModelSubscriptionCommentFilterInput]
-  or: [ModelSubscriptionCommentFilterInput]
+  and: [ModelSubscriptionRouteFilterInput]
+  or: [ModelSubscriptionRouteFilterInput]
 }

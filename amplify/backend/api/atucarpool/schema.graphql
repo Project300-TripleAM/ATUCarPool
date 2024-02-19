@@ -6,6 +6,16 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }# FOR TESTING ONLY!
 
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userSub: String! @auth(rules: [{ allow: owner }])
+  username: String!
+  email: String!
+  phone: String
+  driver: Driver @hasOne
+  rider: Rider @hasOne
+}
+
 type Driver @model {
   id: ID!
   name: String!
@@ -39,11 +49,17 @@ type Trip @model {
   rider: Rider @belongsTo
   startTime: AWSDateTime!
   endTime: AWSDateTime
-  comments: [Comment] @hasMany
+  route: Route @belongsTo
 }
 
-type Comment @model {
+type Route @model {
   id: ID!
-  trip: Trip @belongsTo
-  content: String!
+  origin: Location!
+  destination: Location!
+  trips: [Trip] @hasMany
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
 }

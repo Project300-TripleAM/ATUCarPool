@@ -1,9 +1,7 @@
-/* tslint:disable */
-/* eslint-disable */
-//  This file was automatically generated and should not be edited.
-import { Injectable } from "@angular/core";
-import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { Observable } from "zen-observable-ts";
+import { Injectable } from '@angular/core';
+import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -22,9 +20,12 @@ export type __SubscriptionContainer = {
   onCreateTrip: OnCreateTripSubscription;
   onUpdateTrip: OnUpdateTripSubscription;
   onDeleteTrip: OnDeleteTripSubscription;
-  onCreateComment: OnCreateCommentSubscription;
-  onUpdateComment: OnUpdateCommentSubscription;
-  onDeleteComment: OnDeleteCommentSubscription;
+  onCreateRoute: OnCreateRouteSubscription;
+  onUpdateRoute: OnUpdateRouteSubscription;
+  onDeleteRoute: OnDeleteRouteSubscription;
+  onCreateUser: OnCreateUserSubscription;
+  onUpdateUser: OnUpdateUserSubscription;
+  onDeleteUser: OnDeleteUserSubscription;
 };
 
 export type CreateDriverInput = {
@@ -147,27 +148,28 @@ export type Trip = {
   rider?: Rider | null;
   startTime: string;
   endTime?: string | null;
-  comments?: ModelCommentConnection | null;
+  route?: Route | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
-export type ModelCommentConnection = {
-  __typename: "ModelCommentConnection";
-  items: Array<Comment | null>;
-  nextToken?: string | null;
-};
-
-export type Comment = {
-  __typename: "Comment";
+export type Route = {
+  __typename: "Route";
   id: string;
-  trip?: Trip | null;
-  content: string;
+  origin: Location;
+  destination: Location;
+  trips?: ModelTripConnection | null;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
+};
+
+export type Location = {
+  __typename: "Location";
+  latitude: number;
+  longitude: number;
 };
 
 export type UpdateDriverInput = {
@@ -276,6 +278,7 @@ export type CreateTripInput = {
   endTime?: string | null;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type ModelTripConditionInput = {
@@ -286,6 +289,7 @@ export type ModelTripConditionInput = {
   not?: ModelTripConditionInput | null;
   driverTripsId?: ModelIDInput | null;
   riderTripsId?: ModelIDInput | null;
+  routeTripsId?: ModelIDInput | null;
 };
 
 export type UpdateTripInput = {
@@ -294,33 +298,89 @@ export type UpdateTripInput = {
   endTime?: string | null;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type DeleteTripInput = {
   id: string;
 };
 
-export type CreateCommentInput = {
+export type CreateRouteInput = {
   id?: string | null;
-  content: string;
-  tripCommentsId?: string | null;
+  origin: LocationInput;
+  destination: LocationInput;
 };
 
-export type ModelCommentConditionInput = {
-  content?: ModelStringInput | null;
-  and?: Array<ModelCommentConditionInput | null> | null;
-  or?: Array<ModelCommentConditionInput | null> | null;
-  not?: ModelCommentConditionInput | null;
-  tripCommentsId?: ModelIDInput | null;
+export type LocationInput = {
+  latitude: number;
+  longitude: number;
 };
 
-export type UpdateCommentInput = {
+export type ModelRouteConditionInput = {
+  and?: Array<ModelRouteConditionInput | null> | null;
+  or?: Array<ModelRouteConditionInput | null> | null;
+  not?: ModelRouteConditionInput | null;
+};
+
+export type UpdateRouteInput = {
   id: string;
-  content?: string | null;
-  tripCommentsId?: string | null;
+  origin?: LocationInput | null;
+  destination?: LocationInput | null;
 };
 
-export type DeleteCommentInput = {
+export type DeleteRouteInput = {
+  id: string;
+};
+
+export type CreateUserInput = {
+  id?: string | null;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+};
+
+export type ModelUserConditionInput = {
+  userSub?: ModelStringInput | null;
+  username?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  and?: Array<ModelUserConditionInput | null> | null;
+  or?: Array<ModelUserConditionInput | null> | null;
+  not?: ModelUserConditionInput | null;
+  userDriverId?: ModelIDInput | null;
+  userRiderId?: ModelIDInput | null;
+};
+
+export type User = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: Driver | null;
+  rider?: Rider | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type UpdateUserInput = {
+  id: string;
+  userSub?: string | null;
+  username?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+};
+
+export type DeleteUserInput = {
   id: string;
 };
 
@@ -372,15 +432,39 @@ export type ModelTripFilterInput = {
   not?: ModelTripFilterInput | null;
   driverTripsId?: ModelIDInput | null;
   riderTripsId?: ModelIDInput | null;
+  routeTripsId?: ModelIDInput | null;
 };
 
-export type ModelCommentFilterInput = {
+export type ModelRouteFilterInput = {
   id?: ModelIDInput | null;
-  content?: ModelStringInput | null;
-  and?: Array<ModelCommentFilterInput | null> | null;
-  or?: Array<ModelCommentFilterInput | null> | null;
-  not?: ModelCommentFilterInput | null;
-  tripCommentsId?: ModelIDInput | null;
+  and?: Array<ModelRouteFilterInput | null> | null;
+  or?: Array<ModelRouteFilterInput | null> | null;
+  not?: ModelRouteFilterInput | null;
+};
+
+export type ModelRouteConnection = {
+  __typename: "ModelRouteConnection";
+  items: Array<Route | null>;
+  nextToken?: string | null;
+};
+
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null;
+  userSub?: ModelStringInput | null;
+  username?: ModelStringInput | null;
+  email?: ModelStringInput | null;
+  phone?: ModelStringInput | null;
+  and?: Array<ModelUserFilterInput | null> | null;
+  or?: Array<ModelUserFilterInput | null> | null;
+  not?: ModelUserFilterInput | null;
+  userDriverId?: ModelIDInput | null;
+  userRiderId?: ModelIDInput | null;
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection";
+  items: Array<User | null>;
+  nextToken?: string | null;
 };
 
 export type ModelSubscriptionDriverFilterInput = {
@@ -461,11 +545,20 @@ export type ModelSubscriptionTripFilterInput = {
   or?: Array<ModelSubscriptionTripFilterInput | null> | null;
 };
 
-export type ModelSubscriptionCommentFilterInput = {
+export type ModelSubscriptionRouteFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  content?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionCommentFilterInput | null> | null;
-  or?: Array<ModelSubscriptionCommentFilterInput | null> | null;
+  and?: Array<ModelSubscriptionRouteFilterInput | null> | null;
+  or?: Array<ModelSubscriptionRouteFilterInput | null> | null;
+};
+
+export type ModelSubscriptionUserFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  userSub?: ModelSubscriptionStringInput | null;
+  username?: ModelSubscriptionStringInput | null;
+  email?: ModelSubscriptionStringInput | null;
+  phone?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionUserFilterInput | null> | null;
+  or?: Array<ModelSubscriptionUserFilterInput | null> | null;
 };
 
 export type CreateDriverMutation = {
@@ -670,14 +763,17 @@ export type CreateTripMutation = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type UpdateTripMutation = {
@@ -705,14 +801,17 @@ export type UpdateTripMutation = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type DeleteTripMutation = {
@@ -740,71 +839,182 @@ export type DeleteTripMutation = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
-export type CreateCommentMutation = {
-  __typename: "Comment";
+export type CreateRouteMutation = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
-export type UpdateCommentMutation = {
-  __typename: "Comment";
+export type UpdateRouteMutation = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
-export type DeleteCommentMutation = {
-  __typename: "Comment";
+export type DeleteRouteMutation = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
+};
+
+export type CreateUserMutation = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type UpdateUserMutation = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type DeleteUserMutation = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
 };
 
 export type GetDriverQuery = {
@@ -936,14 +1146,17 @@ export type GetTripQuery = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type ListTripsQuery = {
@@ -957,38 +1170,91 @@ export type ListTripsQuery = {
     updatedAt: string;
     driverTripsId?: string | null;
     riderTripsId?: string | null;
+    routeTripsId?: string | null;
   } | null>;
   nextToken?: string | null;
 };
 
-export type GetCommentQuery = {
-  __typename: "Comment";
+export type GetRouteQuery = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
-export type ListCommentsQuery = {
-  __typename: "ModelCommentConnection";
+export type ListRoutesQuery = {
+  __typename: "ModelRouteConnection";
   items: Array<{
-    __typename: "Comment";
+    __typename: "Route";
     id: string;
-    content: string;
     createdAt: string;
     updatedAt: string;
-    tripCommentsId?: string | null;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetUserQuery = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type ListUsersQuery = {
+  __typename: "ModelUserConnection";
+  items: Array<{
+    __typename: "User";
+    id: string;
+    userSub: string;
+    username: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    userDriverId?: string | null;
+    userRiderId?: string | null;
+    owner?: string | null;
   } | null>;
   nextToken?: string | null;
 };
@@ -1195,14 +1461,17 @@ export type OnCreateTripSubscription = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type OnUpdateTripSubscription = {
@@ -1230,14 +1499,17 @@ export type OnUpdateTripSubscription = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
 export type OnDeleteTripSubscription = {
@@ -1265,1588 +1537,220 @@ export type OnDeleteTripSubscription = {
   } | null;
   startTime: string;
   endTime?: string | null;
-  comments?: {
-    __typename: "ModelCommentConnection";
-    nextToken?: string | null;
+  route?: {
+    __typename: "Route";
+    id: string;
+    createdAt: string;
+    updatedAt: string;
   } | null;
   createdAt: string;
   updatedAt: string;
   driverTripsId?: string | null;
   riderTripsId?: string | null;
+  routeTripsId?: string | null;
 };
 
-export type OnCreateCommentSubscription = {
-  __typename: "Comment";
+export type OnCreateRouteSubscription = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
-export type OnUpdateCommentSubscription = {
-  __typename: "Comment";
+export type OnUpdateRouteSubscription = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
-export type OnDeleteCommentSubscription = {
-  __typename: "Comment";
+export type OnDeleteRouteSubscription = {
+  __typename: "Route";
   id: string;
-  trip?: {
-    __typename: "Trip";
-    id: string;
-    startTime: string;
-    endTime?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    driverTripsId?: string | null;
-    riderTripsId?: string | null;
+  origin: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  destination: {
+    __typename: "Location";
+    latitude: number;
+    longitude: number;
+  };
+  trips?: {
+    __typename: "ModelTripConnection";
+    nextToken?: string | null;
   } | null;
-  content: string;
   createdAt: string;
   updatedAt: string;
-  tripCommentsId?: string | null;
 };
 
+export type OnCreateUserSubscription = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type OnUpdateUserSubscription = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
+
+export type OnDeleteUserSubscription = {
+  __typename: "User";
+  id: string;
+  userSub: string;
+  username: string;
+  email: string;
+  phone?: string | null;
+  driver?: {
+    __typename: "Driver";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    carType?: string | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  rider?: {
+    __typename: "Rider";
+    id: string;
+    name: string;
+    email: string;
+    phone?: string | null;
+    createdAt: string;
+    updatedAt: string;
+    vehiclePassengersId?: string | null;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+  userDriverId?: string | null;
+  userRiderId?: string | null;
+  owner?: string | null;
+};
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
+
 export class APIService {
-  async CreateDriver(
-    input: CreateDriverInput,
-    condition?: ModelDriverConditionInput
-  ): Promise<CreateDriverMutation> {
-    const statement = `mutation CreateDriver($input: CreateDriverInput!, $condition: ModelDriverConditionInput) {
-        createDriver(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateDriverMutation>response.data.createDriver;
-  }
-  async UpdateDriver(
-    input: UpdateDriverInput,
-    condition?: ModelDriverConditionInput
-  ): Promise<UpdateDriverMutation> {
-    const statement = `mutation UpdateDriver($input: UpdateDriverInput!, $condition: ModelDriverConditionInput) {
-        updateDriver(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateDriverMutation>response.data.updateDriver;
-  }
-  async DeleteDriver(
-    input: DeleteDriverInput,
-    condition?: ModelDriverConditionInput
-  ): Promise<DeleteDriverMutation> {
-    const statement = `mutation DeleteDriver($input: DeleteDriverInput!, $condition: ModelDriverConditionInput) {
-        deleteDriver(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteDriverMutation>response.data.deleteDriver;
-  }
-  async CreateRider(
-    input: CreateRiderInput,
-    condition?: ModelRiderConditionInput
-  ): Promise<CreateRiderMutation> {
-    const statement = `mutation CreateRider($input: CreateRiderInput!, $condition: ModelRiderConditionInput) {
-        createRider(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateRiderMutation>response.data.createRider;
-  }
-  async UpdateRider(
-    input: UpdateRiderInput,
-    condition?: ModelRiderConditionInput
-  ): Promise<UpdateRiderMutation> {
-    const statement = `mutation UpdateRider($input: UpdateRiderInput!, $condition: ModelRiderConditionInput) {
-        updateRider(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateRiderMutation>response.data.updateRider;
-  }
-  async DeleteRider(
-    input: DeleteRiderInput,
-    condition?: ModelRiderConditionInput
-  ): Promise<DeleteRiderMutation> {
-    const statement = `mutation DeleteRider($input: DeleteRiderInput!, $condition: ModelRiderConditionInput) {
-        deleteRider(input: $input, condition: $condition) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteRiderMutation>response.data.deleteRider;
-  }
-  async CreateVehicle(
-    input: CreateVehicleInput,
-    condition?: ModelVehicleConditionInput
-  ): Promise<CreateVehicleMutation> {
-    const statement = `mutation CreateVehicle($input: CreateVehicleInput!, $condition: ModelVehicleConditionInput) {
-        createVehicle(input: $input, condition: $condition) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateVehicleMutation>response.data.createVehicle;
-  }
-  async UpdateVehicle(
-    input: UpdateVehicleInput,
-    condition?: ModelVehicleConditionInput
-  ): Promise<UpdateVehicleMutation> {
-    const statement = `mutation UpdateVehicle($input: UpdateVehicleInput!, $condition: ModelVehicleConditionInput) {
-        updateVehicle(input: $input, condition: $condition) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateVehicleMutation>response.data.updateVehicle;
-  }
-  async DeleteVehicle(
-    input: DeleteVehicleInput,
-    condition?: ModelVehicleConditionInput
-  ): Promise<DeleteVehicleMutation> {
-    const statement = `mutation DeleteVehicle($input: DeleteVehicleInput!, $condition: ModelVehicleConditionInput) {
-        deleteVehicle(input: $input, condition: $condition) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteVehicleMutation>response.data.deleteVehicle;
-  }
-  async CreateTrip(
-    input: CreateTripInput,
-    condition?: ModelTripConditionInput
-  ): Promise<CreateTripMutation> {
-    const statement = `mutation CreateTrip($input: CreateTripInput!, $condition: ModelTripConditionInput) {
-        createTrip(input: $input, condition: $condition) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateTripMutation>response.data.createTrip;
-  }
-  async UpdateTrip(
-    input: UpdateTripInput,
-    condition?: ModelTripConditionInput
-  ): Promise<UpdateTripMutation> {
-    const statement = `mutation UpdateTrip($input: UpdateTripInput!, $condition: ModelTripConditionInput) {
-        updateTrip(input: $input, condition: $condition) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateTripMutation>response.data.updateTrip;
-  }
-  async DeleteTrip(
-    input: DeleteTripInput,
-    condition?: ModelTripConditionInput
-  ): Promise<DeleteTripMutation> {
-    const statement = `mutation DeleteTrip($input: DeleteTripInput!, $condition: ModelTripConditionInput) {
-        deleteTrip(input: $input, condition: $condition) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteTripMutation>response.data.deleteTrip;
-  }
-  async CreateComment(
-    input: CreateCommentInput,
-    condition?: ModelCommentConditionInput
-  ): Promise<CreateCommentMutation> {
-    const statement = `mutation CreateComment($input: CreateCommentInput!, $condition: ModelCommentConditionInput) {
-        createComment(input: $input, condition: $condition) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateCommentMutation>response.data.createComment;
-  }
-  async UpdateComment(
-    input: UpdateCommentInput,
-    condition?: ModelCommentConditionInput
-  ): Promise<UpdateCommentMutation> {
-    const statement = `mutation UpdateComment($input: UpdateCommentInput!, $condition: ModelCommentConditionInput) {
-        updateComment(input: $input, condition: $condition) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateCommentMutation>response.data.updateComment;
-  }
-  async DeleteComment(
-    input: DeleteCommentInput,
-    condition?: ModelCommentConditionInput
-  ): Promise<DeleteCommentMutation> {
-    const statement = `mutation DeleteComment($input: DeleteCommentInput!, $condition: ModelCommentConditionInput) {
-        deleteComment(input: $input, condition: $condition) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteCommentMutation>response.data.deleteComment;
-  }
-  async GetDriver(id: string): Promise<GetDriverQuery> {
-    const statement = `query GetDriver($id: ID!) {
-        getDriver(id: $id) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetDriverQuery>response.data.getDriver;
-  }
-  async ListDrivers(
-    filter?: ModelDriverFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListDriversQuery> {
-    const statement = `query ListDrivers($filter: ModelDriverFilterInput, $limit: Int, $nextToken: String) {
-        listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListDriversQuery>response.data.listDrivers;
-  }
-  async GetRider(id: string): Promise<GetRiderQuery> {
-    const statement = `query GetRider($id: ID!) {
-        getRider(id: $id) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetRiderQuery>response.data.getRider;
-  }
-  async ListRiders(
-    filter?: ModelRiderFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListRidersQuery> {
-    const statement = `query ListRiders($filter: ModelRiderFilterInput, $limit: Int, $nextToken: String) {
-        listRiders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListRidersQuery>response.data.listRiders;
-  }
-  async GetVehicle(id: string): Promise<GetVehicleQuery> {
-    const statement = `query GetVehicle($id: ID!) {
-        getVehicle(id: $id) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetVehicleQuery>response.data.getVehicle;
-  }
-  async ListVehicles(
-    filter?: ModelVehicleFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListVehiclesQuery> {
-    const statement = `query ListVehicles($filter: ModelVehicleFilterInput, $limit: Int, $nextToken: String) {
-        listVehicles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            make
-            model
-            year
-            createdAt
-            updatedAt
-            driverVehiclesId
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListVehiclesQuery>response.data.listVehicles;
-  }
-  async GetTrip(id: string): Promise<GetTripQuery> {
-    const statement = `query GetTrip($id: ID!) {
-        getTrip(id: $id) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetTripQuery>response.data.getTrip;
-  }
-  async ListTrips(
-    filter?: ModelTripFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListTripsQuery> {
-    const statement = `query ListTrips($filter: ModelTripFilterInput, $limit: Int, $nextToken: String) {
-        listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListTripsQuery>response.data.listTrips;
-  }
-  async GetComment(id: string): Promise<GetCommentQuery> {
-    const statement = `query GetComment($id: ID!) {
-        getComment(id: $id) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetCommentQuery>response.data.getComment;
-  }
-  async ListComments(
-    filter?: ModelCommentFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListCommentsQuery> {
-    const statement = `query ListComments($filter: ModelCommentFilterInput, $limit: Int, $nextToken: String) {
-        listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            content
-            createdAt
-            updatedAt
-            tripCommentsId
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListCommentsQuery>response.data.listComments;
-  }
-  OnCreateDriverListener(
-    filter?: ModelSubscriptionDriverFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDriver">>
-  > {
-    const statement = `subscription OnCreateDriver($filter: ModelSubscriptionDriverFilterInput) {
-        onCreateDriver(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDriver">>
-    >;
-  }
 
-  OnUpdateDriverListener(
-    filter?: ModelSubscriptionDriverFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDriver">>
-  > {
-    const statement = `subscription OnUpdateDriver($filter: ModelSubscriptionDriverFilterInput) {
-        onUpdateDriver(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
+  constructor(private apollo: Apollo) { }
+
+  getDrivers(): Observable<any[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query ListDrivers(
+          $filter: ModelDriverFilterInput
+          $limit: Int
+          $nextToken: String
+        ) {
+          listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+            items {
+              id
+              name
+              email
+              phone
+              carType
+              createdAt
+              updatedAt
+            }
             nextToken
           }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateDriver">>
-    >;
-  }
-
-  OnDeleteDriverListener(
-    filter?: ModelSubscriptionDriverFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDriver">>
-  > {
-    const statement = `subscription OnDeleteDriver($filter: ModelSubscriptionDriverFilterInput) {
-        onDeleteDriver(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          carType
-          vehicles {
-            __typename
-            nextToken
-          }
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
+      `
+    }).valueChanges.pipe(
+      map((result: any) => {
+        if (result.errors) {
+          throw new Error('GraphQL query error');
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteDriver">>
-    >;
-  }
-
-  OnCreateRiderListener(
-    filter?: ModelSubscriptionRiderFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateRider">>
-  > {
-    const statement = `subscription OnCreateRider($filter: ModelSubscriptionRiderFilterInput) {
-        onCreateRider(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateRider">>
-    >;
-  }
-
-  OnUpdateRiderListener(
-    filter?: ModelSubscriptionRiderFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateRider">>
-  > {
-    const statement = `subscription OnUpdateRider($filter: ModelSubscriptionRiderFilterInput) {
-        onUpdateRider(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateRider">>
-    >;
-  }
-
-  OnDeleteRiderListener(
-    filter?: ModelSubscriptionRiderFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteRider">>
-  > {
-    const statement = `subscription OnDeleteRider($filter: ModelSubscriptionRiderFilterInput) {
-        onDeleteRider(filter: $filter) {
-          __typename
-          id
-          name
-          email
-          phone
-          trips {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          vehiclePassengersId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteRider">>
-    >;
-  }
-
-  OnCreateVehicleListener(
-    filter?: ModelSubscriptionVehicleFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateVehicle">>
-  > {
-    const statement = `subscription OnCreateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
-        onCreateVehicle(filter: $filter) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateVehicle">>
-    >;
-  }
-
-  OnUpdateVehicleListener(
-    filter?: ModelSubscriptionVehicleFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateVehicle">>
-  > {
-    const statement = `subscription OnUpdateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
-        onUpdateVehicle(filter: $filter) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateVehicle">>
-    >;
-  }
-
-  OnDeleteVehicleListener(
-    filter?: ModelSubscriptionVehicleFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteVehicle">>
-  > {
-    const statement = `subscription OnDeleteVehicle($filter: ModelSubscriptionVehicleFilterInput) {
-        onDeleteVehicle(filter: $filter) {
-          __typename
-          id
-          make
-          model
-          year
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          passengers {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverVehiclesId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteVehicle">>
-    >;
-  }
-
-  OnCreateTripListener(
-    filter?: ModelSubscriptionTripFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateTrip">>
-  > {
-    const statement = `subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
-        onCreateTrip(filter: $filter) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateTrip">>
-    >;
-  }
-
-  OnUpdateTripListener(
-    filter?: ModelSubscriptionTripFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateTrip">>
-  > {
-    const statement = `subscription OnUpdateTrip($filter: ModelSubscriptionTripFilterInput) {
-        onUpdateTrip(filter: $filter) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateTrip">>
-    >;
-  }
-
-  OnDeleteTripListener(
-    filter?: ModelSubscriptionTripFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteTrip">>
-  > {
-    const statement = `subscription OnDeleteTrip($filter: ModelSubscriptionTripFilterInput) {
-        onDeleteTrip(filter: $filter) {
-          __typename
-          id
-          driver {
-            __typename
-            id
-            name
-            email
-            phone
-            carType
-            createdAt
-            updatedAt
-          }
-          rider {
-            __typename
-            id
-            name
-            email
-            phone
-            createdAt
-            updatedAt
-            vehiclePassengersId
-          }
-          startTime
-          endTime
-          comments {
-            __typename
-            nextToken
-          }
-          createdAt
-          updatedAt
-          driverTripsId
-          riderTripsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteTrip">>
-    >;
-  }
-
-  OnCreateCommentListener(
-    filter?: ModelSubscriptionCommentFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateComment">>
-  > {
-    const statement = `subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
-        onCreateComment(filter: $filter) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateComment">>
-    >;
-  }
-
-  OnUpdateCommentListener(
-    filter?: ModelSubscriptionCommentFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateComment">>
-  > {
-    const statement = `subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
-        onUpdateComment(filter: $filter) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateComment">>
-    >;
-  }
-
-  OnDeleteCommentListener(
-    filter?: ModelSubscriptionCommentFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteComment">>
-  > {
-    const statement = `subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
-        onDeleteComment(filter: $filter) {
-          __typename
-          id
-          trip {
-            __typename
-            id
-            startTime
-            endTime
-            createdAt
-            updatedAt
-            driverTripsId
-            riderTripsId
-          }
-          content
-          createdAt
-          updatedAt
-          tripCommentsId
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteComment">>
-    >;
+        return result.data.listDrivers.items;
+      })
+    );
   }
 }

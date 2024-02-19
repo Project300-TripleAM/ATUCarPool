@@ -153,14 +153,17 @@ query GetTrip($id: ID!) {
     }
     startTime
     endTime
-    comments {
-      nextToken
+    route {
+      id
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
     updatedAt
     driverTripsId
     riderTripsId
+    routeTripsId
     __typename
   }
 }
@@ -179,6 +182,7 @@ query ListTrips(
       updatedAt
       driverTripsId
       riderTripsId
+      routeTripsId
       __typename
     }
     nextToken
@@ -186,39 +190,99 @@ query ListTrips(
   }
 }
 
-query GetComment($id: ID!) {
-  getComment(id: $id) {
+query GetRoute($id: ID!) {
+  getRoute(id: $id) {
     id
-    trip {
-      id
-      startTime
-      endTime
-      createdAt
-      updatedAt
-      driverTripsId
-      riderTripsId
+    origin {
+      latitude
+      longitude
       __typename
     }
-    content
+    destination {
+      latitude
+      longitude
+      __typename
+    }
+    trips {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
-    tripCommentsId
     __typename
   }
 }
 
-query ListComments(
-  $filter: ModelCommentFilterInput
+query ListRoutes(
+  $filter: ModelRouteFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listRoutes(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      content
       createdAt
       updatedAt
-      tripCommentsId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    userSub
+    username
+    email
+    phone
+    driver {
+      id
+      name
+      email
+      phone
+      carType
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      phone
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    owner
+    __typename
+  }
+}
+
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userSub
+      username
+      email
+      phone
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      owner
       __typename
     }
     nextToken

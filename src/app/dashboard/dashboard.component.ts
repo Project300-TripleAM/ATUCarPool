@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { environment } from '../environments/environment';
-import { Router } from '@angular/router'; // Import the Router class
+import { Router } from '@angular/router';
+import { getCurrentUser } from '@aws-amplify/auth';
+import { generateClient } from 'aws-amplify/api';
+
 declare var google: any;
 
 @Component({
@@ -19,10 +22,59 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     (window as any).initMap = this.initMap.bind(this);
     this.loadGoogleMapsScript();
+    try {
+      //await this.currentAuthenticatedUser();
+    } catch (error) {
+      console.error('Error fetching current authenticated user:', error);
+    }
   }
+ /* async currentAuthenticatedUser() {
+    try {
+      const user = await getCurrentUser();
+      // If the user is authenticated, fetch user data from Cognito and add test data
+      await this.populateUserFromCognito(user);
+      await this.addTestData(user); 
+    } catch (error) {
+      console.error('Error fetching current authenticated user:', error);
+    }
+  }
+  async populateUserFromCognito(user: any) {
+    try {
+      const userData = {
+        id: user.username,
+        userSub: user.attributes.sub,
+        username: user.username,
+        email: user.attributes.email,
+        phone: user.attributes.phone_number
+      };
+      // Save user
+      await this.apiService.CreateUser(userData);
+      console.log('User data saved to DynamoDB:', userData);
+    } catch (error) {
+      console.error('Error fetching user from Cognito:', error);
+    }
+  }
+  async addTestData(user: any) {
+    // Define test data for the driver
+    const driverData = {
+      id: user.username, 
+      name: user.username, 
+      email: user.attributes.email,
+      phone: user.attributes.phone_number,
+      carType: 'Sedan', 
+    };
+  
+    try {
+      // Add driver data to DynamoDB using the API service
+      await this.apiService.CreateDriver(driverData);
+      console.log('Driver data added:', driverData);
+    } catch (error) {
+      console.error('Error adding driver data:', error);
+    }
+  }*/
 
   loadGoogleMapsScript() {
     const script = document.createElement('script');
@@ -123,4 +175,6 @@ export class DashboardComponent implements OnInit {
     // Use the Angular router to navigate to the login page
     this.router.navigate(['/login']);
   }
+  //************************************************************************ GraphQL Queries
+   
 }

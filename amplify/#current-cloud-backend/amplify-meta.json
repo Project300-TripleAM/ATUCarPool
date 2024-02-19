@@ -16,7 +16,15 @@
     "atucarpool": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "atucarpool504a02dc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
       "output": {
         "authConfig": {
           "defaultAuthentication": {
@@ -25,7 +33,14 @@
               "apiKeyExpirationDays": 7
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authatucarpool504a02dc"
+              }
+            }
+          ]
         },
         "GraphQLAPIIdOutput": "csjaejlplnguvl4wfxkcemlzqe",
         "GraphQLAPIEndpointOutput": "https://idoduis3qzacxacra2tn6mfeyi.appsync-api.eu-west-1.amazonaws.com/graphql",
@@ -35,8 +50,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiatucarpool"
       },
-      "lastPushTimeStamp": "2024-01-23T13:40:27.392Z",
-      "lastPushDirHash": "e+DJhxlHQj/pJwJxea+RjRKRrKY="
+      "lastPushTimeStamp": "2024-02-18T17:21:14.923Z",
+      "lastPushDirHash": "BDwGVzEEeNSDPlRnXBptHWI5wJ8="
     }
   },
   "auth": {
@@ -69,7 +84,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/auth/atucarpool504a02dc-cloudformation-template.json",
         "logicalId": "authatucarpool504a02dc"
       },
-      "lastPushTimeStamp": "2024-01-23T13:40:31.221Z",
+      "lastPushTimeStamp": "2024-02-18T17:21:12.989Z",
       "output": {
         "UserPoolId": "eu-west-1_erJBMiXKk",
         "AppClientIDWeb": "7j2ntbf8q20q2a91qm2r2gfk9f",

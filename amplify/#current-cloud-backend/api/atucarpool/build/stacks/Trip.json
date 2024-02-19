@@ -49,16 +49,16 @@
     "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref": {
       "Type": "String"
     },
-    "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId": {
+    "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverMutationcreateDriverinit0FunctionMutationcreateDriverinit0FunctionAppSyncFunctionEFB114F8FunctionId": {
+    "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserMutationcreateUserinit0FunctionMutationcreateUserinit0FunctionAppSyncFunction5CF77F6AFunctionId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverMutationupdateDriverinit0FunctionMutationupdateDriverinit0FunctionAppSyncFunction64A3117AFunctionId": {
+    "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserMutationupdateUserinit0FunctionMutationupdateUserinit0FunctionAppSyncFunction90E2C98AFunctionId": {
       "Type": "String"
     },
-    "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverSubscriptionOnCreateDriverDataResolverFnSubscriptionOnCreateDriverDataResolverFnAppSyncFunction412FAF94FunctionId": {
+    "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserSubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunctionCAFEE24EFunctionId": {
       "Type": "String"
     }
   },
@@ -122,6 +122,10 @@
           {
             "AttributeName": "riderTripsId",
             "AttributeType": "S"
+          },
+          {
+            "AttributeName": "routeTripsId",
+            "AttributeType": "S"
           }
         ],
         "BillingMode": {
@@ -167,6 +171,34 @@
             "KeySchema": [
               {
                 "AttributeName": "riderTripsId",
+                "KeyType": "HASH"
+              }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            },
+            "ProvisionedThroughput": {
+              "Fn::If": [
+                "ShouldUsePayPerRequestBilling",
+                {
+                  "Ref": "AWS::NoValue"
+                },
+                {
+                  "ReadCapacityUnits": {
+                    "Ref": "DynamoDBModelTableReadIOPS"
+                  },
+                  "WriteCapacityUnits": {
+                    "Ref": "DynamoDBModelTableWriteIOPS"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "IndexName": "gsi-Route.trips",
+            "KeySchema": [
+              {
+                "AttributeName": "routeTripsId",
                 "KeyType": "HASH"
               }
             ],
@@ -501,7 +533,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -523,7 +555,7 @@
               {
                 "Ref": "TripTable"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -593,7 +625,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -615,7 +647,7 @@
               {
                 "Ref": "TripTable"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -685,10 +717,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverMutationcreateDriverinit0FunctionMutationcreateDriverinit0FunctionAppSyncFunctionEFB114F8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserMutationcreateUserinit0FunctionMutationcreateUserinit0FunctionAppSyncFunction5CF77F6AFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -710,7 +742,7 @@
               {
                 "Ref": "TripTable"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -780,10 +812,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverMutationupdateDriverinit0FunctionMutationupdateDriverinit0FunctionAppSyncFunction64A3117AFunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserMutationupdateUserinit0FunctionMutationupdateUserinit0FunctionAppSyncFunction90E2C98AFunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -805,7 +837,7 @@
               {
                 "Ref": "TripTable"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -875,7 +907,7 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
               "Fn::GetAtt": [
@@ -897,7 +929,7 @@
               {
                 "Ref": "TripTable"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -916,10 +948,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverSubscriptionOnCreateDriverDataResolverFnSubscriptionOnCreateDriverDataResolverFnAppSyncFunction412FAF94FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserSubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunctionCAFEE24EFunctionId"
             }
           ]
         },
@@ -931,7 +963,7 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -950,10 +982,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverSubscriptionOnCreateDriverDataResolverFnSubscriptionOnCreateDriverDataResolverFnAppSyncFunction412FAF94FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserSubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunctionCAFEE24EFunctionId"
             }
           ]
         },
@@ -965,7 +997,7 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
@@ -984,10 +1016,10 @@
         "PipelineConfig": {
           "Functions": [
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverQuerygetDriverpostAuth0FunctionQuerygetDriverpostAuth0FunctionAppSyncFunction6776A4E8FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserQuerygetUserpostAuth0FunctionQuerygetUserpostAuth0FunctionAppSyncFunction083DF5E5FunctionId"
             },
             {
-              "Ref": "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverSubscriptionOnCreateDriverDataResolverFnSubscriptionOnCreateDriverDataResolverFnAppSyncFunction412FAF94FunctionId"
+              "Ref": "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserSubscriptionOnCreateUserDataResolverFnSubscriptionOnCreateUserDataResolverFnAppSyncFunctionCAFEE24EFunctionId"
             }
           ]
         },
@@ -999,7 +1031,7 @@
               {
                 "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
               },
-              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+              "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"identityPoolId\", \"eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"eu-west-1_ovaknGlWY_Full-access/CognitoIdentityCredentials\",\"eu-west-1_ovaknGlWY_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },

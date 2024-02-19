@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { APIService, Driver } from '../services/api.service';
 
 
 @Component({
@@ -7,11 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  user: { username: string, email: string, name: string } | null = null;
+  users: Driver[] = []; // Define users as an array of Driver objects
 
-  constructor() {}
+  constructor(private apiService: APIService) {}
 
   ngOnInit(): void {
-
+    this.apiService.getDrivers().subscribe({
+      next: (result) => {
+        console.log('Result:', result);
+        if (result.length > 0) {
+          this.users = [result[0]]; 
+          console.log('Users:', this.users);
+        } else {
+          console.log('No drivers found');
+        }
+      },
+      error: (error) => {
+        console.error('GraphQL query error:', error);
+      }
+    });
   }
 }
