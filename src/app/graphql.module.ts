@@ -11,17 +11,17 @@ export function createApollo(httpLink: HttpLink) {
   // Define a function to set the necessary headers for AWS AppSync API key authentication
   const apiKeyAuth = setContext((operation, context) => ({
     headers: {
-      'x-api-key': 'da2-3w3rtx7fszehzlyiyfia5yi4xa', // Add your API key here
+      'x-api-key': 'da2-xyef6v4sj5aahgobm6y4ppqqqi',
     },
   }));
 
-  // Create the HTTP link for Apollo Client
+// Create the HTTP link for Apollo Client
   const http = httpLink.create({ uri });
 
-  // Combine the API key authentication link with the HTTP link
+// Combine the API key authentication link with the HTTP link
   const link = ApolloLink.from([apiKeyAuth, http]);
 
-  // Create the Apollo Client instance with the configured link and cache
+  // Create the Apollo Client instance 
   const cache = new InMemoryCache();
   return {
     link,

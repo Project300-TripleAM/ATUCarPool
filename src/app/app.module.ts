@@ -21,6 +21,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { MapComponent } from './map/map.component';
 const client = generateClient();
 
 Amplify.configure(awsconfig);
@@ -29,7 +30,8 @@ Amplify.configure(awsconfig);
     AppComponent,
     DashboardComponent,
     NavbarComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

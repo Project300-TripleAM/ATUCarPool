@@ -1753,4 +1753,31 @@ export class APIService {
       })
     );
   }
+
+  getRoutes(): Observable<any[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`query ListRoutes {
+        listRoutes {
+          items {
+            id
+            origin {
+              latitude
+              longitude
+            }
+            destination {
+              latitude
+              longitude
+            }
+          }
+        }
+      }`
+    }).valueChanges.pipe(
+      map((result: any) => {
+        if (result.errors) {
+          throw new Error('GraphQL query error');
+        }
+        return result.data.listRoutes.items;
+      })
+    );
+  }
 }

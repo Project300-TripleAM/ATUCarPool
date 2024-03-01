@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService, Driver } from '../services/api.service';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 
 @Component({
@@ -7,10 +8,13 @@ import { APIService, Driver } from '../services/api.service';
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.css']
 })
+
 export class MyAccountComponent implements OnInit {
   users: Driver[] = []; // Define users as an array of Driver objects
 
-  constructor(private apiService: APIService) {}
+  constructor(private apiService: APIService) {
+    
+}
 
   ngOnInit(): void {
     this.apiService.getDrivers().subscribe({
@@ -28,4 +32,16 @@ export class MyAccountComponent implements OnInit {
       }
     });
   }
+  async currentAuthenticatedUser() {
+    try {
+      const { username, userId, signInDetails } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      console.log(`The userId: ${userId}`);
+      console.log(`The signInDetails: ${signInDetails}`);
+    } catch (err) {
+      console.error('Error fetching current authenticated user:', err);
+    }
+  }
 }
+
+
