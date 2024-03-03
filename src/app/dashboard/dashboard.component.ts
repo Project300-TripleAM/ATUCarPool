@@ -20,7 +20,7 @@ export class DashboardComponent{
   }
   goBack(): void {
     // Reset the selected route
-    this.selectedRoute = null;
+    
   }
   
 }
