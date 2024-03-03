@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyAccountComponent } from './my-account/my-account.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './services/authguard.service';
-import { FaqComponent } from './faq/faq.component';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 // Declare routing for app
 const routes: Routes = [
-  { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'faq', component: FaqComponent }
-];
+  { path: 'dashboard', component: DashboardComponent, }, //boolean canactivate to determine if this route can be accessed
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'account', component: MyAccountComponent }
+]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

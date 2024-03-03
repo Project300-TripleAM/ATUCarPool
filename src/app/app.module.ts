@@ -8,24 +8,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthService } from './services/auth.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Amplify } from 'aws-amplify';
+import awsconfig from 'src/amplifyconfiguration.json';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { generateClient } from 'aws-amplify/api';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { MyAccountComponent } from './my-account/my-account.component';
-import { FaqComponent } from './faq/faq.component';
-import { MapComponent } from './map/map.component'; 
+import { MapComponent } from './map/map.component';
+const client = generateClient();
 
-
+Amplify.configure(awsconfig);
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    MyAccountComponent,
     NavbarComponent,
-    FaqComponent,
+    MyAccountComponent,
     MapComponent
   ],
   imports: [
@@ -40,10 +45,13 @@ import { MapComponent } from './map/map.component';
     MatIconModule,
     MatSidenavModule,
     ReactiveFormsModule,
-    FormsModule
-
+    AmplifyAuthenticatorModule,
+    GraphQLModule,
+    HttpClientModule,
+    CommonModule
+    
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

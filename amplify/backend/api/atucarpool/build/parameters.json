@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "atucarpool",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authatucarpool504a02dc",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-atucarpool-dev-123910-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/4e316412b0afebae0d9290a4816397f26c956def"
+}

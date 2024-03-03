@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { AuthService } from '../services/auth.service';
-import { MatToolbarModule } from '@angular/material/toolbar'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,26 +8,16 @@ import { Subscription } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isLoggedIn: boolean = false;
   private authSubscription!: Subscription;
 
   constructor(
-    private authService: AuthService, 
     private router: Router,
     private changeDetector: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    this.authSubscription = this.authService.isLoggedIn().subscribe(
-      (loggedIn: boolean) => {
-        this.isLoggedIn = loggedIn;
-        this.changeDetector.detectChanges();
-      }
-    );
-  }
-  
 
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
@@ -42,7 +30,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }

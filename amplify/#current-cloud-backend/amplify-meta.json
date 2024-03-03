@@ -1,0 +1,102 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-atucarpool-dev-123910-authRole",
+      "UnauthRoleArn": "arn:aws:iam::615140058358:role/amplify-atucarpool-dev-123910-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::615140058358:role/amplify-atucarpool-dev-123910-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-atucarpool-dev-123910-deployment",
+      "UnauthRoleName": "amplify-atucarpool-dev-123910-unauthRole",
+      "StackName": "amplify-atucarpool-dev-123910",
+      "StackId": "arn:aws:cloudformation:eu-west-1:615140058358:stack/amplify-atucarpool-dev-123910/68f54930-b9ec-11ee-90cf-0ac04cc42d87",
+      "AmplifyAppId": "dp5y1jsg75468"
+    }
+  },
+  "api": {
+    "atucarpool": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "atucarpool504a02dc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authatucarpool504a02dc"
+              }
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "csjaejlplnguvl4wfxkcemlzqe",
+        "GraphQLAPIEndpointOutput": "https://idoduis3qzacxacra2tn6mfeyi.appsync-api.eu-west-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-3w3rtx7fszehzlyiyfia5yi4xa"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiatucarpool"
+      },
+      "lastPushTimeStamp": "2024-02-18T17:21:14.923Z",
+      "lastPushDirHash": "BDwGVzEEeNSDPlRnXBptHWI5wJ8="
+    }
+  },
+  "auth": {
+    "atucarpool504a02dc": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/auth/atucarpool504a02dc-cloudformation-template.json",
+        "logicalId": "authatucarpool504a02dc"
+      },
+      "lastPushTimeStamp": "2024-02-18T17:21:12.989Z",
+      "output": {
+        "UserPoolId": "eu-west-1_erJBMiXKk",
+        "AppClientIDWeb": "7j2ntbf8q20q2a91qm2r2gfk9f",
+        "AppClientID": "6vo9ofku5mkj8g6vv2m5i2vham",
+        "HostedUIDomain": "atucarpool504a02dc-504a02dc-dev",
+        "IdentityPoolId": "eu-west-1:9689932f-c680-4dfc-b501-4fbf17ab99d1",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:615140058358:userpool/eu-west-1_erJBMiXKk",
+        "IdentityPoolName": "atucarpool504a02dc_identitypool_504a02dc__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:4200/dashboard/\"],\"LogoutURLs\":[\"https://localhost:4200/\"]}",
+        "UserPoolName": "atucarpool504a02dc_userpool_504a02dc"
+      },
+      "lastPushDirHash": "f6VOMTz6ccKjSqlA2k2h39YPxUk="
+    }
+  }
+}
