@@ -1,8 +1,10 @@
 <div class="account-container">
-  <h4>Welcome to Your ATUCarPool Account, from here you can see your information, recent trips and upcoming trips</h4>
-  <div *ngIf="users">
-    <div *ngFor="let user of users">
-      <p>{{ user.id }} - {{ user.name }} - {{ user.email }}</p>
+  <h3 class ="heading">Your ATU-CarPool Account</h3>
+  <div class="user-info" *ngIf="users">
+    <div class="user-card" *ngFor="let user of users">
+      <p><strong>User ID:</strong> {{ user.id }}</p>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
     </div>
   </div>
 </div>

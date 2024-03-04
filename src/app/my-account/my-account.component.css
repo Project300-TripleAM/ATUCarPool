@@ -1,20 +1,44 @@
 .account-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #3498db; /* Set the background color */
-    border-radius: 10px; /* Add some border radius for a rounded look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  h4 {
-    color: #ffffff; /* Set the text color */
-    text-align: center; /* Center the text */
-  }
+.account-container h4 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  /* Additional styles for user information */
-  h2, p {
-    color: #ffffff;
-    margin: 5px 0;
-  }
+.account-container p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.account-container p strong {
+  color: #333;
+}
+
+.heading {
+  text-align:center;
+}
+/* Style for the user information section */
+.user-info {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+/* Style for the user cards */
+.user-card {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
