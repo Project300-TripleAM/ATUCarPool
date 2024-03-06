@@ -5,6 +5,7 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MapComponent } from './map/map.component'
 import { FaqComponent } from './faq/faq.component';
+import { AddRouteComponent } from './add-route/add-route.component';
 
 // Declare routing for app
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'my-account', component: MyAccountComponent },
   { path: 'map', component: MapComponent },
-  { path: 'faq', component: FaqComponent }
+  { path: 'faq', component: FaqComponent },
+  { path: 'add-route', component: AddRouteComponent}
 ]
 
 @NgModule({
