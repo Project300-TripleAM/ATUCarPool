@@ -121,6 +121,10 @@ export class MapComponent implements OnInit {
       }
     });
   }
+
+  selectRoute(route: any) {
+    this.selectedRoute = route;
+  }
   
   checkAvailability(route: any) {
     // Handle the availability check logic here

@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
+    <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
       <td>{{ route.id }}</td>
       <td>{{ route.origin.lat }}, {{ route.origin.lng }}</td>
       <td>{{ route.destination.lat }}, {{ route.destination.lng }}</td>
