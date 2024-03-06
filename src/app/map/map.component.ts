@@ -4,7 +4,6 @@ import { APIService } from '../services/api.service';
 import { Router } from '@angular/router';
 import {} from 'googlemaps';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -98,28 +97,33 @@ export class MapComponent implements OnInit {
   }
 
   drawSelectedRoute(route: any) {
-    this.selectedRoute = route;
-
     const request = {
-      origin: new google.maps.LatLng(route.origin.lat, route.origin.lng),
-      destination: new google.maps.LatLng(route.destination.lat, route.destination.lng),
+      origin: route.origin,
+      destination: route.destination,
       travelMode: google.maps.TravelMode.DRIVING,
     };
 
-    this.directionsService.route(request, (response: any, status: any) => {
-      if (status == google.maps.DirectionsStatus.OK) {
+    // Specify the type for 'response' and 'status'.
+    this.directionsService.route(request, (response: google.maps.DirectionsResult, status: google.maps.DirectionsStatus) => {
+      if (status === google.maps.DirectionsStatus.OK) {
         this.directionsRenderer.setDirections(response);
-
-        // Update the map center to fit the route
         const bounds = new google.maps.LatLngBounds();
-        response.routes[0].legs.forEach((leg: any) => {
+  
+        // Specify the type for 'leg'.
+        response.routes[0].legs.forEach((leg: google.maps.DirectionsLeg) => {
           bounds.extend(leg.start_location);
           bounds.extend(leg.end_location);
         });
+  
         this.map.fitBounds(bounds);
       } else {
         console.error('Directions request failed due to ' + status);
       }
     });
-}
+  }
+  
+  checkAvailability(route: any) {
+    // Handle the availability check logic here
+    console.log('Checking availability for route:', route);
+  }
 }

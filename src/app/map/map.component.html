@@ -14,7 +14,10 @@
       <td>{{ route.id }}</td>
       <td>{{ route.origin.lat }}, {{ route.origin.lng }}</td>
       <td>{{ route.destination.lat }}, {{ route.destination.lng }}</td>
-      <td><button class="show-on-map-btn" (click)="drawSelectedRoute(route)">Show on Map</button></td>
+      <td class="center-button">
+        <button class="show-on-map-btn" (click)="drawSelectedRoute(route)">Show on Map</button>
+        <button class="availability-btn" (click)="checkAvailability(route)">Availability</button>
+      </td> <!-- Merge action and availability buttons -->
     </tr>
   </tbody>
 </table>
