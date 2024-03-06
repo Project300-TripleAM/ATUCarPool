@@ -1,23 +1,20 @@
 <div id="map" style="height: 400px;"></div>
 
-<!-- Table to display routes -->
 <table class="table">
   <thead>
     <tr>
       <th>ID</th>
       <th>Origin</th>
       <th>Destination</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <p>Routes</p>
     <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
       <td>{{ route.id }}</td>
-      <td>{{ route.origin.lat() }}, {{ route.origin.lng() }}</td>
-      <td>{{ route.destination.lat() }}, {{ route.destination.lng() }}</td>
-      
+      <td>{{ route.origin.lat }}, {{ route.origin.lng }}</td>
+      <td>{{ route.destination.lat }}, {{ route.destination.lng }}</td>
       <td><button (click)="drawSelectedRoute(route)">Show on Map</button></td>
     </tr>
   </tbody>
 </table>
-

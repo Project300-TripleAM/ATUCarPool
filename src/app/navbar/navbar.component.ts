@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { getCurrentUser, signOut } from '@aws-amplify/auth';
+import { Hub } from '@aws-amplify/core';
 
 @Component({
   selector: 'app-navbar',
@@ -11,25 +12,51 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isLoggedIn: boolean = false;
-  private authSubscription!: Subscription;
 
-  constructor(
-    private router: Router,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+  constructor(private router: Router) {
+    // Setting up the Hub listener for authentication events
+    Hub.listen('auth', (data) => {
+      const { payload } = data;
+      if (payload.event === 'signedIn') {
+        this.isLoggedIn = true;
+      } else if (payload.event === 'signedOut') {
+        this.isLoggedIn = false;
+      }
+      // Make sure to apply the changes
+      setTimeout(() => this.sidenav.close());
+    });
 
-
-  ngOnDestroy() {
-    this.authSubscription.unsubscribe();
+    // Check the user's sign-in status when the component initializes
+    this.checkUserSignInStatus();
   }
 
-  toggleSidenav() {
-    if (this.sidenav) {
-      this.sidenav.toggle();
+  ngOnDestroy() {
+    // Clean up the Hub listener when the component is destroyed
+    // Check the AWS Amplify documentation on how to remove listeners correctly
+  }
+
+  private async checkUserSignInStatus() {
+    try {
+      await getCurrentUser();
+      this.isLoggedIn = true;
+    } catch (error) {
+      this.isLoggedIn = false;
     }
   }
 
-  logout() {
-    this.router.navigate(['/login']);
+  toggleSidenav() {
+    this.sidenav.toggle();
+  }
+
+  async logout() {
+    try {
+      await signOut();
+      this.isLoggedIn = false;
+      this.router.navigate(['/login']).then(() => {
+        this.sidenav.close();
+      });
+    } catch (error) {
+      console.error('Error during sign out: ', error);
+    }
   }
 }
