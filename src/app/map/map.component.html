@@ -10,10 +10,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let route of routes">
+    <p>Routes</p>
+    <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
       <td>{{ route.id }}</td>
-      <td>{{ route.origin }}</td>
-      <td>{{ route.destination }}</td>
+      <td>{{ route.origin.lat() }}, {{ route.origin.lng() }}</td>
+      <td>{{ route.destination.lat() }}, {{ route.destination.lng() }}</td>
+      
+      <td><button (click)="drawSelectedRoute(route)">Show on Map</button></td>
     </tr>
   </tbody>
 </table>

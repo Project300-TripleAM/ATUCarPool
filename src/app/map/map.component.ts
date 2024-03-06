@@ -13,7 +13,7 @@ import {} from 'googlemaps'; //medium.com work around see src/index.d.ts
 export class MapComponent implements OnInit{
   private directionsService: any;
   private directionsRenderer: any;
-  private selectedRoute: any;
+  public selectedRoute: any;
   private map: any;
   private marker: any;
   private apiKey = environment.apiKey;
@@ -29,6 +29,7 @@ export class MapComponent implements OnInit{
       this.API.getRoutes().subscribe(
         (result: any) => {
           const routes = result; // Accessing the entire result object
+          console.log('API Response - Routes:', routes);
           if (routes && routes.length > 0) {
             const routeDataArray = routes.map((route: any) => {
               const origin = new google.maps.LatLng(route.origin.latitude, route.origin.longitude);
@@ -163,5 +164,9 @@ export class MapComponent implements OnInit{
     console.error(browserHasGeolocation ?
       'Error: The Geolocation service failed.' :
       'Error: Your browser doesn\'t support geolocation.');
+  }
+
+  drawSelectedRoute(route: any) {
+    // Your implementation logic here
   }
 }
