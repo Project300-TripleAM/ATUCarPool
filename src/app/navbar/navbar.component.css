@@ -9,10 +9,12 @@
   margin: 0 8px; /* Add some margin for spacing */
 }
 
-/* Increase specificity */
-mat-toolbar .navbar-button {
-  color: #000 !important; /* Black text color */
+/* CSS for the mat-toolbar */
+.mat-toolbar {
+  background-color: #1a1a1a; /* Slightly lighter black */
+  color: #fff; /* White text color */
 }
+
 
 
   
