@@ -98,6 +98,28 @@ export class MapComponent implements OnInit {
   }
 
   drawSelectedRoute(route: any) {
-    // Your implementation logic here
-  }
+    this.selectedRoute = route;
+
+    const request = {
+      origin: new google.maps.LatLng(route.origin.lat, route.origin.lng),
+      destination: new google.maps.LatLng(route.destination.lat, route.destination.lng),
+      travelMode: google.maps.TravelMode.DRIVING,
+    };
+
+    this.directionsService.route(request, (response: any, status: any) => {
+      if (status == google.maps.DirectionsStatus.OK) {
+        this.directionsRenderer.setDirections(response);
+
+        // Update the map center to fit the route
+        const bounds = new google.maps.LatLngBounds();
+        response.routes[0].legs.forEach((leg: any) => {
+          bounds.extend(leg.start_location);
+          bounds.extend(leg.end_location);
+        });
+        this.map.fitBounds(bounds);
+      } else {
+        console.error('Directions request failed due to ' + status);
+      }
+    });
+}
 }
