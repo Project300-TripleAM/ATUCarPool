@@ -28,21 +28,24 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.amplify-authenticator {
-  min-height: 100%;
-  position: relative;
+.amplify-authenticator, .container {
+  flex: 1; /* This will make the container grow to fill the available space, pushing the footer down */
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: #5d5d5d;
   padding: 20px 0;
+  background-color: #5d5d5d;
   text-align: center;
+  width: 100%;
+  /* removed position: absolute; and bottom: 0; */
 }
+
+/* ... rest of your styles ... */
+
 
 .footer-links {
   list-style: none;
