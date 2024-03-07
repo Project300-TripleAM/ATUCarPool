@@ -44,3 +44,28 @@ html, body {
   text-align: center;
 }
 
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 20px; /* Adjust spacing between links */
+}
+
+.footer-links li:last-child {
+  margin-right: 0; /* Remove margin for the last link */
+}
+
+.footer-links li a {
+  color: #fff; /* Set link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: 700; /* Make font bold */
+  font-family: 'Nunito', sans-serif; /* Apply font family */
+}
+
+.footer-links li a:hover {
+  color: #ccc; /* Change link color on hover */
+}
