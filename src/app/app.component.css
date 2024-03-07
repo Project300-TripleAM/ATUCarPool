@@ -23,3 +23,24 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
   margin: 0; /* Remove default margin */
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.amplify-authenticator {
+  min-height: 100%;
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #5d5d5d;
+  padding: 20px 0;
+  text-align: center;
+}
+
