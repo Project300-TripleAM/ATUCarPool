@@ -27,13 +27,12 @@
 .heading {
   text-align:center;
 }
-/* Style for the user information section */
+
 .user-info {
   border-top: 1px solid #ddd;
   padding-top: 20px;
 }
 
-/* Style for the user cards */
 .user-card {
   background-color: #fff;
   padding: 15px;
@@ -41,4 +40,27 @@
   border-radius: 8px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recent-trips {
+  margin-top: 20px;
+}
+
+.trip-card {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trip-card p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.trip-card p strong {
+  color: #333;
 }

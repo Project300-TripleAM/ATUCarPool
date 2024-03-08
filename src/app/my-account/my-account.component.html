@@ -1,10 +1,33 @@
 <div class="account-container">
-  <h3 class ="heading">Your ATU-CarPool Account</h3>
+  <h3 class="heading">Your ATU-CarPool Account</h3>
+  <!-- Display user information -->
   <div class="user-info" *ngIf="users">
     <div class="user-card" *ngFor="let user of users">
-      <p><strong>User ID:</strong> {{ user.id }}</p>
+      <!--<p><strong>User ID:</strong> {{ user.id }}</p>--> <!--no need to show user id, name & email is sufficient-->
       <p><strong>Name:</strong> {{ user.name }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
     </div>
   </div>
+
+  <!-- Displaying recent trips --> 
+  <!--Can be for both drivers and riders or just riders?-->
+  <h3 class="heading">Recent Trips</h3>
+  <div class="recent-trips" *ngIf="recentTrips && recentTrips.length > 0">
+    <div class="trip-card" *ngFor="let trip of recentTrips">
+      <p><strong>Trip:</strong> {{ trip.Trip }}</p>
+      <p><strong>From:</strong> {{ trip.origin }}</p>
+      <p><strong>Destination:</strong> {{ trip.destination }}</p>
+      <p><strong>Date:</strong> {{ trip.Date }} </p>
+    </div>
+  </div>
+
+  <!-- Displaying upcoming trips -->
+<h3 class="heading">Upcoming Trips</h3>
+<div class="upcoming-trips" *ngIf="upcomingTrips && upcomingTrips.length > 0">
+  <div class="trip-card" *ngFor="let trip of upcomingTrips">
+    <p><strong>From:</strong> {{ trip.origin }}</p>
+    <p><strong>Destination:</strong> {{ trip.destination }}</p>
+  </div>
+</div>
+
 </div>
