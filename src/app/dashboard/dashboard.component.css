@@ -2,8 +2,12 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff; /* Set background color to white for better contrast */
+    background-color: #f7f7f7; /* Set background color to white for better contrast */
   }
+
+.card-container {
+  background-color: #f7f7f7
+}
   
   .header {
     display: flex;
@@ -49,9 +53,14 @@
   /* Style for bullet points */
   .content ul li:before {
     content: "\2022"; /* Add bullet point */
-    color: #28a745; /* Set bullet point color */
     display: inline-block; /* Ensure the bullet point is displayed inline */
     width: 1em; /* Adjust bullet point width */
     margin-left: -1em; /* Adjust margin to align bullet point with list item */
+  }
+
+  .centered-button {
+    display: flex;
+    justify-content: center;
+    padding:35px;
   }
   
