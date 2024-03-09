@@ -358,11 +358,13 @@ mutation CreateRoute(
   createRoute(input: $input, condition: $condition) {
     id
     origin {
+      name
       latitude
       longitude
       __typename
     }
     destination {
+      name
       latitude
       longitude
       __typename
@@ -384,11 +386,13 @@ mutation UpdateRoute(
   updateRoute(input: $input, condition: $condition) {
     id
     origin {
+      name
       latitude
       longitude
       __typename
     }
     destination {
+      name
       latitude
       longitude
       __typename
@@ -410,11 +414,13 @@ mutation DeleteRoute(
   deleteRoute(input: $input, condition: $condition) {
     id
     origin {
+      name
       latitude
       longitude
       __typename
     }
     destination {
+      name
       latitude
       longitude
       __typename
