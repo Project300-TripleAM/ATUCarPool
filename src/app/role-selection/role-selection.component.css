@@ -1,0 +1,32 @@
+/* role-selection.component.css */
+.role-selection-container {
+    display: flex;
+    height: 100vh; /* Set the height to fill the entire viewport */
+}
+
+.role-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    padding: 20px;
+    border-color: black;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.driver {
+    background-color: #5d5d5d; /* Light blue for the driver side */
+  
+}
+
+.passenger {
+    background-color: #5d5d5d; /* Gold for the passenger side */
+ 
+}
+
+.role-option:hover {
+    background-color: #f0f0f0;
+}

@@ -1,3 +1,4 @@
+// app.component.ts
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
@@ -9,7 +10,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   constructor(private router: Router) {}
 
-  // Method to navigate to the dashboard route
   navigateToDashboard() {
     this.router.navigateByUrl('/dashboard');
   }
