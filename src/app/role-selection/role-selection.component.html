@@ -1,12 +1,14 @@
 <!-- role-selection.component.html -->
 <div class="role-selection-container">
-    <div class="role-option driver" (click)="selectRole('driver')">
-      <h2>Driver</h2>
-      <!-- Add any additional content or styling for the "Driver" side here -->
-    </div>
-  
-    <div class="role-option passenger" (click)="selectRole('passenger')">
-      <h2>Passenger</h2>
-      <!-- Add any additional content or styling for the "Passenger" side here -->
-    </div>
+  <h1 class="choose-role-header">Please choose a role</h1>
+
+  <div class="role-option driver" (click)="selectRole('driver')">
+    <h2>Driver</h2>
+    <!-- Add any additional content or styling for the "Driver" side here -->
+  </div>
+
+  <div class="role-option passenger" (click)="selectRole('passenger')">
+    <h2>Passenger</h2>
+    <!-- Add any additional content or styling for the "Passenger" side here -->
+  </div>
 </div>

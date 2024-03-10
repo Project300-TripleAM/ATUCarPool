@@ -1,7 +1,17 @@
 /* role-selection.component.css */
 .role-selection-container {
+    position: relative;
     display: flex;
     height: 100vh; /* Set the height to fill the entire viewport */
+}
+
+.choose-role-header {
+    position: absolute;
+    top: 50px; /* Adjust this value to add space between the navbar and the text */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: #000000; 
 }
 
 .role-option {
@@ -19,12 +29,12 @@
 
 .driver {
     background-color: #5d5d5d; /* Light blue for the driver side */
-  
+    color: #fff; /* White text color for better contrast */
 }
 
 .passenger {
     background-color: #5d5d5d; /* Gold for the passenger side */
- 
+    color: #fff; /* White text color for better contrast */
 }
 
 .role-option:hover {

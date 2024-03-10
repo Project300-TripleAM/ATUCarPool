@@ -12,8 +12,8 @@ import { RoleSelectionComponent } from './role-selection/role-selection.componen
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard] },
-  { path: 'driver-dashboard', component: DashboardComponent, canActivate: [RoleGuard] }, // Adjust as needed
-  { path: 'passenger-dashboard', component: DashboardComponent, canActivate: [RoleGuard] }, // Adjust as needed
+  { path: 'driver-dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { role: 'driver' } },
+  { path: 'passenger-dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { role: 'passenger' } },
   { path: 'my-account', component: MyAccountComponent },
   { path: 'map', component: MapComponent },
   { path: 'faq', component: FaqComponent },
