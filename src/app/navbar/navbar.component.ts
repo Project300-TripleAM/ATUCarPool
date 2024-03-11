@@ -44,6 +44,12 @@ export class NavbarComponent implements OnDestroy {
     try {
       await getCurrentUser();
       this.isLoggedIn = true;
+      // Check if the user has already selected a role
+      const userRole = this.userRoleService.getUserRole();
+      if (userRole) {
+        this.hasSelectedRole = true;
+        this.isDriver = userRole === 'driver'; // Update driver status
+      }
     } catch (error) {
       this.isLoggedIn = false;
     }
@@ -53,6 +59,7 @@ export class NavbarComponent implements OnDestroy {
     // Subscribe to changes in the user role
     this.userRoleService.userRole$.subscribe((role: string) => {
       this.isDriver = role === 'driver';
+      this.hasSelectedRole = true;
     });
   }
 
