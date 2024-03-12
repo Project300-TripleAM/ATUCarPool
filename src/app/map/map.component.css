@@ -41,6 +41,16 @@
     background-color: #6c6c6c;
 }
 
+.add-route-cell {
+    text-align: center; 
+  }
+  
+  .add-route-btn {
+    padding: 10px 20px; 
+    margin: 10px; 
+  }
+  
+=======
 /* Centering the button */
 .center-button {
     display: flex;

@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MapComponent } from './map/map.component';
 import { FaqComponent } from './faq/faq.component';
+
+import { AddRouteComponent } from './add-route/add-route.component';
+
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { RoleGuard } from './services/role-guard.service';
@@ -17,6 +20,8 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent },
   { path: 'map', component: MapComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'add-route', component: AddRouteComponent}
+]
   { path: 'about-us', component: AboutUsComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'role-selection', component: RoleSelectionComponent },

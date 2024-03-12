@@ -1,0 +1,30 @@
+
+<div>
+    <h2>Add Route</h2>
+    <form>
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" required>
+  
+      <label for="destination">Destination:</label>
+      <input type="text" id="destination" required>
+  
+      <div class="transport-type">
+        <label>
+          <input type="radio" name="transportType" value="driver" required>
+          Driver
+        </label>
+        <label>
+          <input type="radio" name="transportType" value="passenger" required>
+          Passenger
+        </label>
+        <label>
+          <input type="radio" name="transportType" value="both" required>
+          Both
+        </label>
+      </div>
+  
+      <button type="submit">Add Route</button>
+      <button class="back-to-map-btn" (click)="navigateToMap()">Back</button>
+    </form>
+</div>
+  

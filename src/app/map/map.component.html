@@ -10,6 +10,10 @@
     </tr>
   </thead>
   <tbody>
+    <td colspan="4" class="add-route-cell">
+      <button routerLink="/add-route" class="add-route-btn">Add a route</button>
+    </td>
+    <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
     <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
       <td>{{ route.id }}</td>
       <td>{{ route.origin.lat }}, {{ route.origin.lng }}</td>
