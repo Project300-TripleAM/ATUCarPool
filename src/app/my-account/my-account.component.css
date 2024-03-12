@@ -66,11 +66,13 @@
 }
 
 .passenger-table {
-  width: 100%;
+  width: calc(100% - 40px); /* Adjusted width to fit within the container with some margin */
+  margin: 20px; /* Added margin for spacing */
   border-collapse: collapse;
 }
 
-.passenger-table th, .passenger-table td {
+.passenger-table th,
+.passenger-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -88,9 +90,7 @@
   background-color: #ddd;
 }
 
-.account-container {
-  position: relative; /* Ensure the container is positioned */
-}
+
 
 /* Notification button */
 .notification-menu {

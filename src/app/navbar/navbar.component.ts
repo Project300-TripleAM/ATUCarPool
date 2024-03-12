@@ -78,12 +78,4 @@ export class NavbarComponent implements OnDestroy {
       console.error('Error during sign out: ', error);
     }
   }
-
-  switchRole() { // method to toggle between driver and passenger roles
-    this.isDriver = !this.isDriver;
-    // Update the user's role in the user role service
-    this.userRoleService.setUserRole(this.isDriver ? 'driver' : 'passenger');
-    //navigate to the appropriate dashboard based on the role
-    this.router.navigate([this.isDriver ? '/driver-dashboard' : '/passenger-dashboard']);
-  }
 }

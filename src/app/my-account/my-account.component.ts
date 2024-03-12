@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { APIService, Driver } from '../services/api.service';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { UserRoleService } from '../services/user-role.service';
@@ -12,50 +13,51 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class MyAccountComponent implements OnInit {
   users: Driver[] = []; // Define users as an array of Driver objects
-  // Is an array for riders needed? do we have getRiders query in DB?  | riders: Rider[] = []; |
-  passengers: any[] = [];
+  passengers: any[] = []; // --TODO: Define users as an array of Passenger / Rider Objects
   recentTrips: any[] = []; // Define recentTrips to store trip information
-  upcomingTrips: any[] = []; // Define upcomingTrips to store upcoming trip information 
-  userRole: string = '';
+  upcomingTrips: any[] = []; // Define upcomingTrips to store upcoming trip information
+  userRole!: string;
   isMenuOpen: boolean = false;
 
-
-  constructor(private apiService: APIService, private userRoleService: UserRoleService) {}
+  constructor(private apiService: APIService, private userRoleService: UserRoleService, private router: Router) {}
 
   ngOnInit(): void {
     // Fetch user data and recent trips data
     this.fetchUserData();
     this.fetchRecentTrips();
     this.fetchUpcomingTrips();
-    this.userRole = this.userRoleService.getUserRole(); // Get the user's role from the service
-    this.populatePassengers(); //Placeholder dummy data purposes only until configured in DB
+    this.userRole = this.userRoleService.getUserRole();
+
+    if (this.userRole === 'driver') {
+      this.fetchPassengers();
+    }
   }
+  
 
   // Fetch user data from the API service
   fetchUserData() {
-    if (this.userRole === 'driver') {
-      this.apiService.getDrivers().subscribe({
-        next: (result) => {
-          console.log('Result:', result);
-          if (result.length > 0) {
-            this.users = [result[0]]; 
-            console.log('Users:', this.users);
-          } else {
-            console.log('No drivers found');
-          }
-        },
-        error: (error) => {
-          console.error('GraphQL query error:', error);
+    this.apiService.getDrivers().subscribe({
+      next: (result) => {
+        console.log('Result:', result);
+        if (result.length > 0) {
+          this.users = [result[0]]; 
+          console.log('Users:', this.users);
+        } else {
+          console.log('No drivers found');
         }
-      });
-    } else if (this.userRole === 'passenger') {
-      // Fetch passengers if required
-    }
+      },
+      error: (error) => {
+        console.error('GraphQL query error:', error);
+      }
+    });
   }
+
+  
 
   // Fetches recent trips data (placeholder for now)
   fetchRecentTrips() {
-    // TEMPORARY  Placeholder data for recent trips
+    // TEMPORARY Placeholder data for recent trips
+    // will populate when configured in backend and can update with accurate data
     this.recentTrips = [
       { Trip: 1, origin: 'Origin Point 1', destination: 'Destination 1', Date: '02/03/2024' },
       { Trip: 2, origin: 'Origin Point 2', destination: 'Destination 2', Date: '03/03/2024' },
@@ -66,25 +68,39 @@ export class MyAccountComponent implements OnInit {
    // Fetch upcoming trips data from the API service
    fetchUpcomingTrips() {
     // Temporary Placeholder data for upcoming trips 
-    //replace with actual implementation, once we implement Driver / Rider Selection once users are saved into database
+    // will populate when configured in backend and can update with accurate data
     this.upcomingTrips = [
-      { origin: 'Upcoming Trip Origin Point ', destination: 'Upcoming Trip Destination ' },
+      { origin: 'Upcoming Origin Point ', destination: 'Upcoming Destination ' },
     ];
   }
 
-  // Populate passengers' details (Placeholder dummy data)
-  populatePassengers() {
-    // Dummy data for passengers (can be replaced with actual data from the backend)
+  fetchPassengers() {
+    // Fetch passengers data from  API 
+    // Assign the fetched data to the passengers array
+    // Placeholder dummy data only!! 
+    // will populate when configured in backend and can update with accurate data
     this.passengers = [
       { name: 'Jim Jones', pickupPoint: 'Enniscrone', destination: 'ATU Sligo' },
-      { name: 'John James', pickupPoint:'Collooney', destination: 'ATU Sligo' },
-      // Add more passengers' details as needed
+      { name: 'John James', pickupPoint:'Collooney', destination: 'ATU Sligo' }
     ];
   }
 
-  // Toggle the visibility of the notification menu
-  toggleMenu() {
+   // Toggle the visibility of the notification menu
+   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     console.log('button error');
   }
+
+  // Method to switch the user role between driver and passenger
+  switchRole() {
+    // Determine the new role based on the current role
+    const newRole = this.userRole === 'driver' ? 'passenger' : 'driver';
+    
+    // Update the user's role in the user role service
+    this.userRoleService.setUserRole(newRole);
+    
+    // Redirect to the appropriate dashboard based on the new role
+    this.router.navigate([newRole === 'driver' ? '/driver-dashboard' : '/passenger-dashboard']);
+  }
+
 }
