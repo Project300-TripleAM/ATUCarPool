@@ -1,1 +1,70 @@
-<app-map></app-map>
+<div *ngIf="isDriver; else passengerContent">
+  <div class="dashboard-container">
+    <mat-card class="card-container">
+      <!-- Card content for Drivers -->
+      <mat-card-header class="header">
+        <mat-card-title>Welcome to ATU CarPool</mat-card-title>
+      </mat-card-header>
+      <div class="image">
+        <img src="assets/ATU_Sligo.jpg" alt="ATU Sligo" class="Atu-logo" />
+      </div>
+      <mat-card-content>
+        <h2>Driver Guidelines</h2>
+        <p>Here are some guidelines for drivers to ensure a safe and efficient carpool experience:</p>
+        <ul>
+          <li>Ensure your vehicle is in good condition and meets safety standards.</li>
+          <li>Always communicate with passengers regarding trip details and expectations.</li>
+          <li>Respect passengers' preferences and adhere to agreed-upon pickup and drop-off locations.</li>
+          <li>Be punctual and considerate of passengers' time.</li>
+        </ul>
+  
+        <h2>Best Practices for Drivers</h2>
+        <p>Follow these best practices to provide an exceptional carpooling service:</p>
+        <ul>
+          <li>Keep your car clean and comfortable for passengers.</li>
+          <li>Be open to feedback and suggestions from passengers to improve your service.</li>
+          <li>Adhere to traffic laws and regulations at all times.</li>
+          <li>Ensure a pleasant and courteous attitude towards passengers.</li>
+        </ul>
+      </mat-card-content>
+      
+    </mat-card>
+  </div>  
+</div>
+
+<ng-template #passengerContent>
+  <!-- Content for passengers -->
+  <div class="dashboard-container">
+    <mat-card class="card-container">
+      <!-- Card content for passengers -->
+      <mat-card-header class="header">
+        <mat-card-title>Welcome to ATU CarPool</mat-card-title>
+      </mat-card-header>
+      <div class="image">
+        <img src="assets/ATU_Sligo.jpg" alt="ATU Sligo" class="Atu-logo" />
+      </div>
+      <mat-card-content>
+        <h2>Safety and Security Tips For Passengers</h2>
+        <p>Here are some tips to ensure safety and security during trips:</p>
+        <ul>
+          <li>Always verify the driver and vehicle details before boarding.</li>
+          <li>Share trip details with trusted contacts.</li>
+          <li>Choose well-lit and populated pickup/drop-off locations.</li>
+          <li>Trust your instincts; if something feels wrong, cancel the trip.</li>
+        </ul>
+
+        <h2>Best Practices for Using the App</h2>
+        <p>Follow these best practices for a seamless experience:</p>
+        <ul>
+          <li>Keep your app updated to the latest version.</li>
+          <li>Rate your trips to provide feedback and improve service.</li>
+          <li>Report any issues or concerns to customer support.</li>
+          <li>Show respect to fellow passengers & drivers.</li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions class="centered-button">
+        <button mat-raised-button color="primary" routerLink="/map">Search Available Rides</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>

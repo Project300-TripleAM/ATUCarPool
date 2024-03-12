@@ -14,10 +14,14 @@
       <button routerLink="/add-route" class="add-route-btn">Add a route</button>
     </td>
     <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
+    <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
       <td>{{ route.id }}</td>
       <td>{{ route.origin.lat }}, {{ route.origin.lng }}</td>
       <td>{{ route.destination.lat }}, {{ route.destination.lng }}</td>
-      <td><button class="show-on-map-btn" (click)="drawSelectedRoute(route)">Show on Map</button></td>
+      <td class="center-button">
+        <button class="show-on-map-btn" (click)="drawSelectedRoute(route)">Show on Map</button>
+        <button class="availability-btn" (click)="checkAvailability(route)">Availability</button>
+      </td> <!-- Merge action and availability buttons -->
     </tr>
   </tbody>
 </table>

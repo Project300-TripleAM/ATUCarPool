@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { Apollo, gql } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
-
+import { generateClient } from 'aws-amplify/api';
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
 }
@@ -109,7 +109,7 @@ export type Vehicle = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: Driver | null;
   passengers?: ModelRiderConnection | null;
   createdAt: string;
@@ -168,6 +168,7 @@ export type Route = {
 
 export type Location = {
   __typename: "Location";
+  name: string;
   latitude: number;
   longitude: number;
 };
@@ -234,37 +235,25 @@ export type CreateVehicleInput = {
   id?: string | null;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driverVehiclesId?: string | null;
 };
 
 export type ModelVehicleConditionInput = {
   make?: ModelStringInput | null;
   model?: ModelStringInput | null;
-  year?: ModelIntInput | null;
+  year?: ModelStringInput | null;
   and?: Array<ModelVehicleConditionInput | null> | null;
   or?: Array<ModelVehicleConditionInput | null> | null;
   not?: ModelVehicleConditionInput | null;
   driverVehiclesId?: ModelIDInput | null;
 };
 
-export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-};
-
 export type UpdateVehicleInput = {
   id: string;
   make?: string | null;
   model?: string | null;
-  year?: number | null;
+  year?: string | null;
   driverVehiclesId?: string | null;
 };
 
@@ -312,6 +301,7 @@ export type CreateRouteInput = {
 };
 
 export type LocationInput = {
+  name: string;
   latitude: number;
   longitude: number;
 };
@@ -416,7 +406,7 @@ export type ModelVehicleFilterInput = {
   id?: ModelIDInput | null;
   make?: ModelStringInput | null;
   model?: ModelStringInput | null;
-  year?: ModelIntInput | null;
+  year?: ModelStringInput | null;
   and?: Array<ModelVehicleFilterInput | null> | null;
   or?: Array<ModelVehicleFilterInput | null> | null;
   not?: ModelVehicleFilterInput | null;
@@ -520,21 +510,9 @@ export type ModelSubscriptionVehicleFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   make?: ModelSubscriptionStringInput | null;
   model?: ModelSubscriptionStringInput | null;
-  year?: ModelSubscriptionIntInput | null;
+  year?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionVehicleFilterInput | null> | null;
   or?: Array<ModelSubscriptionVehicleFilterInput | null> | null;
-};
-
-export type ModelSubscriptionIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  in?: Array<number | null> | null;
-  notIn?: Array<number | null> | null;
 };
 
 export type ModelSubscriptionTripFilterInput = {
@@ -668,7 +646,7 @@ export type CreateVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -693,7 +671,7 @@ export type UpdateVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -718,7 +696,7 @@ export type DeleteVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -857,11 +835,13 @@ export type CreateRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -878,11 +858,13 @@ export type UpdateRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -899,11 +881,13 @@ export type DeleteRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1086,7 +1070,7 @@ export type GetVehicleQuery = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1113,7 +1097,7 @@ export type ListVehiclesQuery = {
     id: string;
     make: string;
     model: string;
-    year: number;
+    year: string;
     createdAt: string;
     updatedAt: string;
     driverVehiclesId?: string | null;
@@ -1180,11 +1164,13 @@ export type GetRouteQuery = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1366,7 +1352,7 @@ export type OnCreateVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1391,7 +1377,7 @@ export type OnUpdateVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1416,7 +1402,7 @@ export type OnDeleteVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1555,11 +1541,13 @@ export type OnCreateRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1576,11 +1564,13 @@ export type OnUpdateRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1597,11 +1587,13 @@ export type OnDeleteRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1779,5 +1771,110 @@ export class APIService {
         return result.data.listRoutes.items;
       })
     );
+  }
+  createUser(username: string, email: string, phone: string): Observable<any> {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation CreateUser($username: String!, $email: String!, $phone: String) {
+          createUser(input: { username: $username, email: $email, phone: $phone }) {
+            id
+            username
+            email
+            phone
+          }
+        }
+      `,
+      variables: {
+        username,
+        email,
+        phone
+      }
+    });
+  }
+
+  createTrip(driverId: string, riderId: string, startTime: string, endTime: string, routeId: string): Observable<any> {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation CreateTrip($driverId: ID!, $riderId: ID!, $startTime: AWSDateTime!, $endTime: AWSDateTime, $routeId: ID!) {
+          createTrip(input: { driverId: $driverId, riderId: $riderId, startTime: $startTime, endTime: $endTime, routeId: $routeId }) {
+            id
+            startTime
+            endTime
+            driver {
+              id
+              name
+              email
+            }
+            rider {
+              id
+              name
+              email
+            }
+            route {
+              id
+              origin {
+                name
+                latitude
+                longitude
+              }
+              destination {
+                name
+                latitude
+                longitude
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        driverId,
+        riderId,
+        startTime,
+        endTime,
+        routeId
+      }
+    });
+  }
+
+  createDriver(name: string, email: string, phone: string, carType: string): Observable<any> {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation CreateDriver($name: String!, $email: String!, $phone: String, $carType: String) {
+          createDriver(input: { name: $name, email: $email, phone: $phone, carType: $carType }) {
+            id
+            name
+            email
+            phone
+            carType
+          }
+        }
+      `,
+      variables: {
+        name,
+        email,
+        phone,
+        carType
+      }
+    });
+  }
+
+  createRider(name: string, email: string, phone: string): Observable<any> {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation CreateRider($name: String!, $email: String!, $phone: String) {
+          createRider(input: { name: $name, email: $email, phone: $phone }) {
+            id
+            name
+            email
+            phone
+          }
+        }
+      `,
+      variables: {
+        name,
+        email,
+        phone
+      }
+    });
   }
 }

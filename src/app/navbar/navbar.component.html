@@ -8,14 +8,5 @@
   <button mat-button *ngIf="isLoggedIn" routerLink="/dashboard" class="navbar-button">Dashboard</button>
   <button mat-button *ngIf="isLoggedIn" routerLink="/my-account" class="navbar-button">My Account</button>
   <button mat-button *ngIf="isLoggedIn" (click)="logout()" class="navbar-button">Logout</button>
+  <button mat-button *ngIf="isLoggedIn && hasSelectedRole && (isDriver || !isDriver)" (click)="switchRole()" class="navbar-button">Switch Role</button>
 </mat-toolbar>
-
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="over">
-
-  </mat-sidenav>
-  <mat-sidenav-content>
-
-    <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>

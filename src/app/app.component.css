@@ -23,3 +23,52 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
   margin: 0; /* Remove default margin */
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.amplify-authenticator, .container {
+  flex: 1; /* This will make the container grow to fill the available space, pushing the footer down */
+}
+
+.footer {
+  padding: 20px 0;
+  background-color: #5d5d5d;
+  text-align: center;
+  width: 100%;
+  /* removed position: absolute; and bottom: 0; */
+}
+
+/* ... rest of your styles ... */
+
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 20px; /* Adjust spacing between links */
+}
+
+.footer-links li:last-child {
+  margin-right: 0; /* Remove margin for the last link */
+}
+
+.footer-links li a {
+  color: #fff; /* Set link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: 700; /* Make font bold */
+  font-family: 'Nunito', sans-serif; /* Apply font family */
+}
+
+.footer-links li a:hover {
+  color: #ccc; /* Change link color on hover */
+}

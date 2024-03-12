@@ -194,11 +194,13 @@ query GetRoute($id: ID!) {
   getRoute(id: $id) {
     id
     origin {
+      name
       latitude
       longitude
       __typename
     }
     destination {
+      name
       latitude
       longitude
       __typename

@@ -50,8 +50,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiatucarpool"
       },
-      "lastPushTimeStamp": "2024-02-18T17:21:14.923Z",
-      "lastPushDirHash": "BDwGVzEEeNSDPlRnXBptHWI5wJ8="
+      "lastPushTimeStamp": "2024-03-08T20:00:01.928Z",
+      "lastPushDirHash": "RoQLBPReQRuXOCG+4k3oBjzkJ3c="
     }
   },
   "auth": {
@@ -84,7 +84,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/auth/atucarpool504a02dc-cloudformation-template.json",
         "logicalId": "authatucarpool504a02dc"
       },
-      "lastPushTimeStamp": "2024-02-18T17:21:12.989Z",
+      "lastPushTimeStamp": "2024-03-08T20:00:01.928Z",
       "output": {
         "UserPoolId": "eu-west-1_erJBMiXKk",
         "AppClientIDWeb": "7j2ntbf8q20q2a91qm2r2gfk9f",
@@ -96,7 +96,7 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:4200/dashboard/\"],\"LogoutURLs\":[\"https://localhost:4200/\"]}",
         "UserPoolName": "atucarpool504a02dc_userpool_504a02dc"
       },
-      "lastPushDirHash": "f6VOMTz6ccKjSqlA2k2h39YPxUk="
+      "lastPushDirHash": "ncv9hmEcvF+dXJlDu4KecrEVXX8="
     }
   }
 }

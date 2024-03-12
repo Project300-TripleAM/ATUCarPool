@@ -1,9 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
-/*import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { generateClient } from "@aws-amplify/api";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
+
+const client = generateClient();
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -111,7 +114,7 @@ export type Vehicle = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: Driver | null;
   passengers?: ModelRiderConnection | null;
   createdAt: string;
@@ -170,6 +173,7 @@ export type Route = {
 
 export type Location = {
   __typename: "Location";
+  name: string;
   latitude: number;
   longitude: number;
 };
@@ -236,37 +240,25 @@ export type CreateVehicleInput = {
   id?: string | null;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driverVehiclesId?: string | null;
 };
 
 export type ModelVehicleConditionInput = {
   make?: ModelStringInput | null;
   model?: ModelStringInput | null;
-  year?: ModelIntInput | null;
+  year?: ModelStringInput | null;
   and?: Array<ModelVehicleConditionInput | null> | null;
   or?: Array<ModelVehicleConditionInput | null> | null;
   not?: ModelVehicleConditionInput | null;
   driverVehiclesId?: ModelIDInput | null;
 };
 
-export type ModelIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-};
-
 export type UpdateVehicleInput = {
   id: string;
   make?: string | null;
   model?: string | null;
-  year?: number | null;
+  year?: string | null;
   driverVehiclesId?: string | null;
 };
 
@@ -314,6 +306,7 @@ export type CreateRouteInput = {
 };
 
 export type LocationInput = {
+  name: string;
   latitude: number;
   longitude: number;
 };
@@ -418,7 +411,7 @@ export type ModelVehicleFilterInput = {
   id?: ModelIDInput | null;
   make?: ModelStringInput | null;
   model?: ModelStringInput | null;
-  year?: ModelIntInput | null;
+  year?: ModelStringInput | null;
   and?: Array<ModelVehicleFilterInput | null> | null;
   or?: Array<ModelVehicleFilterInput | null> | null;
   not?: ModelVehicleFilterInput | null;
@@ -522,21 +515,9 @@ export type ModelSubscriptionVehicleFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   make?: ModelSubscriptionStringInput | null;
   model?: ModelSubscriptionStringInput | null;
-  year?: ModelSubscriptionIntInput | null;
+  year?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionVehicleFilterInput | null> | null;
   or?: Array<ModelSubscriptionVehicleFilterInput | null> | null;
-};
-
-export type ModelSubscriptionIntInput = {
-  ne?: number | null;
-  eq?: number | null;
-  le?: number | null;
-  lt?: number | null;
-  ge?: number | null;
-  gt?: number | null;
-  between?: Array<number | null> | null;
-  in?: Array<number | null> | null;
-  notIn?: Array<number | null> | null;
 };
 
 export type ModelSubscriptionTripFilterInput = {
@@ -670,7 +651,7 @@ export type CreateVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -695,7 +676,7 @@ export type UpdateVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -720,7 +701,7 @@ export type DeleteVehicleMutation = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -859,11 +840,13 @@ export type CreateRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -880,11 +863,13 @@ export type UpdateRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -901,11 +886,13 @@ export type DeleteRouteMutation = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1088,7 +1075,7 @@ export type GetVehicleQuery = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1115,7 +1102,7 @@ export type ListVehiclesQuery = {
     id: string;
     make: string;
     model: string;
-    year: number;
+    year: string;
     createdAt: string;
     updatedAt: string;
     driverVehiclesId?: string | null;
@@ -1182,11 +1169,13 @@ export type GetRouteQuery = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1368,7 +1357,7 @@ export type OnCreateVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1393,7 +1382,7 @@ export type OnUpdateVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1418,7 +1407,7 @@ export type OnDeleteVehicleSubscription = {
   id: string;
   make: string;
   model: string;
-  year: number;
+  year: string;
   driver?: {
     __typename: "Driver";
     id: string;
@@ -1557,11 +1546,13 @@ export type OnCreateRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1578,11 +1569,13 @@ export type OnUpdateRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1599,11 +1592,13 @@ export type OnDeleteRouteSubscription = {
   id: string;
   origin: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
   destination: {
     __typename: "Location";
+    name: string;
     latitude: number;
     longitude: number;
   };
@@ -1751,7 +1746,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateDriverMutation>response.data.createDriver;
@@ -1786,7 +1781,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateDriverMutation>response.data.updateDriver;
@@ -1821,7 +1816,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteDriverMutation>response.data.deleteDriver;
@@ -1852,7 +1847,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateRiderMutation>response.data.createRider;
@@ -1883,7 +1878,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateRiderMutation>response.data.updateRider;
@@ -1914,7 +1909,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteRiderMutation>response.data.deleteRider;
@@ -1955,7 +1950,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateVehicleMutation>response.data.createVehicle;
@@ -1996,7 +1991,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateVehicleMutation>response.data.updateVehicle;
@@ -2037,7 +2032,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteVehicleMutation>response.data.deleteVehicle;
@@ -2091,7 +2086,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateTripMutation>response.data.createTrip;
@@ -2145,7 +2140,8 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql
+      (
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateTripMutation>response.data.updateTrip;
@@ -2199,7 +2195,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteTripMutation>response.data.deleteTrip;
@@ -2214,11 +2210,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -2236,7 +2234,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateRouteMutation>response.data.createRoute;
@@ -2251,11 +2249,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -2273,7 +2273,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateRouteMutation>response.data.updateRoute;
@@ -2288,11 +2288,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -2310,7 +2312,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteRouteMutation>response.data.deleteRoute;
@@ -2360,7 +2362,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateUserMutation>response.data.createUser;
@@ -2410,7 +2412,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateUserMutation>response.data.updateUser;
@@ -2460,7 +2462,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteUserMutation>response.data.deleteUser;
@@ -2489,7 +2491,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetDriverQuery>response.data.getDriver;
@@ -2525,7 +2527,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListDriversQuery>response.data.listDrivers;
@@ -2550,7 +2552,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetRiderQuery>response.data.getRider;
@@ -2586,7 +2588,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListRidersQuery>response.data.listRiders;
@@ -2621,7 +2623,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetVehicleQuery>response.data.getVehicle;
@@ -2705,7 +2707,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetTripQuery>response.data.getTrip;
@@ -2742,7 +2744,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListTripsQuery>response.data.listTrips;
@@ -2754,11 +2756,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -2805,7 +2809,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
+    const response = (await client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListRoutesQuery>response.data.listRoutes;
@@ -2922,7 +2926,7 @@ export class APIService {
     if (filter) {
       gqlAPIServiceArguments.filter = filter;
     }
-    return API.graphql(
+    return client.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDriver">>
@@ -3399,11 +3403,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -3437,11 +3443,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -3475,11 +3483,13 @@ export class APIService {
           id
           origin {
             __typename
+            name
             latitude
             longitude
           }
           destination {
             __typename
+            name
             latitude
             longitude
           }
@@ -3666,4 +3676,4 @@ export class APIService {
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteUser">>
     >;
   }
-}*/
+}

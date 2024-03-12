@@ -40,7 +40,7 @@ type Vehicle {
   id: ID!
   make: String!
   model: String!
-  year: Int!
+  year: String!
   driver: Driver
   passengers(filter: ModelRiderFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelRiderConnection
   createdAt: AWSDateTime!
@@ -72,6 +72,7 @@ type Route {
 }
 
 type Location {
+  name: String!
   latitude: Float!
   longitude: Float!
 }
@@ -467,7 +468,7 @@ input ModelVehicleFilterInput {
   id: ModelIDInput
   make: ModelStringInput
   model: ModelStringInput
-  year: ModelIntInput
+  year: ModelStringInput
   and: [ModelVehicleFilterInput]
   or: [ModelVehicleFilterInput]
   not: ModelVehicleFilterInput
@@ -477,7 +478,7 @@ input ModelVehicleFilterInput {
 input ModelVehicleConditionInput {
   make: ModelStringInput
   model: ModelStringInput
-  year: ModelIntInput
+  year: ModelStringInput
   and: [ModelVehicleConditionInput]
   or: [ModelVehicleConditionInput]
   not: ModelVehicleConditionInput
@@ -488,7 +489,7 @@ input CreateVehicleInput {
   id: ID
   make: String!
   model: String!
-  year: Int!
+  year: String!
   driverVehiclesId: ID
 }
 
@@ -496,7 +497,7 @@ input UpdateVehicleInput {
   id: ID!
   make: String
   model: String
-  year: Int
+  year: String
   driverVehiclesId: ID
 }
 
@@ -508,7 +509,7 @@ input ModelSubscriptionVehicleFilterInput {
   id: ModelSubscriptionIDInput
   make: ModelSubscriptionStringInput
   model: ModelSubscriptionStringInput
-  year: ModelSubscriptionIntInput
+  year: ModelSubscriptionStringInput
   and: [ModelSubscriptionVehicleFilterInput]
   or: [ModelSubscriptionVehicleFilterInput]
 }
@@ -572,6 +573,7 @@ input ModelSubscriptionTripFilterInput {
 }
 
 input LocationInput {
+  name: String!
   latitude: Float!
   longitude: Float!
 }

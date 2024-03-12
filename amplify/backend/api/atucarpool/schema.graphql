@@ -38,7 +38,7 @@ type Vehicle @model {
   id: ID!
   make: String!
   model: String!
-  year: Int!
+  year: String!
   driver: Driver @belongsTo
   passengers: [Rider] @hasMany
 }
@@ -60,6 +60,7 @@ type Route @model {
 }
 
 type Location {
+  name: String!
   latitude: Float!
   longitude: Float!
 }
