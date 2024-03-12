@@ -1,5 +1,6 @@
 // add-route.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-route',
@@ -16,4 +17,10 @@ export class AddRouteComponent {
     destination: '',
     transportType: ''
   };
+
+  constructor(private router: Router) {}
+
+  navigateToMap() {
+    this.router.navigate(['/map']); // Navigate to the map component route
+  }
 }
