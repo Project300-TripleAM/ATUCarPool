@@ -11,7 +11,6 @@ type User @model @auth(rules: [{ allow: owner }]) {
   userSub: String! @auth(rules: [{ allow: owner }])
   username: String!
   email: String!
-  phone: String
   driver: Driver @hasOne
   rider: Rider @hasOne
 }
@@ -20,7 +19,6 @@ type Driver @model {
   id: ID!
   name: String!
   email: String!
-  phone: String
   carType: String
   vehicles: [Vehicle] @hasMany
   trips: [Trip] @hasMany
@@ -30,7 +28,6 @@ type Rider @model {
   id: ID!
   name: String!
   email: String!
-  phone: String
   trips: [Trip] @hasMany
 }
 

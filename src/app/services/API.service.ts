@@ -1772,22 +1772,20 @@ export class APIService {
       })
     );
   }
-  createUser(username: string, email: string, phone: string): Observable<any> {
+  createUser(username: string, email: string): Observable<any> {
     return this.apollo.mutate<any>({
       mutation: gql`
-        mutation CreateUser($username: String!, $email: String!, $phone: String) {
-          createUser(input: { username: $username, email: $email, phone: $phone }) {
+        mutation CreateUser($username: String!, $email: String!) {
+          createUser(input: { username: $username, email: $email}) {
             id
             username
             email
-            phone
           }
         }
       `,
       variables: {
         username,
-        email,
-        phone
+        email
       }
     });
   }

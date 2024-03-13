@@ -8,7 +8,6 @@ mutation CreateDriver(
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -32,7 +31,6 @@ mutation UpdateDriver(
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -56,7 +54,6 @@ mutation DeleteDriver(
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -80,7 +77,6 @@ mutation CreateRider(
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -100,7 +96,6 @@ mutation UpdateRider(
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -120,7 +115,6 @@ mutation DeleteRider(
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -145,7 +139,6 @@ mutation CreateVehicle(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -175,7 +168,6 @@ mutation UpdateVehicle(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -205,7 +197,6 @@ mutation DeleteVehicle(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -232,7 +223,6 @@ mutation CreateTrip(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -242,7 +232,6 @@ mutation CreateTrip(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -275,7 +264,6 @@ mutation UpdateTrip(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -285,7 +273,6 @@ mutation UpdateTrip(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -318,7 +305,6 @@ mutation DeleteTrip(
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -328,7 +314,6 @@ mutation DeleteTrip(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -444,12 +429,10 @@ mutation CreateUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -459,7 +442,6 @@ mutation CreateUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -483,12 +465,10 @@ mutation UpdateUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -498,7 +478,6 @@ mutation UpdateUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -522,12 +501,10 @@ mutation DeleteUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -537,7 +514,6 @@ mutation DeleteUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
