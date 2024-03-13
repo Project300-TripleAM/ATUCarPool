@@ -1,20 +1,36 @@
 .spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
- 
 .navbar-button {
   background-color: #858484; /* Light grey background color */
   color: #000; /* Text color */
   margin: 0 8px; /* Add some margin for spacing */
 }
 
-/* CSS for the mat-toolbar */
 .mat-toolbar {
   background-color: #1a1a1a; /* Slightly lighter black */
   color: #fff; /* White text color */
 }
 
+/* Media query adjustments */
+@media (max-width: 768px) {
+  /* Adjust navbar buttons for tablet devices */
+  .navbar-button {
+    margin: 0 4px; /* Reduce margin for tighter spaces */
+    padding: 8px 16px; /* Increase padding for better touchability */
+  }
+}
 
-
+@media (max-width: 480px) {
+  /* Further adjustments for mobile devices */
+  .navbar-button {
+    margin: 0 2px; /* Further reduce margin */
+    padding: 10px 20px; /* Further increase padding for even better touchability */
+    font-size: 14px; /* Optionally adjust font size for better readability */
+  }
   
+  .mat-toolbar {
+    padding: 0 5px; /* Reduce padding to accommodate the space constraints of mobile devices */
+  }
+}

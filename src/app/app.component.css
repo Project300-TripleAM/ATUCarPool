@@ -1,51 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
-
-.app-header {
-  
-  text-align: left; /* left-align the header text */
-  padding: 10px 0; /* add some padding above and below the header */
-  background-color: #5d5d5d; /* set the background color to match your app's theme */
-  color: rgb(0, 0, 0); /* set the color of the text */
-}
-
-.navbar-logo {
-  height: 100px; /* increased the size as necessary */
-  width: auto; /* maintain the aspect ratio of the logo */
-  vertical-align: middle; /* align the logo vertically in line with any text or elements */
-  opacity: 0.8; /* make the logo slightly transparent to blend with the background */
-}
-
-.app-name {
-  font-family: 'Nunito', sans-serif; /* This is a more rounded, friendly font */
-  font-size: 2.5em; /* Increase the size of the text */
-  font-weight: 700; /* Make the font bold */
-  letter-spacing: 1px; /* Adjust letter spacing */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
-  margin: 0; /* Remove default margin */
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.amplify-authenticator, .container {
-  flex: 1; /* This will make the container grow to fill the available space, pushing the footer down */
-}
-
+/* Base styles for the footer (your existing CSS) */
 .footer {
   padding: 20px 0;
   background-color: #5d5d5d;
   text-align: center;
   width: 100%;
-  /* removed position: absolute; and bottom: 0; */
 }
-
-/* ... rest of your styles ... */
-
 
 .footer-links {
   list-style: none;
@@ -71,4 +30,23 @@ html, body {
 
 .footer-links li a:hover {
   color: #ccc; /* Change link color on hover */
+}
+
+/* Responsive adjustments for the footer */
+@media (max-width: 768px) {
+  .footer-links li {
+    margin-right: 10px; /* Slightly reduce spacing between links for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links li {
+    display: block; /* Stack the links vertically on small screens */
+    margin-bottom: 10px; /* Add space between stacked links */
+    margin-right: 0; /* Remove the right margin */
+  }
+
+  .footer-links li:last-child {
+    margin-bottom: 0; /* Ensure there's no extra space after the last link */
+  }
 }

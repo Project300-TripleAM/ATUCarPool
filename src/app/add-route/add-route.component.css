@@ -1,68 +1,90 @@
-/* add-route.component.css */
+/* Base Styles for Add Route Form and Buttons */
 div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  form {
-    width: 300px; /* Adjust the width as needed */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    margin-bottom: 8px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-  }
-  
-  div label {
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
 
+form {
+  width: 300px; /* Initial width, adjust as needed */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+button {
+  background-color: #4caf50; /* Green button */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
 
 .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.back-to-map-btn {
+  background-color: #337ab7; /* Blue button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-to-map-btn:hover {
+  background-color: #286090; /* Darker blue on hover */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  form {
+    width: 90%; /* Allow form to take more width on smaller screens */
+    max-width: 400px; /* Set a max-width to prevent the form from becoming too wide */
   }
-  
-  .back-to-map-btn {
-    background-color: #337ab7;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+
+  .button-group {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
   }
-  
-  .back-to-map-btn:hover {
-    background-color: #286090;
+
+  .back-to-map-btn, button {
+    width: 100%; /* Full width buttons for better touch targets */
+    margin-bottom: 10px; /* Space between buttons when stacked */
   }
-  
-  
-  
+
+  .back-to-map-btn:last-child, button:last-child {
+    margin-bottom: 0; /* Remove margin-bottom from the last button */
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 15px; /* Slightly reduce padding for very small screens */
+  }
+
+  label, input, button, .back-to-map-btn {
+    font-size: 14px; /* Adjust font size for better readability on small devices */
+  }
+}
