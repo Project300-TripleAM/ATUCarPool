@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -1780,4 +1780,43 @@ export class APIService {
       })
     );
   }
+
+
+//Adding a route
+//GraphQL
+createRoute(input: CreateRouteInput): Observable<any> {   
+  return this.apollo.mutate<any>({
+    mutation: gql`
+      mutation CreateRoute($input: CreateRouteInput!) {
+        createRoute(input: $input) {
+          id
+          origin {
+            name
+            latitude
+            longitude
+          }
+          destination {
+            name
+            latitude
+            longitude
+          }
+          trips {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    `,
+    variables: {
+      input
+    }
+  }).pipe(
+    catchError(error => {
+      console.error('Error creating route:', error);
+      return throwError('Failed to create route. Please try again later.');
+    })
+  );
+}
+
 }
