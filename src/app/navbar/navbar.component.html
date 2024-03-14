@@ -23,6 +23,7 @@
     <button mat-menu-item *ngIf="!isLoggedIn" routerLink="/dashboard">Dashboard</button>
     <button mat-menu-item *ngIf="isLoggedIn" routerLink="/dashboard">Dashboard</button>
     <button mat-menu-item *ngIf="isLoggedIn" routerLink="/my-account">My Account</button>
+    <button mat-menu-item *ngIf="isLoggedIn" routerLink="/map">Map</button>
     <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </mat-menu>
 
@@ -30,5 +31,6 @@
   <button *ngIf="!isMobile && !isLoggedIn" mat-raised-button color="primary" routerLink="/dashboard" class="navbar-button">Dashboard</button>
   <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" routerLink="/dashboard" class="navbar-button">Dashboard</button>
   <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" routerLink="/my-account" class="navbar-button">My Account</button>
+  <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" routerLink="/map" class=" navbar-button">Map</button>
   <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" (click)="logout()" class="navbar-button">Logout</button>
 </mat-toolbar>

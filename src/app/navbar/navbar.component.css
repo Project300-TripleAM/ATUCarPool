@@ -68,7 +68,7 @@
 .notification-menu ul {
   position: absolute;
   top: calc(100% + 5px); /* Position the dropdown below the button */
-  right: 0;
+  left: 0; /* Ensure the dropdown opens towards the right */
   min-width: 160px; /* Set a minimum width */
   background-color: #fff;
   border: 1px solid #ddd;
@@ -78,6 +78,7 @@
   display: none;
   z-index: 1000; /* Ensure the menu appears above other content */
 }
+
 
 .notification-menu.active ul {
   display: block; /* Show the dropdown when active */
