@@ -25,6 +25,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
     // Fetch user data and recent trips data
     this.auth.currentAuthenticatedUser();
+    
     this.fetchUserData();
     this.fetchRecentTrips();
     this.fetchUpcomingTrips();
