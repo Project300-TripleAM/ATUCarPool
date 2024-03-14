@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { Apollo, gql } from 'apollo-angular';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { generateClient } from 'aws-amplify/api';
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -1727,7 +1727,6 @@ export class APIService {
               id
               name
               email
-              phone
               carType
               createdAt
               updatedAt
@@ -1772,14 +1771,38 @@ export class APIService {
       })
     );
   }
-  createUser(username: string, email: string): Observable<any> {
+  createUser(username: string, email: any): Observable<any> {
     return this.apollo.mutate<any>({
       mutation: gql`
         mutation CreateUser($username: String!, $email: String!) {
           createUser(input: { username: $username, email: $email}) {
+            __typename
             id
             username
             email
+            driver {
+              __typename
+              id
+              name
+              email
+              carType
+              createdAt
+              updatedAt
+            }
+            rider {
+              __typename
+              id
+              name
+              email
+              createdAt
+              updatedAt
+              vehiclePassengersId
+            }
+            createdAt
+            updatedAt
+            userDriverId
+            userRiderId
+            owner
           }
         }
       `,
@@ -1787,7 +1810,12 @@ export class APIService {
         username,
         email
       }
-    });
+    }).pipe(
+      catchError(error => {
+        console.error('Error creating user:', error);
+        return throwError('Failed to create user. Please try again later.');
+      })
+    );
   }
 
   createTrip(driverId: string, riderId: string, startTime: string, endTime: string, routeId: string): Observable<any> {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APIService, Driver } from '../services/api.service';
+import { APIService, Driver } from '../services/API.service';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { UserRoleService } from '../services/user-role.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-my-account',
@@ -19,10 +20,11 @@ export class MyAccountComponent implements OnInit {
   userRole!: string;
   isMenuOpen: boolean = false;
 
-  constructor(private apiService: APIService, private userRoleService: UserRoleService, private router: Router) {}
+  constructor(private apiService: APIService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {}
 
   ngOnInit(): void {
     // Fetch user data and recent trips data
+    this.auth.currentAuthenticatedUser();
     this.fetchUserData();
     this.fetchRecentTrips();
     this.fetchUpcomingTrips();
@@ -32,7 +34,6 @@ export class MyAccountComponent implements OnInit {
       this.fetchPassengers();
     }
   }
-  
 
   // Fetch user data from the API service
   fetchUserData() {
@@ -51,9 +52,6 @@ export class MyAccountComponent implements OnInit {
       }
     });
   }
-
-  
-
   // Fetches recent trips data (placeholder for now)
   fetchRecentTrips() {
     // TEMPORARY Placeholder data for recent trips

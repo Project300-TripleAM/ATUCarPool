@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
-import { APIService } from '../services/api.service';
+import { APIService } from '../services/API.service';
 import { Router } from '@angular/router';
 import {} from 'googlemaps';
 
