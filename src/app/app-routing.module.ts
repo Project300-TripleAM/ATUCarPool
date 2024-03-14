@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent },
   { path: 'map', component: MapComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'add-route', component: AddRouteComponent}
-]
+  { path: 'add-route', component: AddRouteComponent},
+
   { path: 'about-us', component: AboutUsComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'role-selection', component: RoleSelectionComponent },
