@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { APIService } from '../services/api.service';
 
@@ -18,29 +18,27 @@ export class AddRouteComponent {
     destination: ''
   };
 
-  constructor(private router: Router, private http: HttpClient, private apiService: APIService) {} //Inject HttpClient
+  constructor(private router: Router, private http: HttpClient, private apiService: APIService) {}
 
-  // Navigate to map component
   navigateToMap() {
     this.router.navigate(['/map']);
   }
 
-  // Functionality to add a route
   addRoute() {
     const originName = this.route.origin;
     const destinationName = this.route.destination;
-  
+
     if (!originName || !destinationName) {
       console.error('Origin and destination addresses are required.');
       return;
     }
-  
+
     this.geocodeAddress(originName).then((originCoords) => {
       this.geocodeAddress(destinationName).then((destinationCoords) => {
         // Now you have originCoords and destinationCoords, you can send them to the database
         console.log('Origin coordinates:', originCoords);
         console.log('Destination coordinates:', destinationCoords);
-  
+
         // Send data to the database
         this.sendRouteDataToDatabase(originName, originCoords, destinationName, destinationCoords);
       }).catch(error => {
@@ -51,33 +49,32 @@ export class AddRouteComponent {
     });
   }
 
-//Attempted code to send routes to the database.
-sendRouteDataToDatabase(originName: string, originCoords: { lat: number, lng: number }, destinationName: string, destinationCoords: { lat: number, lng: number }) {
-  const routeData = {
-    origin: {
-      name: originName,
-      latitude: originCoords.lat,
-      longitude: originCoords.lng
-    },
-    destination: {
-      name: destinationName,
-      latitude: destinationCoords.lat,
-      longitude: destinationCoords.lng
-    }
-  };
+  //send the data to the database
+  sendRouteDataToDatabase(originName: string, originCoords: { lat: number, lng: number }, destinationName: string, destinationCoords: { lat: number, lng: number }) {
+    const routeData = {
+      origin: {
+        name: originName,
+        latitude: originCoords.lat,
+        longitude: originCoords.lng
+      },
+      destination: {
+        name: destinationName,
+        latitude: destinationCoords.lat,
+        longitude: destinationCoords.lng
+      }
+    };
 
-  this.apiService.createRoute(routeData).subscribe(
-    (response) => {
-      console.log('Route data sent to the database:', response);
-    },
-    (error) => {
-      console.error('Error sending route data to the database:', error);
-    }
-  );
-}
+    this.apiService.createRoute(routeData).subscribe(
+      (response) => {
+        console.log('Route data sent to the database:', response);
+      },
+      (error) => {
+        console.error('Error sending route data to the database:', error);
+      }
+    );
+  }
 
-
-  //Function take the locations as inputs and turns them into longitude and latitude coordinates
+  //Code for taking the data as a string and changing it into coordinates
   geocodeAddress(address: string): Promise<{ lat: number, lng: number }> {
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${environment.apiKey}`;
 
