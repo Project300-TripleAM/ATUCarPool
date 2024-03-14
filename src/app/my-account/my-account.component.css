@@ -27,13 +27,12 @@
 .heading {
   text-align:center;
 }
-/* Style for the user information section */
+
 .user-info {
   border-top: 1px solid #ddd;
   padding-top: 20px;
 }
 
-/* Style for the user cards */
 .user-card {
   background-color: #fff;
   padding: 15px;
@@ -41,4 +40,97 @@
   border-radius: 8px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recent-trips {
+  margin-top: 20px;
+}
+
+.trip-card {
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trip-card p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.trip-card p strong {
+  color: #333;
+}
+
+.passenger-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.passenger-table th, .passenger-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.passenger-table th {
+  background-color: #f2f2f2;
+}
+
+.passenger-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.passenger-table tr:hover {
+  background-color: #ddd;
+}
+
+.account-container {
+  position: relative; /* Ensure the container is positioned */
+}
+
+/* Notification button */
+.notification-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-menu button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.notification-menu button mat-icon {
+  color: black;
+  font-size: 24px;
+}
+
+.notification-menu ul {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.notification-menu.active ul {
+  display: block;
+}
+
+.notification-menu ul li {
+  list-style-type: none;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.notification-menu ul li:hover {
+  background-color: #f0f0f0;
 }

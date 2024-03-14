@@ -1,0 +1,20 @@
+.about-us-card {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #f7f7f7; /* Background color for the card */
+}
+
+.about-us-header{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure items are stacked vertically */
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+.about-us-content {
+  font-size: 16px;
+  color: #333;
+}

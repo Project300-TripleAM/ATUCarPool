@@ -1,40 +1,66 @@
-#map {
-    height: 80%;
-    width: 100%;
-    border: 1px solid #ddd; /* New border for definition */
-    margin-bottom: 20px; /* Space between map and table */
-    border-radius: 8px; /* Rounded corners */
-}
+.dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7; /* Set background color to white for better contrast */
+  }
 
-/* Styles for the table to ensure visibility and basic formatting */
-.table {
-    width: 100%;
-    margin-top: 20px; 
-    border-collapse: separate; 
-    border-spacing: 0 8px; /* Spacing between rows */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+.card-container {
+  background-color: #f7f7f7
 }
+  
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ensure items are stacked vertically */
+    margin-bottom: 20px;
+  }
+  
+  .image {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Atu-logo {
+    width: 50%; /* Ensure the image spans across the width of the container */
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+  }
+  
+  .content h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333; /* Set heading color to a darker shade for better visibility */
+  }
+  
+  .content p {
+    color: #555; /* Set paragraph text color to a slightly darker shade */
+  }
+  
+  .content ul {
+    margin-bottom: 20px;
+    padding-left: 20px; /* Add padding to the left for indentation */
+  }
+  
+  /* Style for list items */
+  .content ul li {
+    list-style-type: none; /* Remove default list styles */
+    margin-bottom: 8px; /* Add space between list items */
+    color: #555; /* Set the text color */
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  /* Style for bullet points */
+  .content ul li:before {
+    content: "\2022"; /* Add bullet point */
+    display: inline-block; /* Ensure the bullet point is displayed inline */
+    width: 1em; /* Adjust bullet point width */
+    margin-left: -1em; /* Adjust margin to align bullet point with list item */
+  }
 
-/* Style for table headers */
-.table th {
-    background-color: #424242; 
-    color: white;
-    text-align: left;
-    padding: 12px 8px; /* Increased padding */
-    border-bottom: none; /* Remove border-bottom */
-    border-radius: 8px 8px 0 0; /* Rounded top corners */
-}
-
-/* Style for table data cells */
-.table td {
-    text-align: left;
-    padding: 12px 8px; /* Increased padding */
-    border-bottom: 1px solid #ddd;
-    background-color: white;
-    border-radius: 0; /* Round corners for cells */
-}
-
-/* Add hover effect for rows */
-.table tr:hover {
-    background-color: #f2f2f2; /* Subtle grey for hover */
-}
+  .centered-button {
+    display: flex;
+    justify-content: center;
+    padding:35px;
+  }
+  

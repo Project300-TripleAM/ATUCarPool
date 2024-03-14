@@ -1,22 +1,42 @@
+/* faq.component.css */
+
 .faq-container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .faq-item {
-    margin-bottom: 20px; /* Adds space between FAQ items */
-    color: white;
-    text-align: left;
-  }
-  
-  .faq-item h2 {
-    font-size: 1.5rem; /* Larger font size for questions */
-    color: #c9c9c9; /* Optional: Use primary color for questions */
-  }
-  
-  .faq-item p {
-    font-size: 1rem; /* Standard font size for answers */
-    text-align: justify; /* Justifies the text for better readability */
-    font-style: italic;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.mat-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Ensure items are stacked vertically */
+  margin-bottom: 20px;
+}
+
+.faq-card {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.faq-item {
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px; /* Add padding for spacing */
+  margin-bottom: 10px; /* Add margin between FAQ items */
+}
+
+
+
+h1 {
+  text-align: left;
+}
+
+h2 {
+  color: #333; /* Adjust the color as per your design */
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666; /* Adjust the color as per your design */
+}
