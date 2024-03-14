@@ -1,13 +1,15 @@
-/* Base Styles for Add Route Form and Buttons */
-div {
+.route-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
+/*  */
+
+
 form {
-  width: 300px; /* Initial width, adjust as needed */
+  width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -20,14 +22,14 @@ label {
 }
 
 input {
-  width: 100%;
+  width: calc(100% - 16px); /* Adjusted width to account for padding */
   padding: 8px;
   margin-bottom: 16px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box;
 }
 
 button {
-  background-color: #4caf50; /* Green button */
+  background-color: #4caf50;
   color: white;
   padding: 10px;
   border: none;
@@ -36,7 +38,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
 .button-group {
@@ -46,7 +48,7 @@ button:hover {
 }
 
 .back-to-map-btn {
-  background-color: #337ab7; /* Blue button */
+  background-color: #337ab7;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -55,36 +57,36 @@ button:hover {
 }
 
 .back-to-map-btn:hover {
-  background-color: #286090; /* Darker blue on hover */
+  background-color: #286090;
 }
 
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
   form {
-    width: 90%; /* Allow form to take more width on smaller screens */
-    max-width: 400px; /* Set a max-width to prevent the form from becoming too wide */
+    width: 90%;
+    max-width: 400px;
   }
 
   .button-group {
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    flex-direction: column;
   }
 
   .back-to-map-btn, button {
-    width: 100%; /* Full width buttons for better touch targets */
-    margin-bottom: 10px; /* Space between buttons when stacked */
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .back-to-map-btn:last-child, button:last-child {
-    margin-bottom: 0; /* Remove margin-bottom from the last button */
+    margin-bottom: 0;
   }
 }
 
 @media (max-width: 480px) {
   form {
-    padding: 15px; /* Slightly reduce padding for very small screens */
+    padding: 15px;
   }
 
   label, input, button, .back-to-map-btn {
-    font-size: 14px; /* Adjust font size for better readability on small devices */
+    font-size: 14px;
   }
 }

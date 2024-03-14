@@ -1,11 +1,34 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleSidenav()">
+  <!-- Notification icon menu -->
+  <div class="notification-menu" [ngClass]="{ 'active': isMenuOpen }">
+    <button mat-button (click)="toggleMenu()">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    
+    <!-- Notification menu -->
+    <ul>
+      <li><i class="material-icons">directions_car</i> Ride Requests</li>
+      <li><i class="material-icons">message</i> Messages</li>
+      <li><i class="material-icons">update</i> Updates</li>
+    </ul>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Burger menu button for mobile screens -->
+  <button *ngIf="isMobile" mat-icon-button [matMenuTriggerFor]="menu" class="burger-menu">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="spacer"></span>
-  <button mat-button routerLink="/faq" class="navbar-button">FAQ</button>
-  <button mat-button *ngIf="!isLoggedIn" routerLink="/dashboard" class="navbar-button">Dashboard</button>
-  <button mat-button *ngIf="isLoggedIn" routerLink="/dashboard" class="navbar-button">Dashboard</button>
-  <button mat-button *ngIf="isLoggedIn" routerLink="/my-account" class="navbar-button">My Account</button>
-  <button mat-button *ngIf="isLoggedIn" (click)="logout()" class="navbar-button">Logout</button>
+  <mat-menu *ngIf="isMobile" #menu="matMenu">
+    <button mat-menu-item *ngIf="!isLoggedIn" routerLink="/dashboard">Dashboard</button>
+    <button mat-menu-item *ngIf="isLoggedIn" routerLink="/dashboard">Dashboard</button>
+    <button mat-menu-item *ngIf="isLoggedIn" routerLink="/my-account">My Account</button>
+    <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+  </mat-menu>
+
+  <!-- Display regular buttons for larger screens -->
+  <button *ngIf="!isMobile && !isLoggedIn" mat-raised-button color="primary" routerLink="/dashboard" class="navbar-button">Dashboard</button>
+  <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" routerLink="/dashboard" class="navbar-button">Dashboard</button>
+  <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" routerLink="/my-account" class="navbar-button">My Account</button>
+  <button *ngIf="!isMobile && isLoggedIn" mat-raised-button color="primary" (click)="logout()" class="navbar-button">Logout</button>
 </mat-toolbar>

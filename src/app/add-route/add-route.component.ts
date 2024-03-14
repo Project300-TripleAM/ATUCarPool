@@ -20,7 +20,11 @@ export class AddRouteComponent {
 
   constructor(private router: Router) {}
 
-  navigateToMap() {
-    this.router.navigate(['/map']); // Navigate to the map component route
+  navigateToPreviousRoute() {
+    this.router.navigate(['/driver-dashboard']); // Navigates back to the drivers dashboard
   }
+
+  navigateToMap() {
+    this.router.navigate(['/map']); // Navigates to the map 
+}
 }

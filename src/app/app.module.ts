@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Amplify } from 'aws-amplify';
@@ -24,6 +25,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { FaqComponent } from './faq/faq.component';
 import { MapComponent } from './map/map.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AddRouteComponent } from './add-route/add-route.component';
 const client = generateClient();
 
 Amplify.configure(awsconfig);
@@ -35,7 +37,8 @@ Amplify.configure(awsconfig);
     FaqComponent,
     MyAccountComponent,
     MapComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AddRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ Amplify.configure(awsconfig);
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatMenuModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
