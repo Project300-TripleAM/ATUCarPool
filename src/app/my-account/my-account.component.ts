@@ -18,7 +18,6 @@ export class MyAccountComponent implements OnInit {
   recentTrips: any[] = []; // Define recentTrips to store trip information
   upcomingTrips: any[] = []; // Define upcomingTrips to store upcoming trip information
   userRole!: string;
-  isMenuOpen: boolean = false;
 
   constructor(private apiService: APIInterfaceService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {
   }
@@ -86,11 +85,6 @@ export class MyAccountComponent implements OnInit {
     ];
   }
 
-   // Toggle the visibility of the notification menu
-   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-    console.log('button error');
-  }
 
   // Method to switch the user role between driver and passenger
   switchRole() {
