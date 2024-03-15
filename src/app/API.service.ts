@@ -2,20 +2,24 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateDriverInput = {
+export type CreateUserInput = {
   id?: string | null,
-  name: string,
+  userSub: string,
+  username: string,
   email: string,
-  carType?: string | null,
+  userDriverId?: string | null,
+  userRiderId?: string | null,
 };
 
-export type ModelDriverConditionInput = {
-  name?: ModelStringInput | null,
+export type ModelUserConditionInput = {
+  userSub?: ModelStringInput | null,
+  username?: ModelStringInput | null,
   email?: ModelStringInput | null,
-  carType?: ModelStringInput | null,
-  and?: Array< ModelDriverConditionInput | null > | null,
-  or?: Array< ModelDriverConditionInput | null > | null,
-  not?: ModelDriverConditionInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+  userDriverId?: ModelIDInput | null,
+  userRiderId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,6 +60,36 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type User = {
+  __typename: "User",
+  id: string,
+  userSub: string,
+  username: string,
+  email: string,
+  driver?: Driver | null,
+  rider?: Rider | null,
+  createdAt: string,
+  updatedAt: string,
+  userDriverId?: string | null,
+  userRiderId?: string | null,
 };
 
 export type Driver = {
@@ -144,6 +178,35 @@ export type Location = {
   longitude: number,
 };
 
+export type UpdateUserInput = {
+  id: string,
+  userSub?: string | null,
+  username?: string | null,
+  email?: string | null,
+  userDriverId?: string | null,
+  userRiderId?: string | null,
+};
+
+export type DeleteUserInput = {
+  id: string,
+};
+
+export type CreateDriverInput = {
+  id?: string | null,
+  name: string,
+  email: string,
+  carType?: string | null,
+};
+
+export type ModelDriverConditionInput = {
+  name?: ModelStringInput | null,
+  email?: ModelStringInput | null,
+  carType?: ModelStringInput | null,
+  and?: Array< ModelDriverConditionInput | null > | null,
+  or?: Array< ModelDriverConditionInput | null > | null,
+  not?: ModelDriverConditionInput | null,
+};
+
 export type UpdateDriverInput = {
   id: string,
   name?: string | null,
@@ -169,22 +232,6 @@ export type ModelRiderConditionInput = {
   or?: Array< ModelRiderConditionInput | null > | null,
   not?: ModelRiderConditionInput | null,
   vehiclePassengersId?: ModelIDInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type UpdateRiderInput = {
@@ -289,52 +336,22 @@ export type DeleteRouteInput = {
   id: string,
 };
 
-export type CreateUserInput = {
-  id?: string | null,
-  userSub: string,
-  username: string,
-  email: string,
-  userDriverId?: string | null,
-  userRiderId?: string | null,
-};
-
-export type ModelUserConditionInput = {
+export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
   userSub?: ModelStringInput | null,
   username?: ModelStringInput | null,
   email?: ModelStringInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
   userDriverId?: ModelIDInput | null,
   userRiderId?: ModelIDInput | null,
 };
 
-export type User = {
-  __typename: "User",
-  id: string,
-  userSub: string,
-  username: string,
-  email: string,
-  driver?: Driver | null,
-  rider?: Rider | null,
-  createdAt: string,
-  updatedAt: string,
-  userDriverId?: string | null,
-  userRiderId?: string | null,
-  owner?: string | null,
-};
-
-export type UpdateUserInput = {
-  id: string,
-  userSub?: string | null,
-  username?: string | null,
-  email?: string | null,
-  userDriverId?: string | null,
-  userRiderId?: string | null,
-};
-
-export type DeleteUserInput = {
-  id: string,
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
 };
 
 export type ModelDriverFilterInput = {
@@ -399,31 +416,13 @@ export type ModelRouteConnection = {
   nextToken?: string | null,
 };
 
-export type ModelUserFilterInput = {
-  id?: ModelIDInput | null,
-  userSub?: ModelStringInput | null,
-  username?: ModelStringInput | null,
-  email?: ModelStringInput | null,
-  and?: Array< ModelUserFilterInput | null > | null,
-  or?: Array< ModelUserFilterInput | null > | null,
-  not?: ModelUserFilterInput | null,
-  userDriverId?: ModelIDInput | null,
-  userRiderId?: ModelIDInput | null,
-};
-
-export type ModelUserConnection = {
-  __typename: "ModelUserConnection",
-  items:  Array<User | null >,
-  nextToken?: string | null,
-};
-
-export type ModelSubscriptionDriverFilterInput = {
+export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
+  userSub?: ModelSubscriptionStringInput | null,
+  username?: ModelSubscriptionStringInput | null,
   email?: ModelSubscriptionStringInput | null,
-  carType?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionDriverFilterInput | null > | null,
-  or?: Array< ModelSubscriptionDriverFilterInput | null > | null,
+  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -454,6 +453,15 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionDriverFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  carType?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionDriverFilterInput | null > | null,
+  or?: Array< ModelSubscriptionDriverFilterInput | null > | null,
 };
 
 export type ModelSubscriptionRiderFilterInput = {
@@ -487,13 +495,151 @@ export type ModelSubscriptionRouteFilterInput = {
   or?: Array< ModelSubscriptionRouteFilterInput | null > | null,
 };
 
-export type ModelSubscriptionUserFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  userSub?: ModelSubscriptionStringInput | null,
-  username?: ModelSubscriptionStringInput | null,
-  email?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    userSub: string,
+    username: string,
+    email: string,
+    driver?:  {
+      __typename: "Driver",
+      id: string,
+      name: string,
+      email: string,
+      carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    rider?:  {
+      __typename: "Rider",
+      id: string,
+      name: string,
+      email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      vehiclePassengersId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userDriverId?: string | null,
+    userRiderId?: string | null,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    userSub: string,
+    username: string,
+    email: string,
+    driver?:  {
+      __typename: "Driver",
+      id: string,
+      name: string,
+      email: string,
+      carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    rider?:  {
+      __typename: "Rider",
+      id: string,
+      name: string,
+      email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      vehiclePassengersId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userDriverId?: string | null,
+    userRiderId?: string | null,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    userSub: string,
+    username: string,
+    email: string,
+    driver?:  {
+      __typename: "Driver",
+      id: string,
+      name: string,
+      email: string,
+      carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    rider?:  {
+      __typename: "Rider",
+      id: string,
+      name: string,
+      email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      vehiclePassengersId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userDriverId?: string | null,
+    userRiderId?: string | null,
+  } | null,
 };
 
 export type CreateDriverMutationVariables = {
@@ -510,10 +656,31 @@ export type CreateDriverMutation = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -535,10 +702,31 @@ export type UpdateDriverMutation = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -560,10 +748,31 @@ export type DeleteDriverMutation = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -584,6 +793,17 @@ export type CreateRiderMutation = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -605,6 +825,17 @@ export type UpdateRiderMutation = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -626,6 +857,17 @@ export type DeleteRiderMutation = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -652,11 +894,28 @@ export type CreateVehicleMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -683,11 +942,28 @@ export type UpdateVehicleMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -714,11 +990,28 @@ export type DeleteVehicleMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -742,6 +1035,14 @@ export type CreateTripMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -750,6 +1051,10 @@ export type CreateTripMutation = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -759,6 +1064,22 @@ export type CreateTripMutation = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -785,6 +1106,14 @@ export type UpdateTripMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -793,6 +1122,10 @@ export type UpdateTripMutation = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -802,6 +1135,22 @@ export type UpdateTripMutation = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -828,6 +1177,14 @@ export type DeleteTripMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -836,6 +1193,10 @@ export type DeleteTripMutation = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -845,6 +1206,22 @@ export type DeleteTripMutation = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -879,6 +1256,17 @@ export type CreateRouteMutation = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -909,6 +1297,17 @@ export type UpdateRouteMutation = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -939,6 +1338,17 @@ export type DeleteRouteMutation = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -946,13 +1356,12 @@ export type DeleteRouteMutation = {
   } | null,
 };
 
-export type CreateUserMutationVariables = {
-  input: CreateUserInput,
-  condition?: ModelUserConditionInput | null,
+export type GetUserQueryVariables = {
+  id: string,
 };
 
-export type CreateUserMutation = {
-  createUser?:  {
+export type GetUserQuery = {
+  getUser?:  {
     __typename: "User",
     id: string,
     userSub: string,
@@ -964,6 +1373,14 @@ export type CreateUserMutation = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -972,6 +1389,10 @@ export type CreateUserMutation = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -980,83 +1401,48 @@ export type CreateUserMutation = {
     updatedAt: string,
     userDriverId?: string | null,
     userRiderId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
-export type UpdateUserMutationVariables = {
-  input: UpdateUserInput,
-  condition?: ModelUserConditionInput | null,
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type UpdateUserMutation = {
-  updateUser?:  {
-    __typename: "User",
-    id: string,
-    userSub: string,
-    username: string,
-    email: string,
-    driver?:  {
-      __typename: "Driver",
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
       id: string,
-      name: string,
+      userSub: string,
+      username: string,
       email: string,
-      carType?: string | null,
+      driver?:  {
+        __typename: "Driver",
+        id: string,
+        name: string,
+        email: string,
+        carType?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      rider?:  {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    rider?:  {
-      __typename: "Rider",
-      id: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-      vehiclePassengersId?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    userDriverId?: string | null,
-    userRiderId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type DeleteUserMutationVariables = {
-  input: DeleteUserInput,
-  condition?: ModelUserConditionInput | null,
-};
-
-export type DeleteUserMutation = {
-  deleteUser?:  {
-    __typename: "User",
-    id: string,
-    userSub: string,
-    username: string,
-    email: string,
-    driver?:  {
-      __typename: "Driver",
-      id: string,
-      name: string,
-      email: string,
-      carType?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    rider?:  {
-      __typename: "Rider",
-      id: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-      vehiclePassengersId?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    userDriverId?: string | null,
-    userRiderId?: string | null,
-    owner?: string | null,
+      userDriverId?: string | null,
+      userRiderId?: string | null,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -1073,10 +1459,31 @@ export type GetDriverQuery = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1099,6 +1506,14 @@ export type ListDriversQuery = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1118,6 +1533,17 @@ export type GetRiderQuery = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1140,6 +1566,10 @@ export type ListRidersQuery = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1165,11 +1595,28 @@ export type GetVehicleQuery = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1193,6 +1640,19 @@ export type ListVehiclesQuery = {
       make: string,
       model: string,
       year: string,
+      driver?:  {
+        __typename: "Driver",
+        id: string,
+        name: string,
+        email: string,
+        carType?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      passengers?:  {
+        __typename: "ModelRiderConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       driverVehiclesId?: string | null,
@@ -1215,6 +1675,14 @@ export type GetTripQuery = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1223,6 +1691,10 @@ export type GetTripQuery = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1232,6 +1704,22 @@ export type GetTripQuery = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1255,8 +1743,32 @@ export type ListTripsQuery = {
     items:  Array< {
       __typename: "Trip",
       id: string,
+      driver?:  {
+        __typename: "Driver",
+        id: string,
+        name: string,
+        email: string,
+        carType?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      rider?:  {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null,
       startTime: string,
       endTime?: string | null,
+      route?:  {
+        __typename: "Route",
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       createdAt: string,
       updatedAt: string,
       driverTripsId?: string | null,
@@ -1289,6 +1801,17 @@ export type GetRouteQuery = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1308,6 +1831,22 @@ export type ListRoutesQuery = {
     items:  Array< {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1315,12 +1854,12 @@ export type ListRoutesQuery = {
   } | null,
 };
 
-export type GetUserQueryVariables = {
-  id: string,
+export type OnCreateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
 };
 
-export type GetUserQuery = {
-  getUser?:  {
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
     __typename: "User",
     id: string,
     userSub: string,
@@ -1332,6 +1871,14 @@ export type GetUserQuery = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1340,6 +1887,10 @@ export type GetUserQuery = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1348,32 +1899,102 @@ export type GetUserQuery = {
     updatedAt: string,
     userDriverId?: string | null,
     userRiderId?: string | null,
-    owner?: string | null,
   } | null,
 };
 
-export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+export type OnUpdateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
 };
 
-export type ListUsersQuery = {
-  listUsers?:  {
-    __typename: "ModelUserConnection",
-    items:  Array< {
-      __typename: "User",
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    userSub: string,
+    username: string,
+    email: string,
+    driver?:  {
+      __typename: "Driver",
       id: string,
-      userSub: string,
-      username: string,
+      name: string,
       email: string,
+      carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-      userDriverId?: string | null,
-      userRiderId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
+    } | null,
+    rider?:  {
+      __typename: "Rider",
+      id: string,
+      name: string,
+      email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      vehiclePassengersId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userDriverId?: string | null,
+    userRiderId?: string | null,
+  } | null,
+};
+
+export type OnDeleteUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    userSub: string,
+    username: string,
+    email: string,
+    driver?:  {
+      __typename: "Driver",
+      id: string,
+      name: string,
+      email: string,
+      carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    rider?:  {
+      __typename: "Rider",
+      id: string,
+      name: string,
+      email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      vehiclePassengersId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userDriverId?: string | null,
+    userRiderId?: string | null,
   } | null,
 };
 
@@ -1390,10 +2011,31 @@ export type OnCreateDriverSubscription = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1414,10 +2056,31 @@ export type OnUpdateDriverSubscription = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1438,10 +2101,31 @@ export type OnDeleteDriverSubscription = {
     carType?: string | null,
     vehicles?:  {
       __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        year: string,
+        createdAt: string,
+        updatedAt: string,
+        driverVehiclesId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1461,6 +2145,17 @@ export type OnCreateRiderSubscription = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1481,6 +2176,17 @@ export type OnUpdateRiderSubscription = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1501,6 +2207,17 @@ export type OnDeleteRiderSubscription = {
     email: string,
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1526,11 +2243,28 @@ export type OnCreateVehicleSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1556,11 +2290,28 @@ export type OnUpdateVehicleSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1586,11 +2337,28 @@ export type OnDeleteVehicleSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     passengers?:  {
       __typename: "ModelRiderConnection",
+      items:  Array< {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1613,6 +2381,14 @@ export type OnCreateTripSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1621,6 +2397,10 @@ export type OnCreateTripSubscription = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1630,6 +2410,22 @@ export type OnCreateTripSubscription = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1655,6 +2451,14 @@ export type OnUpdateTripSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1663,6 +2467,10 @@ export type OnUpdateTripSubscription = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1672,6 +2480,22 @@ export type OnUpdateTripSubscription = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1697,6 +2521,14 @@ export type OnDeleteTripSubscription = {
       name: string,
       email: string,
       carType?: string | null,
+      vehicles?:  {
+        __typename: "ModelVehicleConnection",
+        nextToken?: string | null,
+      } | null,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1705,6 +2537,10 @@ export type OnDeleteTripSubscription = {
       id: string,
       name: string,
       email: string,
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
       vehiclePassengersId?: string | null,
@@ -1714,6 +2550,22 @@ export type OnDeleteTripSubscription = {
     route?:  {
       __typename: "Route",
       id: string,
+      origin:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      destination:  {
+        __typename: "Location",
+        name: string,
+        latitude: number,
+        longitude: number,
+      },
+      trips?:  {
+        __typename: "ModelTripConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1747,6 +2599,17 @@ export type OnCreateRouteSubscription = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1776,6 +2639,17 @@ export type OnUpdateRouteSubscription = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1805,123 +2679,20 @@ export type OnDeleteRouteSubscription = {
     },
     trips?:  {
       __typename: "ModelTripConnection",
+      items:  Array< {
+        __typename: "Trip",
+        id: string,
+        startTime: string,
+        endTime?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverTripsId?: string | null,
+        riderTripsId?: string | null,
+        routeTripsId?: string | null,
+      } | null >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type OnCreateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateUserSubscription = {
-  onCreateUser?:  {
-    __typename: "User",
-    id: string,
-    userSub: string,
-    username: string,
-    email: string,
-    driver?:  {
-      __typename: "Driver",
-      id: string,
-      name: string,
-      email: string,
-      carType?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    rider?:  {
-      __typename: "Rider",
-      id: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-      vehiclePassengersId?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    userDriverId?: string | null,
-    userRiderId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdateUserSubscription = {
-  onUpdateUser?:  {
-    __typename: "User",
-    id: string,
-    userSub: string,
-    username: string,
-    email: string,
-    driver?:  {
-      __typename: "Driver",
-      id: string,
-      name: string,
-      email: string,
-      carType?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    rider?:  {
-      __typename: "Rider",
-      id: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-      vehiclePassengersId?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    userDriverId?: string | null,
-    userRiderId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeleteUserSubscription = {
-  onDeleteUser?:  {
-    __typename: "User",
-    id: string,
-    userSub: string,
-    username: string,
-    email: string,
-    driver?:  {
-      __typename: "Driver",
-      id: string,
-      name: string,
-      email: string,
-      carType?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    rider?:  {
-      __typename: "Rider",
-      id: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-      vehiclePassengersId?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    userDriverId?: string | null,
-    userRiderId?: string | null,
-    owner?: string | null,
   } | null,
 };

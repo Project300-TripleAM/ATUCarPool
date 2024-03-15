@@ -8,6 +8,156 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const createUser = /* GraphQL */ `mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    driver {
+      id
+      name
+      email
+      carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateUserMutationVariables,
+  APITypes.CreateUserMutation
+>;
+export const updateUser = /* GraphQL */ `mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    driver {
+      id
+      name
+      email
+      carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateUserMutationVariables,
+  APITypes.UpdateUserMutation
+>;
+export const deleteUser = /* GraphQL */ `mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    userSub
+    username
+    email
+    driver {
+      id
+      name
+      email
+      carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteUserMutationVariables,
+  APITypes.DeleteUserMutation
+>;
 export const createDriver = /* GraphQL */ `mutation CreateDriver(
   $input: CreateDriverInput!
   $condition: ModelDriverConditionInput
@@ -18,10 +168,31 @@ export const createDriver = /* GraphQL */ `mutation CreateDriver(
     email
     carType
     vehicles {
+      items {
+        id
+        make
+        model
+        year
+        createdAt
+        updatedAt
+        driverVehiclesId
+        __typename
+      }
       nextToken
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -44,10 +215,31 @@ export const updateDriver = /* GraphQL */ `mutation UpdateDriver(
     email
     carType
     vehicles {
+      items {
+        id
+        make
+        model
+        year
+        createdAt
+        updatedAt
+        driverVehiclesId
+        __typename
+      }
       nextToken
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -70,10 +262,31 @@ export const deleteDriver = /* GraphQL */ `mutation DeleteDriver(
     email
     carType
     vehicles {
+      items {
+        id
+        make
+        model
+        year
+        createdAt
+        updatedAt
+        driverVehiclesId
+        __typename
+      }
       nextToken
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -95,6 +308,17 @@ export const createRider = /* GraphQL */ `mutation CreateRider(
     name
     email
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -117,6 +341,17 @@ export const updateRider = /* GraphQL */ `mutation UpdateRider(
     name
     email
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -139,6 +374,17 @@ export const deleteRider = /* GraphQL */ `mutation DeleteRider(
     name
     email
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -166,11 +412,28 @@ export const createVehicle = /* GraphQL */ `mutation CreateVehicle(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
     }
     passengers {
+      items {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -198,11 +461,28 @@ export const updateVehicle = /* GraphQL */ `mutation UpdateVehicle(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
     }
     passengers {
+      items {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -230,11 +510,28 @@ export const deleteVehicle = /* GraphQL */ `mutation DeleteVehicle(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
     }
     passengers {
+      items {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -259,6 +556,14 @@ export const createTrip = /* GraphQL */ `mutation CreateTrip(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -267,6 +572,10 @@ export const createTrip = /* GraphQL */ `mutation CreateTrip(
       id
       name
       email
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
@@ -276,6 +585,22 @@ export const createTrip = /* GraphQL */ `mutation CreateTrip(
     endTime
     route {
       id
+      origin {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      destination {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -303,6 +628,14 @@ export const updateTrip = /* GraphQL */ `mutation UpdateTrip(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -311,6 +644,10 @@ export const updateTrip = /* GraphQL */ `mutation UpdateTrip(
       id
       name
       email
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
@@ -320,6 +657,22 @@ export const updateTrip = /* GraphQL */ `mutation UpdateTrip(
     endTime
     route {
       id
+      origin {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      destination {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -347,6 +700,14 @@ export const deleteTrip = /* GraphQL */ `mutation DeleteTrip(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -355,6 +716,10 @@ export const deleteTrip = /* GraphQL */ `mutation DeleteTrip(
       id
       name
       email
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
@@ -364,6 +729,22 @@ export const deleteTrip = /* GraphQL */ `mutation DeleteTrip(
     endTime
     route {
       id
+      origin {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      destination {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -399,6 +780,17 @@ export const createRoute = /* GraphQL */ `mutation CreateRoute(
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -430,6 +822,17 @@ export const updateRoute = /* GraphQL */ `mutation UpdateRoute(
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -461,6 +864,17 @@ export const deleteRoute = /* GraphQL */ `mutation DeleteRoute(
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -472,121 +886,4 @@ export const deleteRoute = /* GraphQL */ `mutation DeleteRoute(
 ` as GeneratedMutation<
   APITypes.DeleteRouteMutationVariables,
   APITypes.DeleteRouteMutation
->;
-export const createUser = /* GraphQL */ `mutation CreateUser(
-  $input: CreateUserInput!
-  $condition: ModelUserConditionInput
-) {
-  createUser(input: $input, condition: $condition) {
-    id
-    userSub
-    username
-    email
-    driver {
-      id
-      name
-      email
-      carType
-      createdAt
-      updatedAt
-      __typename
-    }
-    rider {
-      id
-      name
-      email
-      createdAt
-      updatedAt
-      vehiclePassengersId
-      __typename
-    }
-    createdAt
-    updatedAt
-    userDriverId
-    userRiderId
-    owner
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateUserMutationVariables,
-  APITypes.CreateUserMutation
->;
-export const updateUser = /* GraphQL */ `mutation UpdateUser(
-  $input: UpdateUserInput!
-  $condition: ModelUserConditionInput
-) {
-  updateUser(input: $input, condition: $condition) {
-    id
-    userSub
-    username
-    email
-    driver {
-      id
-      name
-      email
-      carType
-      createdAt
-      updatedAt
-      __typename
-    }
-    rider {
-      id
-      name
-      email
-      createdAt
-      updatedAt
-      vehiclePassengersId
-      __typename
-    }
-    createdAt
-    updatedAt
-    userDriverId
-    userRiderId
-    owner
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateUserMutationVariables,
-  APITypes.UpdateUserMutation
->;
-export const deleteUser = /* GraphQL */ `mutation DeleteUser(
-  $input: DeleteUserInput!
-  $condition: ModelUserConditionInput
-) {
-  deleteUser(input: $input, condition: $condition) {
-    id
-    userSub
-    username
-    email
-    driver {
-      id
-      name
-      email
-      carType
-      createdAt
-      updatedAt
-      __typename
-    }
-    rider {
-      id
-      name
-      email
-      createdAt
-      updatedAt
-      vehiclePassengersId
-      __typename
-    }
-    createdAt
-    updatedAt
-    userDriverId
-    userRiderId
-    owner
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteUserMutationVariables,
-  APITypes.DeleteUserMutation
 >;

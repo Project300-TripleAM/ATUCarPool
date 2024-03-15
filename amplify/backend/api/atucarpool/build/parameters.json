@@ -9,5 +9,5 @@
         ]
     },
     "S3DeploymentBucket": "amplify-atucarpool-dev-123910-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/3b434bca48a037e4cfcc317d65070a2617babc6a"
+    "S3DeploymentRootKey": "amplify-appsync-files/052e1160d6d8fd20c9cfc54428663c522f47eb26"
 }

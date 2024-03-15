@@ -6,9 +6,9 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }# FOR TESTING ONLY!
 
-type User @model @auth(rules: [{ allow: owner }]) {
+type User @model {
   id: ID!
-  userSub: String! @auth(rules: [{ allow: owner }])
+  userSub: String!
   username: String!
   email: String!
   driver: Driver @hasOne

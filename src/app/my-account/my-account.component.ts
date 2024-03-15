@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APIService, Driver } from '../services/API.service';
+import { APIInterfaceService} from '../services/APIInterface.service';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { UserRoleService } from '../services/user-role.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthenticationService } from '../services/authentication.service';
+import { Driver } from '../API.service';
 
 @Component({
   selector: 'app-my-account',
@@ -20,12 +21,12 @@ export class MyAccountComponent implements OnInit {
   userRole!: string;
   isMenuOpen: boolean = false;
 
-  constructor(private apiService: APIService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {}
+  constructor(private apiService: APIInterfaceService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {}
 
   ngOnInit(): void {
     // Fetch user data and recent trips data
-    this.auth.currentAuthenticatedUser();
-    
+    //this.auth.currentAuthenticatedUser();
+
     this.fetchUserData();
     this.fetchRecentTrips();
     this.fetchUpcomingTrips();
@@ -38,19 +39,16 @@ export class MyAccountComponent implements OnInit {
 
   // Fetch user data from the API service
   fetchUserData() {
-    this.apiService.getDrivers().subscribe({
-      next: (result) => {
-        console.log('Result:', result);
-        if (result.length > 0) {
-          this.users = [result[0]]; 
-          console.log('Users:', this.users);
-        } else {
-          console.log('No drivers found');
-        }
-      },
-      error: (error) => {
-        console.error('GraphQL query error:', error);
+    this.apiService.getUsers().then((result: any) => {
+      console.log('Result:', result);
+      if (result.length > 0) {
+        this.users = result.map((user: any) => ({ ...user })); // Copy each user object to a new array
+        console.log('Users:', this.users);
+      } else {
+        console.log('No users found');
       }
+    }).catch(error => {
+      console.error('Error fetching user data:', error);
     });
   }
   // Fetches recent trips data (placeholder for now)

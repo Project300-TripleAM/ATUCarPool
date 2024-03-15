@@ -415,36 +415,6 @@
         "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
       }
     },
-    "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032": {
-      "Type": "AWS::AppSync::FunctionConfiguration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
-        },
-        "DataSourceName": {
-          "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
-        },
-        "Name": "Userdriverauth0Function",
-        "FunctionVersion": "2018-05-29",
-        "RequestMappingTemplateS3Location": {
-          "Fn::Join": [
-            "",
-            [
-              "s3://",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentBucket7592718ARef"
-              },
-              "/",
-              {
-                "Ref": "referencetotransformerrootstackS3DeploymentRootKeyA71EA735Ref"
-              },
-              "/resolvers/User.driver.auth.1.req.vtl"
-            ]
-          ]
-        },
-        "ResponseMappingTemplate": "$util.toJson({})"
-      }
-    },
     "UserDriverDataResolverFnUserDriverDataResolverFnAppSyncFunction4F6E138D": {
       "Type": "AWS::AppSync::FunctionConfiguration",
       "Properties": {
@@ -501,12 +471,6 @@
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
-            {
-              "Fn::GetAtt": [
-                "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032",
-                "FunctionId"
-              ]
-            },
             {
               "Fn::GetAtt": [
                 "UserDriverDataResolverFnUserDriverDataResolverFnAppSyncFunction4F6E138D",
@@ -590,12 +554,6 @@
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
-            {
-              "Fn::GetAtt": [
-                "Userdriverauth0FunctionUserdriverauth0FunctionAppSyncFunctionF5006032",
-                "FunctionId"
-              ]
-            },
             {
               "Fn::GetAtt": [
                 "UserRiderDataResolverFnUserRiderDataResolverFnAppSyncFunctionF8CEE0F0",
@@ -982,9 +940,6 @@
       "Type": "String"
     },
     "referencetotransformerrootstackRiderNestedStackRiderNestedStackResourceB54119C3OutputstransformerrootstackRiderRiderTable827C24DCRef": {
-      "Type": "String"
-    },
-    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
       "Type": "String"
     },
     "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverDataSource526375F9Name": {

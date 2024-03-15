@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
-import { APIService } from '../services/API.service';
+import { APIInterfaceService } from '../services/APIInterface.service';
 import { Router } from '@angular/router';
 import {} from 'googlemaps';
 
@@ -16,40 +16,34 @@ export class MapComponent implements OnInit {
   private map: any;
   private marker: any;
   private apiKey = environment.apiKey;
-  public routes: { id: string; origin: { lat: number, lng: number }; destination: { lat: number, lng: number } }[] = [];
+  public routes: { id: string; origin: {name: string, lat: number, lng: number }; destination: { name: string, lat: number, lng: number } }[] = [];
 
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private API: APIService) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef, private API: APIInterfaceService) {}
 
   async ngOnInit() {
-    (window as any).initMap = this.initMap.bind(this);
-    try {
-      // Load Google Maps script
-      await this.loadGoogleMapsScript();
-      // Now that the script is loaded, fetch routes and draw them
-      this.API.getRoutes().subscribe(
-        (result: any) => {
-          const routes = result; // Accessing the entire result object
-          console.log('API Response - Routes:', routes);
-          if (routes && routes.length > 0) {
-            this.routes = routes.map((route: any) => ({
-              id: route.id,
-              origin: { lat: route.origin.latitude, lng: route.origin.longitude },
-              destination: { lat: route.destination.latitude, lng: route.destination.longitude }
-            }));
-            // After routes are fetched, we initialize the map
-            this.initMap();
-          } else {
-            console.log('No routes found');
-          }
-        },
-        (error: any) => {
-          console.error('Error fetching routes:', error);
+      (window as any).initMap = this.initMap.bind(this);
+      try {
+        // Load Google Maps script
+        await this.loadGoogleMapsScript();
+        // Now that the script is loaded, fetch routes and draw them
+        const routes = await this.API.getRoutes();
+        console.log('API Response - Routes:', routes);
+        if (routes && routes.length > 0) {
+          this.routes = routes.map((route: any) => ({
+            id: route.id,
+            origin: { name: route.origin.name, lat: route.origin.latitude, lng: route.origin.longitude},
+            destination: {name: route.destination.name, lat: route.destination.latitude, lng: route.destination.longitude }
+          }));
+          // After routes are fetched, we initialize the map
+          this.initMap();
+        } else {
+          console.log('No routes found');
         }
-      );
-    } catch (error) {
-      console.error('Error loading Google Maps script:', error);
+      } catch (error) {
+        console.error('Error loading Google Maps script or fetching routes:', error);
+      }
     }
-  }
+
   
   loadGoogleMapsScript() {
     return new Promise<void>((resolve, reject) => {

@@ -127,7 +127,7 @@
                         "ApiId"
                     ]
                 },
-                "Expires": 1710960911
+                "Expires": 1711113473
             }
         },
         "GraphQLAPINONEDS95A13CF0": {
@@ -728,12 +728,6 @@
                         "Fn::GetAtt": [
                             "Rider",
                             "Outputs.transformerrootstackRiderRiderTable827C24DCRef"
-                        ]
-                    },
-                    "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name": {
-                        "Fn::GetAtt": [
-                            "GraphQLAPINONEDS95A13CF0",
-                            "Name"
                         ]
                     },
                     "referencetotransformerrootstackDriverNestedStackDriverNestedStackResource4B03BC37OutputstransformerrootstackDriverDriverDataSource526375F9Name": {

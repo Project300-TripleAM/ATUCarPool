@@ -8,6 +8,90 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    userSub
+    username
+    email
+    driver {
+      id
+      name
+      email
+      carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+    rider {
+      id
+      name
+      email
+      trips {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      vehiclePassengersId
+      __typename
+    }
+    createdAt
+    updatedAt
+    userDriverId
+    userRiderId
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+export const listUsers = /* GraphQL */ `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        createdAt
+        updatedAt
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
 export const getDriver = /* GraphQL */ `query GetDriver($id: ID!) {
   getDriver(id: $id) {
     id
@@ -15,10 +99,31 @@ export const getDriver = /* GraphQL */ `query GetDriver($id: ID!) {
     email
     carType
     vehicles {
+      items {
+        id
+        make
+        model
+        year
+        createdAt
+        updatedAt
+        driverVehiclesId
+        __typename
+      }
       nextToken
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -39,6 +144,14 @@ export const listDrivers = /* GraphQL */ `query ListDrivers(
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -57,6 +170,17 @@ export const getRider = /* GraphQL */ `query GetRider($id: ID!) {
     name
     email
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -77,6 +201,10 @@ export const listRiders = /* GraphQL */ `query ListRiders(
       id
       name
       email
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
@@ -101,11 +229,28 @@ export const getVehicle = /* GraphQL */ `query GetVehicle($id: ID!) {
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
     }
     passengers {
+      items {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -130,6 +275,19 @@ export const listVehicles = /* GraphQL */ `query ListVehicles(
       make
       model
       year
+      driver {
+        id
+        name
+        email
+        carType
+        createdAt
+        updatedAt
+        __typename
+      }
+      passengers {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       driverVehiclesId
@@ -151,6 +309,14 @@ export const getTrip = /* GraphQL */ `query GetTrip($id: ID!) {
       name
       email
       carType
+      vehicles {
+        nextToken
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -159,6 +325,10 @@ export const getTrip = /* GraphQL */ `query GetTrip($id: ID!) {
       id
       name
       email
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
@@ -168,6 +338,22 @@ export const getTrip = /* GraphQL */ `query GetTrip($id: ID!) {
     endTime
     route {
       id
+      origin {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      destination {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -189,8 +375,32 @@ export const listTrips = /* GraphQL */ `query ListTrips(
   listTrips(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      driver {
+        id
+        name
+        email
+        carType
+        createdAt
+        updatedAt
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        __typename
+      }
       startTime
       endTime
+      route {
+        id
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       driverTripsId
@@ -219,6 +429,17 @@ export const getRoute = /* GraphQL */ `query GetRoute($id: ID!) {
       __typename
     }
     trips {
+      items {
+        id
+        startTime
+        endTime
+        createdAt
+        updatedAt
+        driverTripsId
+        riderTripsId
+        routeTripsId
+        __typename
+      }
       nextToken
       __typename
     }
@@ -236,6 +457,22 @@ export const listRoutes = /* GraphQL */ `query ListRoutes(
   listRoutes(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      origin {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      destination {
+        name
+        latitude
+        longitude
+        __typename
+      }
+      trips {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -248,59 +485,3 @@ export const listRoutes = /* GraphQL */ `query ListRoutes(
   APITypes.ListRoutesQueryVariables,
   APITypes.ListRoutesQuery
 >;
-export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    userSub
-    username
-    email
-    driver {
-      id
-      name
-      email
-      carType
-      createdAt
-      updatedAt
-      __typename
-    }
-    rider {
-      id
-      name
-      email
-      createdAt
-      updatedAt
-      vehiclePassengersId
-      __typename
-    }
-    createdAt
-    updatedAt
-    userDriverId
-    userRiderId
-    owner
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
-export const listUsers = /* GraphQL */ `query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      userSub
-      username
-      email
-      createdAt
-      updatedAt
-      userDriverId
-      userRiderId
-      owner
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;

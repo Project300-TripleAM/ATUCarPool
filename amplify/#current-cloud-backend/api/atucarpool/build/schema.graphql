@@ -1,4 +1,4 @@
-type User @aws_cognito_user_pools {
+type User {
   id: ID!
   userSub: String!
   username: String!
@@ -9,7 +9,6 @@ type User @aws_cognito_user_pools {
   updatedAt: AWSDateTime!
   userDriverId: ID
   userRiderId: ID
-  owner: String
 }
 
 type Driver {
@@ -224,7 +223,7 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelUserConnection @aws_cognito_user_pools {
+type ModelUserConnection {
   items: [User]!
   nextToken: String
 }
@@ -242,6 +241,8 @@ input ModelUserFilterInput {
 }
 
 type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
   getDriver(id: ID!): Driver
   listDrivers(filter: ModelDriverFilterInput, limit: Int, nextToken: String): ModelDriverConnection
   getRider(id: ID!): Rider
@@ -252,8 +253,6 @@ type Query {
   listTrips(filter: ModelTripFilterInput, limit: Int, nextToken: String): ModelTripConnection
   getRoute(id: ID!): Route
   listRoutes(filter: ModelRouteFilterInput, limit: Int, nextToken: String): ModelRouteConnection
-  getUser(id: ID!): User @aws_cognito_user_pools
-  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection @aws_cognito_user_pools
 }
 
 input ModelUserConditionInput {
@@ -290,6 +289,9 @@ input DeleteUserInput {
 }
 
 type Mutation {
+  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User
+  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User
+  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User
   createDriver(input: CreateDriverInput!, condition: ModelDriverConditionInput): Driver
   updateDriver(input: UpdateDriverInput!, condition: ModelDriverConditionInput): Driver
   deleteDriver(input: DeleteDriverInput!, condition: ModelDriverConditionInput): Driver
@@ -305,9 +307,6 @@ type Mutation {
   createRoute(input: CreateRouteInput!, condition: ModelRouteConditionInput): Route
   updateRoute(input: UpdateRouteInput!, condition: ModelRouteConditionInput): Route
   deleteRoute(input: DeleteRouteInput!, condition: ModelRouteConditionInput): Route
-  createUser(input: CreateUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
-  updateUser(input: UpdateUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
-  deleteUser(input: DeleteUserInput!, condition: ModelUserConditionInput): User @aws_cognito_user_pools
 }
 
 input ModelSubscriptionUserFilterInput {
@@ -320,6 +319,9 @@ input ModelSubscriptionUserFilterInput {
 }
 
 type Subscription {
+  onCreateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser(filter: ModelSubscriptionUserFilterInput): User @aws_subscribe(mutations: ["deleteUser"])
   onCreateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["createDriver"])
   onUpdateDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["updateDriver"])
   onDeleteDriver(filter: ModelSubscriptionDriverFilterInput): Driver @aws_subscribe(mutations: ["deleteDriver"])
@@ -335,9 +337,6 @@ type Subscription {
   onCreateRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["createRoute"])
   onUpdateRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["updateRoute"])
   onDeleteRoute(filter: ModelSubscriptionRouteFilterInput): Route @aws_subscribe(mutations: ["deleteRoute"])
-  onCreateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["createUser"]) @aws_cognito_user_pools
-  onUpdateUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["updateUser"]) @aws_cognito_user_pools
-  onDeleteUser(filter: ModelSubscriptionUserFilterInput, owner: String): User @aws_subscribe(mutations: ["deleteUser"]) @aws_cognito_user_pools
 }
 
 type ModelDriverConnection {
