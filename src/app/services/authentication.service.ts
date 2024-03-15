@@ -5,15 +5,8 @@ import { APIInterfaceService } from './APIInterface.service';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  userSubSelected: any;
 
   constructor(private API:APIInterfaceService) { }
-
-  listenForUserSub() {
-    this.userSubSelected.subscribe((userSub: string) => {
-      this.currentAuthenticatedUser(userSub); 
-    });
-  }
 
   async currentAuthenticatedUser(userSub: string) {
     try {

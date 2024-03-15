@@ -26,6 +26,7 @@ import { FaqComponent } from './faq/faq.component';
 import { MapComponent } from './map/map.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AddRouteComponent } from './add-route/add-route.component';
+import { RoleSelectionComponent } from './role-selection/role-selection.component';
 const client = generateClient();
 
 Amplify.configure(awsconfig);
@@ -38,7 +39,8 @@ Amplify.configure(awsconfig);
     MyAccountComponent,
     MapComponent,
     AboutUsComponent,
-    AddRouteComponent
+    AddRouteComponent,
+    RoleSelectionComponent
   ],
   imports: [
     BrowserModule,

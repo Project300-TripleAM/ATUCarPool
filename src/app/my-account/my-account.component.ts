@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { APIInterfaceService} from '../services/APIInterface.service';
 import { getCurrentUser } from 'aws-amplify/auth';
@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthenticationService } from '../services/authentication.service';
 import { Driver } from '../API.service';
-
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -21,11 +20,16 @@ export class MyAccountComponent implements OnInit {
   userRole!: string;
   isMenuOpen: boolean = false;
 
-  constructor(private apiService: APIInterfaceService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {}
+  constructor(private apiService: APIInterfaceService, private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {
+  }
 
   ngOnInit(): void {
     // Fetch user data and recent trips data
     //this.auth.currentAuthenticatedUser();
+      this.userRoleService.userRole$.subscribe(role => {
+        console.log('Selected role:', role);
+        this.auth.currentAuthenticatedUser(role);
+      });
 
     this.fetchUserData();
     this.fetchRecentTrips();

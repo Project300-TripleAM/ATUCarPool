@@ -28,6 +28,8 @@ export class RoleSelectionComponent {
 
   selectRole(role: string) {
     try {
+      this.userRoleService.setUserRole(role);
+      console.log(role,'From role-select');
       this.userSubSelected.emit(role); 
       if (role === 'driver') {
         this.router.navigate(['/driver-dashboard']);
