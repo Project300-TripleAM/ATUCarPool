@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, HostListener } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatMenu } from '@angular/material/menu';
 import { Router } from '@angular/router';
@@ -89,5 +89,13 @@ export class NavbarComponent implements OnDestroy {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     console.log('button error');
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: any) {
+    if (!event.target.closest('.notification-menu')) {
+      // Clicked outside the notification menu, close it
+      this.isMenuOpen = false;
+    }
   }
 }

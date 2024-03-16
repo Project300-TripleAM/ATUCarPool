@@ -29,27 +29,10 @@
     width: 100%; /* Ensure map fills the container width */
   }
   
-  /* Button Styling */
-  .show-on-map-btn, .availability-btn {
-    background-color: #858585; /* Uniform button color */
-    color: white; /* Text color for readability */
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer; /* Indicate clickable buttons */
-  }
-  
-  .show-on-map-btn:hover, .availability-btn:hover {
-    background-color: #6c6c6c; /* Hover effect for buttons */
-  }
   
   /* Additional Button for Adding Routes */
   .add-route-cell {
     text-align: center; 
-  }
-    
-  .add-route-btn {
-    padding: 10px 20px; 
-    margin: 10px; 
   }
   
   /* Button Alignment */
@@ -62,6 +45,25 @@
   .center-button button {
     margin-right: 10px; /* Space between buttons */
   }
+
+  /* Add hover effect to buttons */
+.hover-button {
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.hover-button:hover {
+  background-color: #68696a; /* Slightly darker color on hover */
+}
+
+.estimated-time-and-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.estimated-time {
+  margin-right: 10px; /* Adjust as needed */
+}
+
   
   /* Last button margin correction */
   .center-button button:last-child {

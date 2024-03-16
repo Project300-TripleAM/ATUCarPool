@@ -17,6 +17,7 @@ export class MapComponent implements OnInit {
   private marker: any;
   private apiKey = environment.apiKey;
   public routes: { id: string; origin: {name: string, lat: number, lng: number }; destination: { name: string, lat: number, lng: number } }[] = [];
+  public estimatedTime: string = '';
 
   constructor(private router: Router, private cdr: ChangeDetectorRef, private API: APIInterfaceService) {}
 
@@ -33,7 +34,7 @@ export class MapComponent implements OnInit {
             id: route.id,
             origin: { name: route.origin.name, lat: route.origin.latitude, lng: route.origin.longitude},
             destination: {name: route.destination.name, lat: route.destination.latitude, lng: route.destination.longitude }
-          }));
+          })).sort((a, b) => a.origin.name.localeCompare(b.origin.name));
           // After routes are fetched, we initialize the map
           this.initMap();
         } else {
@@ -107,6 +108,9 @@ export class MapComponent implements OnInit {
         response.routes[0].legs.forEach((leg: google.maps.DirectionsLeg) => {
           bounds.extend(leg.start_location);
           bounds.extend(leg.end_location);
+          if (route === this.selectedRoute) {
+            this.estimatedTime = leg.duration.text; // Extract estimated time for selected route
+          }
         });
   
         this.map.fitBounds(bounds);

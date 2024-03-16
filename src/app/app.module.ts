@@ -27,6 +27,9 @@ import { MapComponent } from './map/map.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AddRouteComponent } from './add-route/add-route.component';
 import { RoleSelectionComponent } from './role-selection/role-selection.component';
+import { RideRequestsComponent } from './ride-requests/ride-requests.component';
+import { MessagesComponent } from './messages/messages.component';
+import { UpdatesComponent } from './updates/updates.component';
 const client = generateClient();
 
 Amplify.configure(awsconfig);
@@ -39,7 +42,10 @@ Amplify.configure(awsconfig);
     MyAccountComponent,
     MapComponent,
     AboutUsComponent,
-    RoleSelectionComponent
+    RoleSelectionComponent,
+    RideRequestsComponent,
+    MessagesComponent,
+    UpdatesComponent
   ],
   imports: [
     BrowserModule,

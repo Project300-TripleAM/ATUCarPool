@@ -3,7 +3,6 @@
 <table class="table">
   <thead>
     <tr>
-    
       <th>Origin</th>
       <th>Destination</th>
       <th>Action</th>
@@ -11,17 +10,20 @@
   </thead>
   <tbody>
     <td colspan="4" class="add-route-cell">
-      <button routerLink="/add-route" class="add-route-btn">Add a route</button>
+      <button mat-raised-button color="primary" class="hover-button" routerLink="/add-route">Add a route</button>
     </td>
-    <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
     <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
-     
-      <td>{{ route.origin.name}}</td>
-      <td>{{ route.destination.name}}</td>
+      <td>{{ route.origin.name }}</td>
+      <td>{{ route.destination.name }}</td>
       <td class="center-button">
-        <button class="show-on-map-btn" (click)="drawSelectedRoute(route)">Show on Map</button>
-        <button class="availability-btn" (click)="checkAvailability(route)">Availability</button>
-      </td> <!-- Merge action and availability buttons -->
+        <!-- Estimated time -->
+        <div class="estimated-time" *ngIf="selectedRoute === route">
+          <mat-icon>schedule</mat-icon> <!-- Material icon for schedule -->
+          <strong>{{ estimatedTime }}</strong>
+        </div>        <!-- Buttons -->
+        <button mat-raised-button color="primary" class="hover-button" (click)="drawSelectedRoute(route)">Show on Map</button>
+        <button mat-raised-button color="primary" class="hover-button" (click)="checkAvailability(route)">Availability</button>
+      </td>
     </tr>
   </tbody>
 </table>
