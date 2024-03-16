@@ -31,6 +31,7 @@ export class AddRouteComponent{
   }
 
   addRoute() {
+    this.router.navigate(['/map']);
     const originName = this.route.origin;
     const destinationName = this.route.destination;
 
@@ -97,6 +98,9 @@ export class AddRouteComponent{
         reject(new Error('Geocoding failed. Error in HTTP request.'));
       });
     });
+
   }
+
+  
 
 }
