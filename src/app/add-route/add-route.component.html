@@ -1,12 +1,12 @@
 
 <div>
     <h2>Add Route</h2>
-    <form>
+    <form (ngSubmit)="addRoute()">
       <label for="origin">Origin:</label>
-      <input type="text" id="origin" required>
+      <input type="text" id="origin" [(ngModel)]="route.origin" name="origin" required>
   
       <label for="destination">Destination:</label>
-      <input type="text" id="destination" required>
+      <input type="text" id="destination" [(ngModel)]="route.destination" name="destination" required>
   
   
       <button type="submit">Add Route</button>

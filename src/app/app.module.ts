@@ -12,7 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component'; 
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Amplify } from 'aws-amplify';
 import awsconfig from 'src/amplifyconfiguration.json';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
@@ -52,7 +53,8 @@ Amplify.configure(awsconfig);
     AmplifyAuthenticatorModule,
     GraphQLModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
     
   ],
   providers: [],

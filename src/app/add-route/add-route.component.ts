@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, isStandalone } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { APIService } from '../services/api.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
+  standalone:true,
   selector: 'app-add-route',
   templateUrl: './add-route.component.html',
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./add-route.component.css']
 })
-export class AddRouteComponent {
+
+export class AddRouteComponent{
   public route: {
     origin: string,
     destination: string
@@ -92,4 +98,5 @@ export class AddRouteComponent {
       });
     });
   }
+
 }
