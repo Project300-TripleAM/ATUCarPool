@@ -28,8 +28,10 @@ export class AddRouteComponent{
   constructor(private router: Router, private http: HttpClient, private apiService: APIService) {}
 
   navigateToMap() {
-    this.router.navigate(['/map']);
+    // Update this line to navigate to the driver dashboard
+    this.router.navigate(['/driver-dashboard']);
   }
+  
 
   addRoute() {
     this.router.navigate(['/map']);

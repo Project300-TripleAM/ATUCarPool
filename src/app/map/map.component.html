@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
+    
       <th>Origin</th>
       <th>Destination</th>
       <th>Action</th>
@@ -15,7 +15,7 @@
     </td>
     <tr *ngFor="let route of routes" [class.selected]="route === selectedRoute">
     <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
-      <td>{{ route.id }}</td>
+     
       <td>{{ route.origin.name}}</td>
       <td>{{ route.destination.name}}</td>
       <td class="center-button">

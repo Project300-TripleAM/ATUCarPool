@@ -95,7 +95,7 @@ export class MyAccountComponent implements OnInit {
     this.userRoleService.setUserRole(newRole);
     
     // Redirect to the appropriate dashboard based on the new role
-    this.router.navigate([newRole === 'driver' ? '/driver-dashboard' : '/passenger-dashboard']);
+    this.router.navigate(['/role-selection']);
   }
 
 }
