@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.fetchRecentTrips(); // You can fetch recent trips data from your API or service here
     this.checkUserRole(); // Call the method to check user role
+    
   }
 
   logOut(): void {
@@ -44,5 +45,17 @@ export class DashboardComponent implements OnInit {
   checkUserRole(): void {
     const userRole = this.userRoleService.getUserRole(); // Get user role from service
     this.isDriver = userRole === 'driver';
+  }
+
+  // Method to switch the user role between driver and passenger
+  switchRole(): void {
+    // Determine the new role based on the current role
+    const newRole = this.isDriver ? 'passenger' : 'driver';
+    
+    // Update the user's role in the user role service
+    this.userRoleService.setUserRole(newRole);
+    
+    // Redirect to the appropriate dashboard based on the new role
+    this.router.navigate([newRole === 'driver' ? '/driver-dashboard' : '/passenger-dashboard']);
   }
 }

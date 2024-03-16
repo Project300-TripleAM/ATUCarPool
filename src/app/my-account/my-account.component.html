@@ -1,48 +1,7 @@
 <div class="account-container">
-  <!--Content for passengers-->
-  <div *ngIf="userRole === 'passenger'">
-  <h3 class="heading">Your ATU-CarPool Rider Account</h3>
-  <!-- Display user information -->
-  <div class="user-info" *ngIf="users">
-    <div class="user-card" *ngFor="let user of users">
-      <!--<p><strong>User ID:</strong> {{ user.id }}</p>--> <!--no need to show user id, name & email is sufficient-->
-      <p><strong>Name:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-    </div>
-  </div>
-  
-
-  <!-- Displaying recent trips --> 
-  <!--Can be for both drivers and riders or just riders?-->
-  <h3 class="heading">Recent Trips</h3>
-  <div class="recent-trips" *ngIf="recentTrips && recentTrips.length > 0">
-    <div class="trip-card" *ngFor="let trip of recentTrips">
-      <p><strong>Trip:</strong> {{ trip.Trip }}</p>
-      <p><strong>From:</strong> {{ trip.origin }}</p>
-      <p><strong>Destination:</strong> {{ trip.destination }}</p>
-      <p><strong>Date:</strong> {{ trip.Date }} </p>
-    </div>
-  </div>
-
-  <!-- Displaying upcoming trips -->
-<h3 class="heading">Upcoming Trips</h3>
-<div class="upcoming-trips" *ngIf="upcomingTrips && upcomingTrips.length > 0">
-  <div class="trip-card" *ngFor="let trip of upcomingTrips">
-    <p><strong>From:</strong> {{ trip.origin }}</p>
-    <p><strong>Destination:</strong> {{ trip.destination }}</p>
-  </div>
-</div>
-</div>
-
-
-<!---------------------------------------------------------------------------------------------------------------->
-
-
-  <!--Content for drivers-->
-<div *ngIf="userRole === 'driver'">
-  <h3 class="heading">Your ATU-CarPool Driver Account</h3>
-  <p>(-------------Placeholder data only--------------)</p>
-  <!-- Notification icon menu -->
+  <button mat-raised-button color="primary" (click)="switchRole()" class="switch-role-button">Switch Role</button>
+  <div *ngIf="userRole === 'driver'">
+    <!-- Notification icon menu -->
   <div class="notification-menu" [ngClass]="{ 'active': isMenuOpen }">
     <button mat-button (click)="toggleMenu()">
       <mat-icon>notifications</mat-icon>
@@ -55,63 +14,82 @@
     <li><i class="material-icons">update</i> Updates</li>
     </ul>
   </div>
+  </div>
+  <h3 class="heading">Your ATU-CarPool Account</h3>
   <!-- Display user information -->
-  <div class="user-info" *ngIf="users && users.length > 0">
+  <div class="user-info" *ngIf="users">
     <div class="user-card" *ngFor="let user of users">
-      <!--<p><strong>User ID:</strong> {{ user.id }}</p>--> <!--no need to show user id, name & email is sufficient-->
       <p><strong>Name:</strong> {{ user.name }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
     </div>
   </div>
-  
 
-  <!-- Displaying recent trips --> 
-  <!--Can be for both drivers and riders-->
+  <!-- Displaying recent trips -->
   <h3 class="heading">Recent Trips</h3>
   <div class="recent-trips" *ngIf="recentTrips && recentTrips.length > 0">
-    <div class="trip-card" *ngFor="let trip of recentTrips">
-      <p><strong>Trip:</strong> {{ trip.Trip }}</p>
-      <p><strong>From:</strong> {{ trip.origin }}</p>
-      <p><strong>Destination:</strong> {{ trip.destination }}</p>
-      <p><strong>Date:</strong> {{ trip.Date }} </p>
+    <!-- Display recent trips based on user role -->
+    <div *ngIf="userRole === 'driver'">
+      <div class="trip-card" *ngFor="let trip of recentTrips">
+        <p><strong>Trip:</strong> {{ trip.Trip }}</p>
+        <p><strong>From:</strong> {{ trip.origin }}</p>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+        <p><strong>Date:</strong> {{ trip.Date }} </p>
+      </div>
+    </div>
+    <div *ngIf="userRole === 'passenger'">
+      <div class="trip-card" *ngFor="let trip of recentTrips">
+        <p><strong>Trip:</strong> {{ trip.Trip }}</p>
+        <p><strong>From:</strong> {{ trip.origin }}</p>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+        <p><strong>Date:</strong> {{ trip.Date }} </p>
+      </div>
     </div>
   </div>
 
   <!-- Displaying upcoming trips -->
-<h3 class="heading">Upcoming Trips</h3>
-<div class="upcoming-trips" *ngIf="upcomingTrips && upcomingTrips.length > 0">
-  <div class="trip-card" *ngFor="let trip of upcomingTrips">
-    <p><strong>From:</strong> {{ trip.origin }}</p>
-    <p><strong>Destination:</strong> {{ trip.destination }}</p>
+  <h3 class="heading">Upcoming Trips</h3>
+  <div class="upcoming-trips" *ngIf="upcomingTrips && upcomingTrips.length > 0">
+    <!-- Display upcoming trips based on user role -->
+    <div *ngIf="userRole === 'driver'">
+      <div class="trip-card" *ngFor="let trip of upcomingTrips">
+        <p><strong>From:</strong> {{ trip.origin }}</p>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="userRole === 'passenger'">
+      <div class="trip-card" *ngFor="let trip of upcomingTrips">
+        <p><strong>From:</strong> {{ trip.origin }}</p>
+        <p><strong>Destination:</strong> {{ trip.destination }}</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Passengers Details for upcoming trip -->
-  <h3 class="heading">Passengers Details for Upcoming Trip</h3>
-  <div class="passengers-details">
-    <!-- Display details of passengers the driver is providing a lift for -->
-    <table class="passenger-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Pickup Point</th>
-          <th>Destination</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let passenger of passengers">
-          <td>{{ passenger.name }}</td>
-          <td>{{ passenger.pickupPoint }}</td>
-          <td>{{ passenger.destination }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="userRole === 'driver'">
+    <h3 class="heading">Passenger Details for Upcoming Trip</h3>
+    <div class="passengers-details">
+      <!-- Display details of passengers the driver is providing a lift for -->
+      <table class="passenger-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Pickup Point</th>
+            <th>Destination</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let passenger of passengers">
+            <td>{{ passenger.name }}</td>
+            <td>{{ passenger.pickupPoint }}</td>
+            <td>{{ passenger.destination }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 </div>
 
 
-</div>
-
-</div>
 
 

@@ -1,66 +1,109 @@
 .dashboard-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7; /* Set background color to white for better contrast */
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7; /* Improved contrast with a light background */
+}
 
 .card-container {
-  background-color: #f7f7f7
+  background-color: #f7f7f7;
 }
-  
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Ensure items are stacked vertically */
-    margin-bottom: 20px;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically for clarity */
+  margin-bottom: 20px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+}
+
+.Atu-logo {
+  width: 50%; /* Adapt image size to the container's width */
+  max-width: 100%; /* Prevent image overflow */
+}
+
+.content h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333; /* Enhance heading visibility with a darker shade */
+}
+
+.content p {
+  color: #555; /* Slightly darker text color for readability */
+}
+
+.content ul {
+  margin-bottom: 20px;
+  padding-left: 20px; /* Indentation for list */
+}
+
+/* List item styles */
+.content ul li {
+  list-style-type: none; /* Custom bullet points */
+  margin-bottom: 8px; /* Space between items */
+  color: #555;
+  font-size: 16px;
+}
+
+/* Custom bullet points */
+.content ul li:before {
+  content: "\2022";
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em; /* Align bullet points with the text */
+}
+
+.centered-button {
+  display: flex;
+  justify-content: space-between; /* Space buttons evenly */
+  align-items: center;
+  padding-top: 20px;
+}
+
+.role-specifier {
+  opacity: 0.25; /* Diminished emphasis on role specifier for design purposes */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container, .card-container {
+    padding: 15px; /* Slightly reduce padding on smaller tablets */
   }
-  
-  .image {
-    display: flex;
-    justify-content: center;
+
+  .Atu-logo, .content h2, .content p, .content ul {
+    width: 100%; /* Ensure full width usage for smaller devices */
   }
-  
-  .Atu-logo {
-    width: 50%; /* Ensure the image spans across the width of the container */
-    max-width: 100%; /* Ensure the image doesn't exceed its container */
-  }
-  
-  .content h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #333; /* Set heading color to a darker shade for better visibility */
-  }
-  
-  .content p {
-    color: #555; /* Set paragraph text color to a slightly darker shade */
-  }
-  
-  .content ul {
-    margin-bottom: 20px;
-    padding-left: 20px; /* Add padding to the left for indentation */
-  }
-  
-  /* Style for list items */
-  .content ul li {
-    list-style-type: none; /* Remove default list styles */
-    margin-bottom: 8px; /* Add space between list items */
-    color: #555; /* Set the text color */
-    font-size: 16px; /* Adjust font size */
-  }
-  
-  /* Style for bullet points */
+
   .content ul li:before {
-    content: "\2022"; /* Add bullet point */
-    display: inline-block; /* Ensure the bullet point is displayed inline */
-    width: 1em; /* Adjust bullet point width */
-    margin-left: -1em; /* Adjust margin to align bullet point with list item */
+    margin-left: 0; /* Adjust bullet points alignment on smaller screens */
   }
 
   .centered-button {
-    display: flex;
-    justify-content: center;
-    padding:35px;
+    flex-direction: column; /* Stack buttons vertically for better accessibility */
+    padding-top: 10px;
   }
-  
+
+  .centered-button > * {
+    margin-bottom: 10px; /* Add spacing between stacked buttons */
+  }
+
+  .centered-button > *:last-child {
+    margin-bottom: 0; /* Remove bottom margin from the last button */
+  }
+}
+
+@media (max-width: 480px) {
+  .header, .image, .content {
+    flex-direction: column;
+    text-align: center; /* Center content for very small devices */
+  }
+
+  .content ul {
+    padding-left: 0; /* Remove list indentation on small screens */
+  }
+}

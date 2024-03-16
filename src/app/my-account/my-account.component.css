@@ -1,3 +1,4 @@
+/* Base Styles for Account, User Info, Recent Trips, and Notifications */
 .account-container {
   max-width: 800px;
   margin: 0 auto;
@@ -14,26 +15,25 @@
   color: #333;
 }
 
-.account-container p {
+.account-container p,
+.trip-card p {
   font-size: 16px;
   margin-bottom: 10px;
   color: #666;
 }
 
-.account-container p strong {
+.account-container p strong,
+.trip-card p strong {
   color: #333;
 }
 
 .heading {
-  text-align:center;
+  text-align: center;
 }
 
-.user-info {
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
-}
-
-.user-card {
+.user-info,
+.user-card,
+.trip-card {
   background-color: #fff;
   padding: 15px;
   border: 1px solid #e0e0e0;
@@ -46,31 +46,14 @@
   margin-top: 20px;
 }
 
-.trip-card {
-  background-color: #fff;
-  padding: 15px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.trip-card p {
-  font-size: 16px;
-  margin-bottom: 5px;
-  color: #666;
-}
-
-.trip-card p strong {
-  color: #333;
-}
-
 .passenger-table {
-  width: 100%;
+  width: calc(100% - 40px);
+  margin: 20px;
   border-collapse: collapse;
 }
 
-.passenger-table th, .passenger-table td {
+.passenger-table th,
+.passenger-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -80,7 +63,8 @@
   background-color: #f2f2f2;
 }
 
-.passenger-table tr:nth-child(even) {
+.passenger-table tr:nth-child(even),
+.passenger-table tr:hover {
   background-color: #f2f2f2;
 }
 
@@ -88,11 +72,6 @@
   background-color: #ddd;
 }
 
-.account-container {
-  position: relative; /* Ensure the container is positioned */
-}
-
-/* Notification button */
 .notification-menu {
   position: relative;
   display: inline-block;
@@ -121,8 +100,10 @@
   display: none;
 }
 
-.notification-menu.active ul {
+.notification-menu.active ul,
+.notification-menu ul li:hover {
   display: block;
+  background-color: #f0f0f0;
 }
 
 .notification-menu ul li {
@@ -131,6 +112,49 @@
   cursor: pointer;
 }
 
-.notification-menu ul li:hover {
-  background-color: #f0f0f0;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .account-container,
+  .user-info,
+  .user-card,
+  .trip-card {
+    padding: 15px;
+    margin: 10px auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .account-container h4,
+  .account-container p,
+  .trip-card p,
+  .notification-menu button mat-icon {
+    font-size: 20px; /* Slightly smaller text for compact display */
+  }
+
+  .passenger-table,
+  .notification-menu ul {
+    width: 100%; /* Full width for smaller tables and notification dropdown */
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-container,
+  .user-info,
+  .user-card,
+  .trip-card,
+  .notification-menu ul {
+    padding: 10px;
+    margin: 5px auto;
+    box-shadow: none; /* Remove shadow for a cleaner look */
+  }
+
+  .account-container h4,
+  .account-container p,
+  .trip-card p {
+    font-size: 18px; /* Further reduced text size for small screens */
+  }
+
+  .notification-menu button mat-icon {
+    font-size: 22px; /* Adjust icon size for better fit */
+  }
 }

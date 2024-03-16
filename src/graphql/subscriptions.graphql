@@ -5,7 +5,6 @@ subscription OnCreateDriver($filter: ModelSubscriptionDriverFilterInput) {
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -26,7 +25,6 @@ subscription OnUpdateDriver($filter: ModelSubscriptionDriverFilterInput) {
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -47,7 +45,6 @@ subscription OnDeleteDriver($filter: ModelSubscriptionDriverFilterInput) {
     id
     name
     email
-    phone
     carType
     vehicles {
       nextToken
@@ -68,7 +65,6 @@ subscription OnCreateRider($filter: ModelSubscriptionRiderFilterInput) {
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -85,7 +81,6 @@ subscription OnUpdateRider($filter: ModelSubscriptionRiderFilterInput) {
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -102,7 +97,6 @@ subscription OnDeleteRider($filter: ModelSubscriptionRiderFilterInput) {
     id
     name
     email
-    phone
     trips {
       nextToken
       __typename
@@ -124,7 +118,6 @@ subscription OnCreateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -151,7 +144,6 @@ subscription OnUpdateVehicle($filter: ModelSubscriptionVehicleFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -178,7 +170,6 @@ subscription OnDeleteVehicle($filter: ModelSubscriptionVehicleFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -202,7 +193,6 @@ subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -212,7 +202,6 @@ subscription OnCreateTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -242,7 +231,6 @@ subscription OnUpdateTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -252,7 +240,6 @@ subscription OnUpdateTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -282,7 +269,6 @@ subscription OnDeleteTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -292,7 +278,6 @@ subscription OnDeleteTrip($filter: ModelSubscriptionTripFilterInput) {
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -399,12 +384,10 @@ subscription OnCreateUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -414,7 +397,6 @@ subscription OnCreateUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -438,12 +420,10 @@ subscription OnUpdateUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -453,7 +433,6 @@ subscription OnUpdateUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId
@@ -477,12 +456,10 @@ subscription OnDeleteUser(
     userSub
     username
     email
-    phone
     driver {
       id
       name
       email
-      phone
       carType
       createdAt
       updatedAt
@@ -492,7 +469,6 @@ subscription OnDeleteUser(
       id
       name
       email
-      phone
       createdAt
       updatedAt
       vehiclePassengersId

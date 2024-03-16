@@ -1727,7 +1727,6 @@ export class APIService {
               id
               name
               email
-              phone
               carType
               createdAt
               updatedAt

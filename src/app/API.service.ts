@@ -2,11 +2,8 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
-import { generateClient } from "@aws-amplify/api";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
-
-const client = generateClient();
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -37,14 +34,12 @@ export type CreateDriverInput = {
   id?: string | null;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
 };
 
 export type ModelDriverConditionInput = {
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   carType?: ModelStringInput | null;
   and?: Array<ModelDriverConditionInput | null> | null;
   or?: Array<ModelDriverConditionInput | null> | null;
@@ -95,7 +90,6 @@ export type Driver = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: ModelVehicleConnection | null;
   trips?: ModelTripConnection | null;
@@ -133,7 +127,6 @@ export type Rider = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: ModelTripConnection | null;
   createdAt: string;
   updatedAt: string;
@@ -182,7 +175,6 @@ export type UpdateDriverInput = {
   id: string;
   name?: string | null;
   email?: string | null;
-  phone?: string | null;
   carType?: string | null;
 };
 
@@ -194,14 +186,12 @@ export type CreateRiderInput = {
   id?: string | null;
   name: string;
   email: string;
-  phone?: string | null;
   vehiclePassengersId?: string | null;
 };
 
 export type ModelRiderConditionInput = {
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   and?: Array<ModelRiderConditionInput | null> | null;
   or?: Array<ModelRiderConditionInput | null> | null;
   not?: ModelRiderConditionInput | null;
@@ -228,7 +218,6 @@ export type UpdateRiderInput = {
   id: string;
   name?: string | null;
   email?: string | null;
-  phone?: string | null;
   vehiclePassengersId?: string | null;
 };
 
@@ -332,7 +321,6 @@ export type CreateUserInput = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   userDriverId?: string | null;
   userRiderId?: string | null;
 };
@@ -341,7 +329,6 @@ export type ModelUserConditionInput = {
   userSub?: ModelStringInput | null;
   username?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   and?: Array<ModelUserConditionInput | null> | null;
   or?: Array<ModelUserConditionInput | null> | null;
   not?: ModelUserConditionInput | null;
@@ -355,7 +342,6 @@ export type User = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: Driver | null;
   rider?: Rider | null;
   createdAt: string;
@@ -370,7 +356,6 @@ export type UpdateUserInput = {
   userSub?: string | null;
   username?: string | null;
   email?: string | null;
-  phone?: string | null;
   userDriverId?: string | null;
   userRiderId?: string | null;
 };
@@ -383,7 +368,6 @@ export type ModelDriverFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   carType?: ModelStringInput | null;
   and?: Array<ModelDriverFilterInput | null> | null;
   or?: Array<ModelDriverFilterInput | null> | null;
@@ -400,7 +384,6 @@ export type ModelRiderFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   and?: Array<ModelRiderFilterInput | null> | null;
   or?: Array<ModelRiderFilterInput | null> | null;
   not?: ModelRiderFilterInput | null;
@@ -448,7 +431,6 @@ export type ModelUserFilterInput = {
   userSub?: ModelStringInput | null;
   username?: ModelStringInput | null;
   email?: ModelStringInput | null;
-  phone?: ModelStringInput | null;
   and?: Array<ModelUserFilterInput | null> | null;
   or?: Array<ModelUserFilterInput | null> | null;
   not?: ModelUserFilterInput | null;
@@ -466,7 +448,6 @@ export type ModelSubscriptionDriverFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
   email?: ModelSubscriptionStringInput | null;
-  phone?: ModelSubscriptionStringInput | null;
   carType?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionDriverFilterInput | null> | null;
   or?: Array<ModelSubscriptionDriverFilterInput | null> | null;
@@ -506,7 +487,6 @@ export type ModelSubscriptionRiderFilterInput = {
   id?: ModelSubscriptionIDInput | null;
   name?: ModelSubscriptionStringInput | null;
   email?: ModelSubscriptionStringInput | null;
-  phone?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionRiderFilterInput | null> | null;
   or?: Array<ModelSubscriptionRiderFilterInput | null> | null;
 };
@@ -539,7 +519,6 @@ export type ModelSubscriptionUserFilterInput = {
   userSub?: ModelSubscriptionStringInput | null;
   username?: ModelSubscriptionStringInput | null;
   email?: ModelSubscriptionStringInput | null;
-  phone?: ModelSubscriptionStringInput | null;
   and?: Array<ModelSubscriptionUserFilterInput | null> | null;
   or?: Array<ModelSubscriptionUserFilterInput | null> | null;
 };
@@ -549,7 +528,6 @@ export type CreateDriverMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -568,7 +546,6 @@ export type UpdateDriverMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -587,7 +564,6 @@ export type DeleteDriverMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -606,7 +582,6 @@ export type CreateRiderMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -621,7 +596,6 @@ export type UpdateRiderMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -636,7 +610,6 @@ export type DeleteRiderMutation = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -657,7 +630,6 @@ export type CreateVehicleMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -682,7 +654,6 @@ export type UpdateVehicleMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -707,7 +678,6 @@ export type DeleteVehicleMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -729,7 +699,6 @@ export type CreateTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -739,7 +708,6 @@ export type CreateTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -767,7 +735,6 @@ export type UpdateTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -777,7 +744,6 @@ export type UpdateTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -805,7 +771,6 @@ export type DeleteTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -815,7 +780,6 @@ export type DeleteTripMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -910,13 +874,11 @@ export type CreateUserMutation = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -926,7 +888,6 @@ export type CreateUserMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -944,13 +905,11 @@ export type UpdateUserMutation = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -960,7 +919,6 @@ export type UpdateUserMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -978,13 +936,11 @@ export type DeleteUserMutation = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -994,7 +950,6 @@ export type DeleteUserMutation = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1011,7 +966,6 @@ export type GetDriverQuery = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -1032,7 +986,6 @@ export type ListDriversQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1045,7 +998,6 @@ export type GetRiderQuery = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -1062,7 +1014,6 @@ export type ListRidersQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1081,7 +1032,6 @@ export type GetVehicleQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1118,7 +1068,6 @@ export type GetTripQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1128,7 +1077,6 @@ export type GetTripQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1204,13 +1152,11 @@ export type GetUserQuery = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1220,7 +1166,6 @@ export type GetUserQuery = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1240,7 +1185,6 @@ export type ListUsersQuery = {
     userSub: string;
     username: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     userDriverId?: string | null;
@@ -1255,7 +1199,6 @@ export type OnCreateDriverSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -1274,7 +1217,6 @@ export type OnUpdateDriverSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -1293,7 +1235,6 @@ export type OnDeleteDriverSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   carType?: string | null;
   vehicles?: {
     __typename: "ModelVehicleConnection";
@@ -1312,7 +1253,6 @@ export type OnCreateRiderSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -1327,7 +1267,6 @@ export type OnUpdateRiderSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -1342,7 +1281,6 @@ export type OnDeleteRiderSubscription = {
   id: string;
   name: string;
   email: string;
-  phone?: string | null;
   trips?: {
     __typename: "ModelTripConnection";
     nextToken?: string | null;
@@ -1363,7 +1301,6 @@ export type OnCreateVehicleSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1388,7 +1325,6 @@ export type OnUpdateVehicleSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1413,7 +1349,6 @@ export type OnDeleteVehicleSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1435,7 +1370,6 @@ export type OnCreateTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1445,7 +1379,6 @@ export type OnCreateTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1473,7 +1406,6 @@ export type OnUpdateTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1483,7 +1415,6 @@ export type OnUpdateTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1511,7 +1442,6 @@ export type OnDeleteTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1521,7 +1451,6 @@ export type OnDeleteTripSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1616,13 +1545,11 @@ export type OnCreateUserSubscription = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1632,7 +1559,6 @@ export type OnCreateUserSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1650,13 +1576,11 @@ export type OnUpdateUserSubscription = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1666,7 +1590,6 @@ export type OnUpdateUserSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1684,13 +1607,11 @@ export type OnDeleteUserSubscription = {
   userSub: string;
   username: string;
   email: string;
-  phone?: string | null;
   driver?: {
     __typename: "Driver";
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     carType?: string | null;
     createdAt: string;
     updatedAt: string;
@@ -1700,7 +1621,6 @@ export type OnDeleteUserSubscription = {
     id: string;
     name: string;
     email: string;
-    phone?: string | null;
     createdAt: string;
     updatedAt: string;
     vehiclePassengersId?: string | null;
@@ -1726,7 +1646,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -1746,7 +1665,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateDriverMutation>response.data.createDriver;
@@ -1761,7 +1680,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -1781,7 +1699,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateDriverMutation>response.data.updateDriver;
@@ -1796,7 +1714,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -1816,7 +1733,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteDriverMutation>response.data.deleteDriver;
@@ -1831,7 +1748,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -1847,7 +1763,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateRiderMutation>response.data.createRider;
@@ -1862,7 +1778,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -1878,7 +1793,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateRiderMutation>response.data.updateRider;
@@ -1893,7 +1808,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -1909,7 +1823,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteRiderMutation>response.data.deleteRider;
@@ -1930,7 +1844,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -1950,7 +1863,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateVehicleMutation>response.data.createVehicle;
@@ -1971,7 +1884,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -1991,7 +1903,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateVehicleMutation>response.data.updateVehicle;
@@ -2012,7 +1924,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2032,7 +1943,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteVehicleMutation>response.data.deleteVehicle;
@@ -2050,7 +1961,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2060,7 +1970,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2086,7 +1995,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateTripMutation>response.data.createTrip;
@@ -2104,7 +2013,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2114,7 +2022,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2140,8 +2047,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql
-      (
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateTripMutation>response.data.updateTrip;
@@ -2159,7 +2065,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2169,7 +2074,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2195,7 +2099,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteTripMutation>response.data.deleteTrip;
@@ -2234,7 +2138,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateRouteMutation>response.data.createRoute;
@@ -2273,7 +2177,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateRouteMutation>response.data.updateRoute;
@@ -2312,7 +2216,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteRouteMutation>response.data.deleteRoute;
@@ -2328,13 +2232,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2344,7 +2246,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2362,7 +2263,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <CreateUserMutation>response.data.createUser;
@@ -2378,13 +2279,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2394,7 +2293,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2412,7 +2310,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <UpdateUserMutation>response.data.updateUser;
@@ -2428,13 +2326,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2444,7 +2340,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2462,7 +2357,7 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteUserMutation>response.data.deleteUser;
@@ -2474,7 +2369,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -2491,7 +2385,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetDriverQuery>response.data.getDriver;
@@ -2509,7 +2403,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2527,7 +2420,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListDriversQuery>response.data.listDrivers;
@@ -2539,7 +2432,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -2552,7 +2444,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetRiderQuery>response.data.getRider;
@@ -2570,7 +2462,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2588,7 +2479,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListRidersQuery>response.data.listRiders;
@@ -2606,7 +2497,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2623,7 +2513,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetVehicleQuery>response.data.getVehicle;
@@ -2674,7 +2564,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2684,7 +2573,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2707,7 +2595,7 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <GetTripQuery>response.data.getTrip;
@@ -2744,7 +2632,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListTripsQuery>response.data.listTrips;
@@ -2809,7 +2697,7 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await client.graphql(
+    const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListRoutesQuery>response.data.listRoutes;
@@ -2822,13 +2710,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -2838,7 +2724,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -2872,7 +2757,6 @@ export class APIService {
             userSub
             username
             email
-            phone
             createdAt
             updatedAt
             userDriverId
@@ -2908,7 +2792,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -2926,7 +2809,7 @@ export class APIService {
     if (filter) {
       gqlAPIServiceArguments.filter = filter;
     }
-    return client.graphql(
+    return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateDriver">>
@@ -2944,7 +2827,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -2980,7 +2862,6 @@ export class APIService {
           id
           name
           email
-          phone
           carType
           vehicles {
             __typename
@@ -3016,7 +2897,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -3048,7 +2928,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -3080,7 +2959,6 @@ export class APIService {
           id
           name
           email
-          phone
           trips {
             __typename
             nextToken
@@ -3118,7 +2996,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3160,7 +3037,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3202,7 +3078,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3241,7 +3116,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3251,7 +3125,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -3296,7 +3169,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3306,7 +3178,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -3351,7 +3222,6 @@ export class APIService {
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3361,7 +3231,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -3525,13 +3394,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3541,7 +3408,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -3580,13 +3446,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3596,7 +3460,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId
@@ -3635,13 +3498,11 @@ export class APIService {
           userSub
           username
           email
-          phone
           driver {
             __typename
             id
             name
             email
-            phone
             carType
             createdAt
             updatedAt
@@ -3651,7 +3512,6 @@ export class APIService {
             id
             name
             email
-            phone
             createdAt
             updatedAt
             vehiclePassengersId

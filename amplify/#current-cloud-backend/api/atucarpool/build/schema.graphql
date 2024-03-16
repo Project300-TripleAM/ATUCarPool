@@ -3,7 +3,6 @@ type User @aws_cognito_user_pools {
   userSub: String!
   username: String!
   email: String!
-  phone: String
   driver: Driver
   rider: Rider
   createdAt: AWSDateTime!
@@ -17,7 +16,6 @@ type Driver {
   id: ID!
   name: String!
   email: String!
-  phone: String
   carType: String
   vehicles(filter: ModelVehicleFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVehicleConnection
   trips(filter: ModelTripFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTripConnection
@@ -29,7 +27,6 @@ type Rider {
   id: ID!
   name: String!
   email: String!
-  phone: String
   trips(filter: ModelTripFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTripConnection
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
@@ -237,7 +234,6 @@ input ModelUserFilterInput {
   userSub: ModelStringInput
   username: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
   not: ModelUserFilterInput
@@ -264,7 +260,6 @@ input ModelUserConditionInput {
   userSub: ModelStringInput
   username: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   and: [ModelUserConditionInput]
   or: [ModelUserConditionInput]
   not: ModelUserConditionInput
@@ -277,7 +272,6 @@ input CreateUserInput {
   userSub: String!
   username: String!
   email: String!
-  phone: String
   userDriverId: ID
   userRiderId: ID
 }
@@ -287,7 +281,6 @@ input UpdateUserInput {
   userSub: String
   username: String
   email: String
-  phone: String
   userDriverId: ID
   userRiderId: ID
 }
@@ -322,7 +315,6 @@ input ModelSubscriptionUserFilterInput {
   userSub: ModelSubscriptionStringInput
   username: ModelSubscriptionStringInput
   email: ModelSubscriptionStringInput
-  phone: ModelSubscriptionStringInput
   and: [ModelSubscriptionUserFilterInput]
   or: [ModelSubscriptionUserFilterInput]
 }
@@ -357,7 +349,6 @@ input ModelDriverFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   carType: ModelStringInput
   and: [ModelDriverFilterInput]
   or: [ModelDriverFilterInput]
@@ -367,7 +358,6 @@ input ModelDriverFilterInput {
 input ModelDriverConditionInput {
   name: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   carType: ModelStringInput
   and: [ModelDriverConditionInput]
   or: [ModelDriverConditionInput]
@@ -378,7 +368,6 @@ input CreateDriverInput {
   id: ID
   name: String!
   email: String!
-  phone: String
   carType: String
 }
 
@@ -386,7 +375,6 @@ input UpdateDriverInput {
   id: ID!
   name: String
   email: String
-  phone: String
   carType: String
 }
 
@@ -398,7 +386,6 @@ input ModelSubscriptionDriverFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
   email: ModelSubscriptionStringInput
-  phone: ModelSubscriptionStringInput
   carType: ModelSubscriptionStringInput
   and: [ModelSubscriptionDriverFilterInput]
   or: [ModelSubscriptionDriverFilterInput]
@@ -413,7 +400,6 @@ input ModelRiderFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   and: [ModelRiderFilterInput]
   or: [ModelRiderFilterInput]
   not: ModelRiderFilterInput
@@ -423,7 +409,6 @@ input ModelRiderFilterInput {
 input ModelRiderConditionInput {
   name: ModelStringInput
   email: ModelStringInput
-  phone: ModelStringInput
   and: [ModelRiderConditionInput]
   or: [ModelRiderConditionInput]
   not: ModelRiderConditionInput
@@ -434,7 +419,6 @@ input CreateRiderInput {
   id: ID
   name: String!
   email: String!
-  phone: String
   vehiclePassengersId: ID
 }
 
@@ -442,7 +426,6 @@ input UpdateRiderInput {
   id: ID!
   name: String
   email: String
-  phone: String
   vehiclePassengersId: ID
 }
 
@@ -454,7 +437,6 @@ input ModelSubscriptionRiderFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
   email: ModelSubscriptionStringInput
-  phone: ModelSubscriptionStringInput
   and: [ModelSubscriptionRiderFilterInput]
   or: [ModelSubscriptionRiderFilterInput]
 }

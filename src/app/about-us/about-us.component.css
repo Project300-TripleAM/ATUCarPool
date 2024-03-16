@@ -1,20 +1,53 @@
+/* Styles for About Us Card */
 .about-us-card {
   max-width: 600px;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: #f7f7f7; /* Background color for the card */
+  background-color: #f7f7f7; /* Light grey background for the card */
 }
 
-.about-us-header{
+.about-us-header {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Ensure items are stacked vertically */
-    margin-bottom: 5px;
-    font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically */
+  margin-bottom: 5px;
+  font-size: 24px; /* Larger font size for the header */
 }
 
 .about-us-content {
-  font-size: 16px;
-  color: #333;
+  font-size: 16px; /* Comfortable reading font size */
+  color: #333; /* Dark grey for text for better readability */
+  padding: 0 20px; /* Add padding for text content */
+  margin-bottom: 20px; /* Space at the bottom of the card */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .about-us-card {
+    padding: 15px; /* Add padding for a bit of space inside the card */
+  }
+
+  .about-us-header {
+    font-size: 20px; /* Adjust header font size for smaller screens */
+  }
+
+  .about-us-content {
+    font-size: 14px; /* Slightly smaller font size for content on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-card {
+    margin-top: 10px; /* Less margin at the top for very small screens */
+    padding: 10px; /* Less padding to use space more efficiently */
+  }
+
+  .about-us-header, .about-us-content {
+    text-align: center; /* Center-align text for small screens for consistency */
+  }
+
+  .about-us-content {
+    padding: 0 10px; /* Adjust padding for very small screens */
+  }
 }

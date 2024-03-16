@@ -1,42 +1,76 @@
-/* role-selection.component.css */
+/* Container for Role Selection */
 .role-selection-container {
     position: relative;
     display: flex;
-    height: 100vh; /* Set the height to fill the entire viewport */
-}
-
-.choose-role-header {
+    height: 100vh; /* Fill the entire viewport vertically */
+  }
+  
+  /* Header Styling for Choosing Role */
+  .choose-role-header {
     position: absolute;
-    top: 50px; /* Adjust this value to add space between the navbar and the text */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    color: #000000; 
-}
-
-.role-option {
-    flex: 1;
+    top: 50px; /* Space from top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Precise centering */
+    font-size: 30px; /* Large, readable text */
+    color: #000000; /* Black color for contrast */
+  }
+  
+  /* Common Styles for Role Options */
+  .role-option {
+    flex: 1; /* Distribute space evenly between options */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    padding: 20px;
-    border-color: black;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-}
-
-.driver {
-    background-color: #5d5d5d; /* Light blue for the driver side */
-    color: #fff; /* White text color for better contrast */
-}
-
-.passenger {
-    background-color: #5d5d5d; /* Gold for the passenger side */
-    color: #fff; /* White text color for better contrast */
-}
-
-.role-option:hover {
-    background-color: #f0f0f0;
-}
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center; /* Ensure text is centered */
+    cursor: pointer; /* Indicate clickable items */
+    padding: 20px; /* Spacing inside each option */
+    border-color: black; /* Border color */
+    border-radius: 6px; /* Rounded corners for aesthetics */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  /* Specific Styling for Driver Role Option */
+  .driver, .passenger {
+    background-color: #5d5d5d; /* Unified color for both roles */
+    color: #fff; /* White text for readability */
+  }
+  
+  /* Hover Effect for Role Options */
+  .role-option:hover {
+    background-color: #f0f0f0; /* Lighter background on hover for feedback */
+  }
+  
+  /* Responsive Design Adjustments */
+  @media (max-width: 768px) {
+    .role-selection-container {
+      flex-direction: column; /* Stack roles vertically on smaller screens */
+      height: auto; /* Adjust height for a column layout */
+      padding-top: 60px; /* Provide space for absolute-positioned header */
+    }
+  
+    .choose-role-header {
+      top: 10px; /* Adjust top spacing for smaller screens */
+      font-size: 24px; /* Adjust font size for smaller screens */
+    }
+  
+    .role-option {
+      width: 80%; /* Adjust width for a centered look on smaller screens */
+      margin-bottom: 10px; /* Add spacing between stacked options */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .role-selection-container {
+      padding-top: 40px; /* Reduce padding-top further for very small screens */
+    }
+  
+    .choose-role-header {
+      font-size: 20px; /* Further reduce font size for small screens */
+    }
+  
+    .role-option {
+      width: 90%; /* Increase width for small screens to utilize more space */
+      padding: 15px; /* Adjust padding for a balanced look */
+    }
+  }
+  

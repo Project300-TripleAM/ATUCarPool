@@ -1,9 +1,15 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatMenu } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { getCurrentUser, signOut } from '@aws-amplify/auth';
 import { Hub } from '@aws-amplify/core';
-import { UserRoleService } from '../services/user-role.service'; // Import the user role service
+import { UserRoleService } from '../services/user-role.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,43 +18,48 @@ import { UserRoleService } from '../services/user-role.service'; // Import the u
 })
 export class NavbarComponent implements OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
+  @ViewChild(MatMenu) menu!: MatMenu; // Add the menu property
   isLoggedIn: boolean = false;
-  isDriver: boolean = false; // Add a variable to track the user's role
-  hasSelectedRole: boolean = false; // Add a variable to track whether the user has selected a role
+  isDriver: boolean = false;
+  hasSelectedRole: boolean = false;
+  isMobile: boolean = false;
+  isMenuOpen: boolean = false;
 
-  constructor(private router: Router, private userRoleService: UserRoleService) {
-    // Setting up the Hub listener for authentication events
+  constructor(
+    private router: Router,
+    private userRoleService: UserRoleService,
+    private breakpointObserver: BreakpointObserver
+  ) {
     Hub.listen('auth', (data) => {
       const { payload } = data;
       if (payload.event === 'signedIn') {
         this.isLoggedIn = true;
       } else if (payload.event === 'signedOut') {
         this.isLoggedIn = false;
-        
       }
-      // Make sure to apply the changes
       setTimeout(() => this.sidenav.close());
     });
 
-    // Check the user's sign-in status when the component initializes
     this.checkUserSignInStatus();
     this.checkUserRole();
+
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
   }
 
   ngOnDestroy() {
-    // Clean up the Hub listener when the component is destroyed
-    // Check the AWS Amplify documentation on how to remove listeners correctly
   }
 
   private async checkUserSignInStatus() {
     try {
       await getCurrentUser();
       this.isLoggedIn = true;
-      // Check if the user has already selected a role
       const userRole = this.userRoleService.getUserRole();
       if (userRole) {
         this.hasSelectedRole = true;
-        this.isDriver = userRole === 'driver'; // Update driver status
+        this.isDriver = userRole === 'driver';
       }
     } catch (error) {
       this.isLoggedIn = false;
@@ -56,15 +67,10 @@ export class NavbarComponent implements OnDestroy {
   }
 
   private checkUserRole() {
-    // Subscribe to changes in the user role
     this.userRoleService.userRole$.subscribe((role: string) => {
       this.isDriver = role === 'driver';
       this.hasSelectedRole = true;
     });
-  }
-
-  toggleSidenav() {
-    this.sidenav.toggle();
   }
 
   async logout() {
@@ -79,11 +85,9 @@ export class NavbarComponent implements OnDestroy {
     }
   }
 
-  switchRole() { // method to toggle between driver and passenger roles
-    this.isDriver = !this.isDriver;
-    // Update the user's role in the user role service
-    this.userRoleService.setUserRole(this.isDriver ? 'driver' : 'passenger');
-    //navigate to the appropriate dashboard based on the role
-    this.router.navigate([this.isDriver ? '/driver-dashboard' : '/passenger-dashboard']);
+  // Toggle the visibility of the notification menu
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log('button error');
   }
 }

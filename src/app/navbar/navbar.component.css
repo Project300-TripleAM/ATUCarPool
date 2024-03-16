@@ -1,20 +1,96 @@
 .spacer {
-    flex: 1 1 auto;
-  }
-
- 
-.navbar-button {
-  background-color: #858484; /* Light grey background color */
-  color: #000; /* Text color */
-  margin: 0 8px; /* Add some margin for spacing */
+  flex: 1 1 auto;
 }
 
-/* CSS for the mat-toolbar */
 .mat-toolbar {
   background-color: #1a1a1a; /* Slightly lighter black */
   color: #fff; /* White text color */
 }
 
+.burger-menu {
+  margin-right: 4px; /* Add margin to the burger menu button */
+}
 
-
+/* Media query adjustments */
+@media (max-width: 768px) {
+  /* Adjust burger menu button for tablet devices */
+  .burger-menu {
+    margin-right: 2px; /* Further reduce margin */
+  }
   
+  /* Hide regular buttons for smaller screens */
+  .navbar-button {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for mobile devices */
+  .burger-menu {
+    margin-right: 2px; /* Further reduce margin */
+  }
+
+  /* Adjust menu item padding for better touchability */
+  .mat-menu-content {
+    padding: 8px 0;
+  }
+}
+
+.navbar-button {
+  margin: 0 8px;
+}
+
+.mat-raised-button {
+  background-color: #858484; /* Light grey background color */
+  color: #000; /* Text color */
+}
+
+.mat-raised-button:hover {
+  background-color: #f0f0f0; /* Light grey hover color */
+}
+
+.notification-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-menu button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.notification-menu button mat-icon {
+  color: white;
+  font-size: 24px;
+}
+
+.notification-menu ul {
+  position: absolute;
+  top: calc(100% + 5px); /* Position the dropdown below the button */
+  left: 0; /* Ensure the dropdown opens towards the right */
+  min-width: 160px; /* Set a minimum width */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000; /* Ensure the menu appears above other content */
+}
+
+
+.notification-menu.active ul {
+  display: block; /* Show the dropdown when active */
+}
+
+.notification-menu ul li {
+  list-style-type: none;
+  padding: 8px 0;
+  cursor: pointer;
+  color: #000; /* Black text color */
+}
+
+.notification-menu ul li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}

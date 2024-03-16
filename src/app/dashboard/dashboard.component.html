@@ -4,6 +4,7 @@
       <!-- Card content for Drivers -->
       <mat-card-header class="header">
         <mat-card-title>Welcome to ATU CarPool</mat-card-title>
+        <p class="role-specifier">[Driver]</p>
       </mat-card-header>
       <div class="image">
         <img src="assets/ATU_Sligo.jpg" alt="ATU Sligo" class="Atu-logo" />
@@ -27,7 +28,10 @@
           <li>Ensure a pleasant and courteous attitude towards passengers.</li>
         </ul>
       </mat-card-content>
-      
+      <mat-card-actions class="centered-button">
+        <button mat-raised-button color="primary" routerLink="/add-route">Add Route</button>
+        <button mat-raised-button color="primary" (click)="switchRole()">Switch To Passenger</button> 
+      </mat-card-actions>
     </mat-card>
   </div>  
 </div>
@@ -39,6 +43,7 @@
       <!-- Card content for passengers -->
       <mat-card-header class="header">
         <mat-card-title>Welcome to ATU CarPool</mat-card-title>
+        <p class="role-specifier">[Passenger]</p>
       </mat-card-header>
       <div class="image">
         <img src="assets/ATU_Sligo.jpg" alt="ATU Sligo" class="Atu-logo" />
@@ -64,6 +69,7 @@
       </mat-card-content>
       <mat-card-actions class="centered-button">
         <button mat-raised-button color="primary" routerLink="/map">Search Available Rides</button>
+        <button mat-raised-button color="primary" (click)="switchRole()">Switch To Driver</button>
       </mat-card-actions>
     </mat-card>
   </div>

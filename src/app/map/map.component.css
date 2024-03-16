@@ -1,83 +1,103 @@
-/* CSS styles for the table */
+/* General Styles for Table */
 .table-container {
     margin-top: 20px;
-}
-
-.table {
+  }
+  
+  .table {
     width: 100%;
     border-collapse: collapse;
-}
-
-.table th, .table td {
+  }
+  
+  .table th, .table td {
     padding: 8px;
     border: 1px solid #000000;
     text-align: left;
-    color: white; /* Change text color to white */
-}
-
-.table th {
-    background-color: #1a1a1a;
-}
-
-.table tbody tr:hover {
-    background-color: #13bcf0;
-}
-
-/* CSS styles for the map */
-#map {
-    height: 400px;
-    width: 100%;
-}
-
-.show-on-map-btn {
-    background-color: #858585;
-    color: rgb(255, 255, 255); /* White text color */
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-.show-on-map-btn:hover {
-    background-color: #6c6c6c;
-}
-
-.add-route-cell {
-    text-align: center; 
+    color: white; /* Ensure text color contrasts with the background */
   }
   
+  .table th {
+    background-color: #1a1a1a; /* Dark background for headers */
+  }
+  
+  .table tbody tr:hover {
+    background-color: #13bcf0; /* Highlight color on row hover */
+  }
+  
+  /* Styles for the Map */
+  #map {
+    height: 400px;
+    width: 100%; /* Ensure map fills the container width */
+  }
+  
+  /* Button Styling */
+  .show-on-map-btn, .availability-btn {
+    background-color: #858585; /* Uniform button color */
+    color: white; /* Text color for readability */
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer; /* Indicate clickable buttons */
+  }
+  
+  .show-on-map-btn:hover, .availability-btn:hover {
+    background-color: #6c6c6c; /* Hover effect for buttons */
+  }
+  
+  /* Additional Button for Adding Routes */
+  .add-route-cell {
+    text-align: center; 
+  }
+    
   .add-route-btn {
     padding: 10px 20px; 
     margin: 10px; 
   }
   
-=======
-/* Centering the button */
-.center-button {
+  /* Button Alignment */
+  .center-button {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* CSS styles for the new button */
-.availability-btn {
-    background-color: #858585;
-    color: rgb(255, 255, 255); /* White text color */
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-}
-
-.availability-btn:hover {
-    background-color: #6c6c6c;
-}
-
-/* Space between buttons */
-.center-button button {
-    margin-right: 10px; /* Adjust the value as needed */
-}
-
-/* Selected route style */
-.selected td {
-    background-color: #88d28b; /* Green background color */
-    color: white; /* White text color */
-}
+  }
+  
+  .center-button button {
+    margin-right: 10px; /* Space between buttons */
+  }
+  
+  /* Last button margin correction */
+  .center-button button:last-child {
+    margin-right: 0; /* Remove margin for the last button */
+  }
+  
+  /* Highlighting Selected Route */
+  .selected td {
+    background-color: #88d28b; /* Highlight selected route */
+    color: white; /* Text color for contrast */
+  }
+  
+  /* Responsive Design Adjustments */
+  @media (max-width: 768px) {
+    .add-route-btn, .show-on-map-btn, .availability-btn {
+      padding: 8px 12px; /* Adjust padding for smaller screens */
+      margin: 5px; /* Adjust margin to fit more compact spaces */
+    }
+  
+    .table th, .table td {
+      padding: 6px; /* Smaller padding for table cells on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .center-button {
+      flex-direction: column; /* Stack buttons vertically on very small screens */
+    }
+  
+    .center-button button {
+      width: 100%; /* Full width buttons for easier interaction */
+      margin-bottom: 10px; /* Space between vertically stacked buttons */
+    }
+  
+    .center-button button:last-child {
+      margin-bottom: 0; /* Remove bottom margin for the last button */
+    }
+  }
+  
