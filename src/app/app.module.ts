@@ -39,7 +39,6 @@ Amplify.configure(awsconfig);
     MyAccountComponent,
     MapComponent,
     AboutUsComponent,
-    AddRouteComponent,
     RoleSelectionComponent
   ],
   imports: [
@@ -58,7 +57,8 @@ Amplify.configure(awsconfig);
     AmplifyAuthenticatorModule,
     GraphQLModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    FormsModule
     
   ],
   providers: [],

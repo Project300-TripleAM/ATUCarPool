@@ -1,19 +1,14 @@
-<div class="route-container">
-<mat-card class="route-card">
-  <mat-card-header>
-    <mat-card-title>Add Route</mat-card-title>
-  </mat-card-header>
-  <form>
-    <label for="origin">Route Origin:</label>
-    <input type="text" id="origin" required>
+<div>
+  <h2>Add Route</h2>
+  <form (ngSubmit)="addRoute()">
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin" [(ngModel)]="route.origin" name="origin" required>
 
     <label for="destination">Destination:</label>
-    <input type="text" id="destination" required>
+    <input type="text" id="destination" [(ngModel)]="route.destination" name="destination" required>
 
-    <div class="button-group">
-      <button mat-raised-button color="primary" (click)="navigateToMap()">Add Route</button>
-      <button mat-raised-button color="primary" (click)="navigateToPreviousRoute()">Back</button>
-    </div>
+
+    <button type="submit">Add Route</button>
+    <button class="back-to-map-btn" (click)="navigateToMap()">Back</button>
   </form>
-</mat-card>
 </div>

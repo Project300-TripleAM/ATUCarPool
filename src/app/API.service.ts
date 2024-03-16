@@ -2,6 +2,11 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+import { Injectable } from '@angular/core';
+import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, catchError, map, throwError } from 'rxjs';
+
 export type CreateUserInput = {
   id?: string | null,
   userSub: string,
@@ -2696,3 +2701,105 @@ export type OnDeleteRouteSubscription = {
     updatedAt: string,
   } | null,
 };
+@Injectable({
+  providedIn: 'root'
+})
+export class APIService {
+
+  constructor(private apollo: Apollo) { }
+
+  getDrivers(): Observable<any[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query ListDrivers(
+          $filter: ModelDriverFilterInput
+          $limit: Int
+          $nextToken: String
+        ) {
+          listDrivers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+            items {
+              id
+              name
+              email
+              carType
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+        }
+      `
+    }).valueChanges.pipe(
+      map((result: any) => {
+        if (result.errors) {
+          throw new Error('GraphQL query error');
+        }
+        return result.data.listDrivers.items;
+      })
+    );
+  }
+
+  getRoutes(): Observable<any[]> {
+    return this.apollo.watchQuery<any>({
+      query: gql`query ListRoutes {
+        listRoutes {
+          items {
+            id
+            origin {
+              latitude
+              longitude
+            }
+            destination {
+              latitude
+              longitude
+            }
+          }
+        }
+      }`
+    }).valueChanges.pipe(
+      map((result: any) => {
+        if (result.errors) {
+          throw new Error('GraphQL query error');
+        }
+        return result.data.listRoutes.items;
+      })
+    );
+  }
+
+  //AddingARoute
+//GraphQL
+createRoute(input: CreateRouteInput): Observable<any> {   
+  return this.apollo.mutate<any>({
+    mutation: gql`
+      mutation CreateRoute($input: CreateRouteInput!) {
+        createRoute(input: $input) {
+          id
+          origin {
+            name
+            latitude
+            longitude
+          }
+          destination {
+            name
+            latitude
+            longitude
+          }
+          trips {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    `,
+    variables: {
+      input
+    }
+  }).pipe(
+    catchError(error => {
+      console.error('Error creating route:', error);
+      return throwError('Failed to create route. Please try again later.');
+    })
+  );
+}
+}
