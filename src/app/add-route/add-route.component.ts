@@ -1,6 +1,7 @@
 
 import { Component, NgModule, isStandalone } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { APIService } from '../API.service';
@@ -31,11 +32,10 @@ export class AddRouteComponent{
     destination: ''
   };
 
-  constructor(private router: Router, private http: HttpClient, private apiService: APIService) {}
+  constructor(private router: Router, private http: HttpClient, private apiService: APIService, private location: Location) {}
 
-  navigateToMap() {
-    // Update this line to navigate to the driver dashboard
-    this.router.navigate(['/driver-dashboard']);
+  goBack() {
+    this.location.back(); //function updated so the user will be brought back to the previous page they were on (either dashboard or map)
   }
   
 

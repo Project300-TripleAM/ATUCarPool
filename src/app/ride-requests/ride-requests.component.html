@@ -1,1 +1,30 @@
-<p>ride-requests works!</p>
+<div class="ride-requests-container">
+    <h2 class="heading">Ride Requests</h2>
+    <div class="ride-request-cards">
+      <mat-card class="ride-request-card" *ngFor="let request of rideRequests">
+        <mat-card-content>
+          <div class="card-section">
+            <h3 class="section-heading">Passenger Name</h3>
+            <p>{{ request.passengerName }}</p>
+          </div>
+          <div class="card-section">
+            <h3 class="section-heading">Trip Details</h3>
+            <p>Pickup Location: {{ request.pickupLocation }}</p>
+            <p>Destination: {{ request.destination }}</p>
+          </div>
+          <div class="card-section">
+            <h3 class="section-heading">Status</h3>
+            <p>{{ request.status }}</p>
+          </div>
+          <div class="actions" *ngIf="!request.actionTaken && request.status !== 'cancelled'">
+            <button mat-raised-button color="primary" (click)="acceptRequest(request)">Accept</button>
+            <button mat-raised-button color="Primary" (click)="rejectRequest(request)">Reject</button>
+          </div>
+          <div class="actions" *ngIf="request.actionTaken === 'accepted' || request.status === 'cancelled'">
+            <button mat-raised-button color="primary" (click)="cancelRequest(request)">Cancel Ride</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
