@@ -36,12 +36,13 @@ async getUser(id: string) {
     throw error;
   }
 }
+//get by username
   //Get ROUTEs
   async getRoutes() {
     try {
       const response = await client.graphql({ query: queries.listRoutes });
       console.log(response.data.listRoutes.items);
-      return response.data.listRoutes.items; //Return the routes
+      return response.data.listRoutes.items;
     } catch (error) {
       console.error('Error fetching routes:', error);
       throw error;
@@ -70,12 +71,13 @@ async getUser(id: string) {
     }
   }
   // ####################################################### MUTATIONS ################################
-  async createUser(username: string, email: any, userSub: string) {
+  async createUser(id:string,username: string, email: any, userSub: string) {
     try {
       const result = await client.graphql({
         query: mutations.createUser,
         variables: {
           input: {
+            id,
             username,
             email,
             userSub 
@@ -105,4 +107,36 @@ async getUser(id: string) {
       throw error; 
     }
   }
+  
 }
+const getUserByUsernameQ = `query GetUsersByUsername($username: String!) {
+  getUsersByUsername(username: $username) {
+    items {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        createdAt
+        updatedAt
+      }
+      rider {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+        vehiclePassengersId
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      owner
+    }
+  }
+}`

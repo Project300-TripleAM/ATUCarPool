@@ -50,8 +50,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiatucarpool"
       },
-      "lastPushTimeStamp": "2024-03-20T13:55:49.455Z",
-      "lastPushDirHash": "80Lp1QoDJ0TD0JwRO+fwAC1tpKQ="
+      "lastPushTimeStamp": "2024-03-20T16:22:58.209Z",
+      "lastPushDirHash": "tFh8xSvSgge3x14sArDCxs1QlK4="
     }
   },
   "auth": {
@@ -84,7 +84,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-atucarpool-dev-123910-deployment/amplify-cfn-templates/auth/atucarpool504a02dc-cloudformation-template.json",
         "logicalId": "authatucarpool504a02dc"
       },
-      "lastPushTimeStamp": "2024-03-20T13:55:45.449Z",
+      "lastPushTimeStamp": "2024-03-20T16:14:55.616Z",
       "output": {
         "UserPoolId": "eu-west-1_erJBMiXKk",
         "AppClientIDWeb": "7j2ntbf8q20q2a91qm2r2gfk9f",

@@ -658,3 +658,58 @@ export const listRoutes = /* GraphQL */ `query ListRoutes(
   APITypes.ListRoutesQueryVariables,
   APITypes.ListRoutesQuery
 >;
+export const usersByUsername = /* GraphQL */ `query UsersByUsername(
+  $username: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  usersByUsername(
+    username: $username
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UsersByUsernameQueryVariables,
+  APITypes.UsersByUsernameQuery
+>;

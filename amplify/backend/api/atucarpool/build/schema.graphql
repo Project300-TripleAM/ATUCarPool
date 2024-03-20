@@ -259,6 +259,7 @@ type Query {
   listTrips(filter: ModelTripFilterInput, limit: Int, nextToken: String): ModelTripConnection
   getRoute(id: ID!): Route
   listRoutes(filter: ModelRouteFilterInput, limit: Int, nextToken: String): ModelRouteConnection
+  usersByUsername(username: String!, sortDirection: ModelSortDirection, filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
 }
 
 input ModelUserConditionInput {

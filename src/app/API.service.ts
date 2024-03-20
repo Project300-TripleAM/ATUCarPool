@@ -438,6 +438,12 @@ export type ModelRouteConnection = {
   nextToken?: string | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   userSub?: ModelSubscriptionStringInput | null,
@@ -1792,7 +1798,8 @@ export type DeleteRouteMutation = {
 };
 
 export type GetUserQueryVariables = {
-  id: string,
+  id?: string,
+  username?:string
 };
 
 export type GetUserQuery = {
@@ -2457,6 +2464,54 @@ export type ListRoutesQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UsersByUsernameQueryVariables = {
+  username: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UsersByUsernameQuery = {
+  usersByUsername?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      userSub: string,
+      username: string,
+      email: string,
+      driver?:  {
+        __typename: "Driver",
+        id: string,
+        name: string,
+        email: string,
+        carType?: string | null,
+        routeId?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        driverUserId?: string | null,
+      } | null,
+      rider?:  {
+        __typename: "Rider",
+        id: string,
+        name: string,
+        email: string,
+        routeId?: string | null,
+        createdAt: string,
+        updatedAt: string,
+        vehiclePassengersId?: string | null,
+        riderUserId?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+      userDriverId?: string | null,
+      userRiderId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
