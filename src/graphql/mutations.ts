@@ -30,8 +30,21 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -42,9 +55,22 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -80,8 +106,21 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -92,9 +131,22 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -130,8 +182,21 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -142,9 +207,22 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -196,8 +274,43 @@ export const createDriver = /* GraphQL */ `mutation CreateDriver(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -243,8 +356,43 @@ export const updateDriver = /* GraphQL */ `mutation UpdateDriver(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -290,8 +438,43 @@ export const deleteDriver = /* GraphQL */ `mutation DeleteDriver(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -322,9 +505,44 @@ export const createRider = /* GraphQL */ `mutation CreateRider(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -355,9 +573,44 @@ export const updateRider = /* GraphQL */ `mutation UpdateRider(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -388,9 +641,44 @@ export const deleteRider = /* GraphQL */ `mutation DeleteRider(
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -420,8 +708,21 @@ export const createVehicle = /* GraphQL */ `mutation CreateVehicle(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -429,9 +730,11 @@ export const createVehicle = /* GraphQL */ `mutation CreateVehicle(
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -469,8 +772,21 @@ export const updateVehicle = /* GraphQL */ `mutation UpdateVehicle(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -478,9 +794,11 @@ export const updateVehicle = /* GraphQL */ `mutation UpdateVehicle(
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -518,8 +836,21 @@ export const deleteVehicle = /* GraphQL */ `mutation DeleteVehicle(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -527,9 +858,11 @@ export const deleteVehicle = /* GraphQL */ `mutation DeleteVehicle(
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -564,8 +897,21 @@ export const createTrip = /* GraphQL */ `mutation CreateTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -576,9 +922,22 @@ export const createTrip = /* GraphQL */ `mutation CreateTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime
@@ -636,8 +995,21 @@ export const updateTrip = /* GraphQL */ `mutation UpdateTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -648,9 +1020,22 @@ export const updateTrip = /* GraphQL */ `mutation UpdateTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime
@@ -708,8 +1093,21 @@ export const deleteTrip = /* GraphQL */ `mutation DeleteTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -720,9 +1118,22 @@ export const deleteTrip = /* GraphQL */ `mutation DeleteTrip(
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime

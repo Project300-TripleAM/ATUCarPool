@@ -15,7 +15,8 @@ export class APIInterfaceService {
 
   constructor(private apollo: Apollo) { }
 
-  // Simple query
+//################################# GET QUERIES ###########################################
+//Get all users
   async getUsers() {
     try {
       const users = await client.graphql({ query: queries.listUsers });
@@ -25,6 +26,17 @@ export class APIInterfaceService {
       throw error; 
     }
   }
+//Get by ID
+async getUser(id: string) {
+  try {
+    const user = await client.graphql({ query: queries.getUser, variables: { id: id }});
+    return user.data.getUser;
+  } catch(error) {
+    console.error('error fetching user:', error);
+    throw error;
+  }
+}
+  //Get ROUTEs
   async getRoutes() {
     try {
       const response = await client.graphql({ query: queries.listRoutes });
@@ -33,6 +45,28 @@ export class APIInterfaceService {
     } catch (error) {
       console.error('Error fetching routes:', error);
       throw error;
+    }
+  }
+
+  //####################################################### UPDATE ################################
+  async updateUser(id: any, username: any, email: any, userSub: any) {
+    try {
+      const response = await client.graphql({ 
+        query: mutations.updateUser,
+        variables: {
+          input: {
+            id: id,
+            username: username,
+            email: email,
+            userSub: userSub
+          }
+        }
+      });
+      console.log('User updated:', response.data.updateUser);
+      return response.data.updateUser;
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw error; 
     }
   }
   // ####################################################### MUTATIONS ################################

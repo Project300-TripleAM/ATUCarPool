@@ -127,7 +127,7 @@
             "ApiId"
           ]
         },
-        "Expires": 1711113473
+        "Expires": 1711547582
       }
     },
     "GraphQLAPINONEDS95A13CF0": {
@@ -742,6 +742,18 @@
               "Outputs.transformerrootstackDriverDriverTableC69EC46CRef"
             ]
           },
+          "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserUserDataSourceA8C4C398Name": {
+            "Fn::GetAtt": [
+              "User",
+              "Outputs.transformerrootstackUserUserDataSourceA8C4C398Name"
+            ]
+          },
+          "referencetotransformerrootstackUserNestedStackUserNestedStackResource01084C14OutputstransformerrootstackUserUserTableA7A02430Ref": {
+            "Fn::GetAtt": [
+              "User",
+              "Outputs.transformerrootstackUserUserTableA7A02430Ref"
+            ]
+          },
           "referencetotransformerrootstackRouteNestedStackRouteNestedStackResource0DAFAD40OutputstransformerrootstackRouteRouteDataSource298D77DEName": {
             "Fn::GetAtt": [
               "Route",
@@ -762,6 +774,7 @@
         "Rider",
         "Route",
         "Trip",
+        "User",
         "Vehicle"
       ]
     },

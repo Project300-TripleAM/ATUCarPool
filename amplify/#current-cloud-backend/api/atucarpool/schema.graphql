@@ -22,6 +22,8 @@ type Driver @model {
   carType: String
   vehicles: [Vehicle] @hasMany
   trips: [Trip] @hasMany
+  routeId: ID 
+  user: User @belongsTo
 }
 
 type Rider @model {
@@ -29,6 +31,8 @@ type Rider @model {
   name: String!
   email: String!
   trips: [Trip] @hasMany
+  routeId: ID
+  user: User @belongsTo
 }
 
 type Vehicle @model {

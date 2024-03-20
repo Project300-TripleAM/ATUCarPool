@@ -25,16 +25,12 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
     // Fetch user data and recent trips data
     //this.auth.currentAuthenticatedUser();
-      this.userRoleService.userRole$.subscribe(role => {
-        console.log('Selected role:', role);
-        this.auth.currentAuthenticatedUser(role);
-      });
 
     this.fetchUserData();
     this.fetchRecentTrips();
     this.fetchUpcomingTrips();
     this.userRole = this.userRoleService.getUserRole();
-
+ 
     if (this.userRole === 'driver') {
       this.fetchPassengers();
     }

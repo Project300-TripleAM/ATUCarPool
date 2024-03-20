@@ -27,8 +27,21 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -39,9 +52,22 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -74,8 +100,21 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -86,9 +125,22 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -121,8 +173,21 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -133,9 +198,22 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     createdAt
@@ -184,8 +262,43 @@ export const onCreateDriver = /* GraphQL */ `subscription OnCreateDriver($filter
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -228,8 +341,43 @@ export const onUpdateDriver = /* GraphQL */ `subscription OnUpdateDriver($filter
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -272,8 +420,43 @@ export const onDeleteDriver = /* GraphQL */ `subscription OnDeleteDriver($filter
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
+    driverUserId
     __typename
   }
 }
@@ -301,9 +484,44 @@ export const onCreateRider = /* GraphQL */ `subscription OnCreateRider($filter: 
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -331,9 +549,44 @@ export const onUpdateRider = /* GraphQL */ `subscription OnUpdateRider($filter: 
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -361,9 +614,44 @@ export const onDeleteRider = /* GraphQL */ `subscription OnDeleteRider($filter: 
       nextToken
       __typename
     }
+    routeId
+    user {
+      id
+      userSub
+      username
+      email
+      driver {
+        id
+        name
+        email
+        carType
+        routeId
+        createdAt
+        updatedAt
+        driverUserId
+        __typename
+      }
+      rider {
+        id
+        name
+        email
+        routeId
+        createdAt
+        updatedAt
+        vehiclePassengersId
+        riderUserId
+        __typename
+      }
+      createdAt
+      updatedAt
+      userDriverId
+      userRiderId
+      __typename
+    }
     createdAt
     updatedAt
     vehiclePassengersId
+    riderUserId
     __typename
   }
 }
@@ -390,8 +678,21 @@ export const onCreateVehicle = /* GraphQL */ `subscription OnCreateVehicle($filt
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -399,9 +700,11 @@ export const onCreateVehicle = /* GraphQL */ `subscription OnCreateVehicle($filt
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -436,8 +739,21 @@ export const onUpdateVehicle = /* GraphQL */ `subscription OnUpdateVehicle($filt
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -445,9 +761,11 @@ export const onUpdateVehicle = /* GraphQL */ `subscription OnUpdateVehicle($filt
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -482,8 +800,21 @@ export const onDeleteVehicle = /* GraphQL */ `subscription OnDeleteVehicle($filt
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     passengers {
@@ -491,9 +822,11 @@ export const onDeleteVehicle = /* GraphQL */ `subscription OnDeleteVehicle($filt
         id
         name
         email
+        routeId
         createdAt
         updatedAt
         vehiclePassengersId
+        riderUserId
         __typename
       }
       nextToken
@@ -525,8 +858,21 @@ export const onCreateTrip = /* GraphQL */ `subscription OnCreateTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -537,9 +883,22 @@ export const onCreateTrip = /* GraphQL */ `subscription OnCreateTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime
@@ -594,8 +953,21 @@ export const onUpdateTrip = /* GraphQL */ `subscription OnUpdateTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -606,9 +978,22 @@ export const onUpdateTrip = /* GraphQL */ `subscription OnUpdateTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime
@@ -663,8 +1048,21 @@ export const onDeleteTrip = /* GraphQL */ `subscription OnDeleteTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
+      driverUserId
       __typename
     }
     rider {
@@ -675,9 +1073,22 @@ export const onDeleteTrip = /* GraphQL */ `subscription OnDeleteTrip($filter: Mo
         nextToken
         __typename
       }
+      routeId
+      user {
+        id
+        userSub
+        username
+        email
+        createdAt
+        updatedAt
+        userDriverId
+        userRiderId
+        __typename
+      }
       createdAt
       updatedAt
       vehiclePassengersId
+      riderUserId
       __typename
     }
     startTime

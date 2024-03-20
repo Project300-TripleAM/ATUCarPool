@@ -1,5 +1,5 @@
 // role-selection.component.ts
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router'; // Import the Router
 import { UserRoleService } from '../services/user-role.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -9,7 +9,7 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: './role-selection.component.html',
   styleUrls: ['./role-selection.component.css']
 })
-export class RoleSelectionComponent {
+export class RoleSelectionComponent implements OnInit{
   userSub?: string;
 
   constructor(private userRoleService: UserRoleService, private router: Router,private auth:AuthenticationService) {}
@@ -25,7 +25,12 @@ export class RoleSelectionComponent {
       this.router.navigate(['/passenger-dashboard']);
     }
   }*/
-
+ngOnInit(): void{
+  this.userRoleService.userRole$.subscribe(role => {
+    console.log('Selected role:', role);
+    this.auth.currentAuthenticatedUser(role);
+  });
+}
   selectRole(role: string) {
     try {
       this.userRoleService.setUserRole(role);

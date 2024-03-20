@@ -18,8 +18,11 @@ type Driver {
   carType: String
   vehicles(filter: ModelVehicleFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelVehicleConnection
   trips(filter: ModelTripFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTripConnection
+  routeId: ID
+  user: User
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  driverUserId: ID
 }
 
 type Rider {
@@ -27,9 +30,12 @@ type Rider {
   name: String!
   email: String!
   trips(filter: ModelTripFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTripConnection
+  routeId: ID
+  user: User
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   vehiclePassengersId: ID
+  riderUserId: ID
 }
 
 type Vehicle {
@@ -349,18 +355,22 @@ input ModelDriverFilterInput {
   name: ModelStringInput
   email: ModelStringInput
   carType: ModelStringInput
+  routeId: ModelIDInput
   and: [ModelDriverFilterInput]
   or: [ModelDriverFilterInput]
   not: ModelDriverFilterInput
+  driverUserId: ModelIDInput
 }
 
 input ModelDriverConditionInput {
   name: ModelStringInput
   email: ModelStringInput
   carType: ModelStringInput
+  routeId: ModelIDInput
   and: [ModelDriverConditionInput]
   or: [ModelDriverConditionInput]
   not: ModelDriverConditionInput
+  driverUserId: ModelIDInput
 }
 
 input CreateDriverInput {
@@ -368,6 +378,8 @@ input CreateDriverInput {
   name: String!
   email: String!
   carType: String
+  routeId: ID
+  driverUserId: ID
 }
 
 input UpdateDriverInput {
@@ -375,6 +387,8 @@ input UpdateDriverInput {
   name: String
   email: String
   carType: String
+  routeId: ID
+  driverUserId: ID
 }
 
 input DeleteDriverInput {
@@ -386,6 +400,7 @@ input ModelSubscriptionDriverFilterInput {
   name: ModelSubscriptionStringInput
   email: ModelSubscriptionStringInput
   carType: ModelSubscriptionStringInput
+  routeId: ModelSubscriptionIDInput
   and: [ModelSubscriptionDriverFilterInput]
   or: [ModelSubscriptionDriverFilterInput]
 }
@@ -399,33 +414,41 @@ input ModelRiderFilterInput {
   id: ModelIDInput
   name: ModelStringInput
   email: ModelStringInput
+  routeId: ModelIDInput
   and: [ModelRiderFilterInput]
   or: [ModelRiderFilterInput]
   not: ModelRiderFilterInput
   vehiclePassengersId: ModelIDInput
+  riderUserId: ModelIDInput
 }
 
 input ModelRiderConditionInput {
   name: ModelStringInput
   email: ModelStringInput
+  routeId: ModelIDInput
   and: [ModelRiderConditionInput]
   or: [ModelRiderConditionInput]
   not: ModelRiderConditionInput
   vehiclePassengersId: ModelIDInput
+  riderUserId: ModelIDInput
 }
 
 input CreateRiderInput {
   id: ID
   name: String!
   email: String!
+  routeId: ID
   vehiclePassengersId: ID
+  riderUserId: ID
 }
 
 input UpdateRiderInput {
   id: ID!
   name: String
   email: String
+  routeId: ID
   vehiclePassengersId: ID
+  riderUserId: ID
 }
 
 input DeleteRiderInput {
@@ -436,6 +459,7 @@ input ModelSubscriptionRiderFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
   email: ModelSubscriptionStringInput
+  routeId: ModelSubscriptionIDInput
   and: [ModelSubscriptionRiderFilterInput]
   or: [ModelSubscriptionRiderFilterInput]
 }

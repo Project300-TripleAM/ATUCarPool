@@ -16,18 +16,25 @@ export class AuthenticationService {
       console.log(`The userId: ${userId}`);
       console.log(`Sign in dets`, JSON.stringify(signInDetails, null, 2));
 
+      const existingUser = await this.API.getUser(username);
+      if(existingUser){
+        console.log(`User with username ${username} already exists. Updating subscription.`);
+
+      await this.API.updateUser(existingUser.id, username, signInDetails?.loginId, userSub);
+      console.log(`Subscription updated for user ${username}`);
+    } else {
+
       if (signInDetails) {
         console.log("Calling createUser function...");
         await this.API.createUser(username, signInDetails?.loginId, userSub);
-        console.log(`User created. ${username} - ${signInDetails.loginId}`);
+        console.log(`User created. ${username}`);
       } else {
         console.log("signInDetails is null or undefined.");
       }
-    } catch (err) {
-      console.log("Error in currentAuthenticatedUser function:", err);
-      throw err; 
     }
+  } catch (err) {
+    console.log("Error in currentAuthenticatedUser function:", err);
+    throw err; 
   }
-
-
+}
 }
