@@ -23,7 +23,6 @@ export class AuthenticationService {
       await this.API.updateUser(existingUser.id, username, signInDetails?.loginId, userSub);
       console.log(`Subscription updated for user ${username}`);
     } else {
-
       if (signInDetails) {
         console.log("Calling createUser function...");
         await this.API.createUser(username, signInDetails?.loginId, userSub);

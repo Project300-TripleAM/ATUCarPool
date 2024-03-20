@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { APIService } from '../API.service';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { APIInterfaceService } from '../services/APIInterface.service';
 
 
 
@@ -32,7 +32,7 @@ export class AddRouteComponent{
     destination: ''
   };
 
-  constructor(private router: Router, private http: HttpClient, private apiService: APIService, private location: Location) {}
+  constructor(private router: Router, private http: HttpClient, private api:APIInterfaceService, private location: Location) {}
 
   goBack() {
     this.location.back(); //function updated so the user will be brought back to the previous page they were on (either dashboard or map)
@@ -79,15 +79,14 @@ export class AddRouteComponent{
         longitude: destinationCoords.lng
       }
     };
-
-    this.apiService.createRoute(routeData).subscribe(
-      (response) => {
+  
+    this.api.createRoute(routeData)
+      .then((response) => {
         console.log('Route data sent to the database:', response);
-      },
-      (error) => {
+      })
+      .catch((error) => {
         console.error('Error sending route data to the database:', error);
-      }
-    );
+      });
   }
 
   //Code for taking the data as a string and changing it into coordinates

@@ -90,4 +90,19 @@ async getUser(id: string) {
       throw error; 
     }
   }
+  async createRoute(input: any, condition?: any) {
+    try {
+      const response = await client.graphql({ 
+        query: mutations.createRoute,
+        variables: {
+          input: input
+        }
+      });
+      console.log('Route created:', response.data.createRoute);
+      return response.data.createRoute;
+    } catch (error) {
+      console.error('Error creating route:', error);
+      throw error; 
+    }
+  }
 }
