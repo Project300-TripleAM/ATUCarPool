@@ -1,32 +1,45 @@
-<div id="map" style="height: 400px;"></div>
+<div class="map-container">
+  <div id="map" class="map"></div>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Origin</th>
-      <th>Destination</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <td colspan="4" class="add-route-cell">
-      <button mat-raised-button color="primary" class="hover-button" routerLink="/add-route">Add a route</button>
-    </td>
-    <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
-      <td>{{ route.origin.name }}</td>
-      <td>{{ route.destination.name }}</td>
-      <td class="center-button">
-        <!-- Estimated time -->
-        <div class="estimated-time" *ngIf="selectedRoute === route">
-          <mat-icon>schedule</mat-icon> <!-- Material icon for schedule -->
-          <strong>{{ estimatedTime }}</strong>
-        </div>        <!-- Buttons -->
-        <button mat-raised-button color="primary" class="hover-button" (click)="drawSelectedRoute(route)">Show on Map</button>
-        <button mat-raised-button color="primary" class="hover-button" (click)="checkAvailability(route.id)">Availability</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="routes-container">
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td colspan="4" class="add-route-cell">
+          <button mat-raised-button color="primary" class="hover-button" routerLink="/add-route">Add a route</button>
+        </td>
+        <tr *ngFor="let route of routes" (click)="selectRoute(route)" [class.selected]="route === selectedRoute">
+          <td>{{ route.origin.name }}</td>
+          <td>{{ route.destination.name }}</td>
+          <td class="center-button">
+            <!-- Estimated time -->
+            <div class="estimated-time" *ngIf="selectedRoute === route">
+              <mat-icon>schedule</mat-icon> <!-- Material icon for schedule -->
+              <strong>{{ estimatedTime }}</strong>
+            </div>
+            <!-- Buttons -->
+            <button mat-raised-button color="primary" class="hover-button" (click)="drawSelectedRoute(route)">Show on
+              Map</button>
+            <button mat-raised-button color="primary" class="hover-button"
+              (click)="checkAvailability(route)">Availability</button>
+            <div class="route-actions">
+              <button mat-raised-button color="primary" class="hover-button" (click)="flipRoute()">Flip Route</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="overlay" *ngIf="overlay">
   <div class="overlay-content">
     <h2>Available Routes</h2>

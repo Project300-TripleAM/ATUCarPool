@@ -147,4 +147,17 @@ export class MapComponent implements OnInit {
   requestRide(route:any){
 
   }
+
+  // function to flip route to act as return route
+  flipRoute() {
+    if (this.selectedRoute) {
+      const temp = { ...this.selectedRoute.origin }; // Create a copy of the origin
+      this.selectedRoute.origin = { ...this.selectedRoute.destination }; // Set the origin to the destination
+      this.selectedRoute.destination = temp; // Set the destination to the original origin
+      // Redraw the route on the map
+      this.drawSelectedRoute(this.selectedRoute);
+    } else {
+      console.error('No route selected.');
+    }
   }
+}

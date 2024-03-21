@@ -1,4 +1,27 @@
-/* General Styles for Table */
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Map Container Styles */
+.map-container {
+  flex: 1;
+  height: 300px;
+  overflow: hidden;
+  border-bottom: 3px solid black;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.routes-container {
+  flex: 1;
+  height: 300px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  border-top: 3px solid black;
+}
 .table-container {
     margin-top: 20px;
   }
@@ -43,16 +66,16 @@
   }
   
   .center-button button {
-    margin-right: 10px; /* Space between buttons */
+    margin-right: 10px; 
   }
 
   /* Add hover effect to buttons */
 .hover-button {
-  transition: background-color 0.3s ease; /* Smooth transition */
+  transition: background-color 0.3s ease; 
 }
 
 .hover-button:hover {
-  background-color: #68696a; /* Slightly darker color on hover */
+  background-color: #68696a; 
 }
 
 .estimated-time-and-buttons {

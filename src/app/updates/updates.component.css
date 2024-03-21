@@ -1,0 +1,49 @@
+.updates-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
+
+.card-container{
+  justify-content: center; /* Center horizontally */
+  align-items: center; 
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack items vertically for clarity */
+  margin-bottom: 20px;
+}
+
+.content-heading{
+ text-align:center
+}
+
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .updates-container, .card-container {
+    padding: 15px; /* Slightly reduce padding on smaller tablets */
+  }
+
+  .content ul {
+    width: 100%; /* Ensure full width usage for smaller devices */
+  }
+
+  .content ul li:before {
+    margin-left: 0; /* Adjust bullet points alignment on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .header, .content {
+    flex-direction: column;
+    text-align: center; /* Center content for very small devices */
+  }
+
+  .content ul {
+    padding-left: 0; /* Remove list indentation on small screens */
+  }
+}
