@@ -18,9 +18,10 @@ export class MapComponent implements OnInit {
   private apiKey = environment.apiKey;
   public routes: { id: string; origin: {name: string, lat: number, lng: number }; destination: { name: string, lat: number, lng: number } }[] = [];
   public estimatedTime: string = '';
+  availableRoutes: any;
 
   constructor(private router: Router, private cdr: ChangeDetectorRef, private API: APIInterfaceService) {}
-
+  overlay: boolean = false;
   async ngOnInit() {
       (window as any).initMap = this.initMap.bind(this);
       try {
@@ -124,8 +125,26 @@ export class MapComponent implements OnInit {
     this.selectedRoute = route;
   }
   
-  checkAvailability(route: any) {
-    // Handle the availability check logic here
-    console.log('Checking availability for route:', route);
+  async checkAvailability(route: any) {
+    try {
+      this.overlay = true;
+      const trip = await this.API.getTrip(route.id);
+      if (trip) {
+        console.log('Trips found for route:', route);
+        console.log('Trips:', trip);
+        this.availableRoutes = trip;
+      } else {
+        console.log('No trips found for route:', route);
+        this.availableRoutes = []; 
+      }
+    } catch (error) {
+      console.error('Error checking availability for route:', error);
+    }
   }
-}
+  closeOverlay() {
+    this.overlay = false; 
+  }
+  requestRide(route:any){
+
+  }
+  }

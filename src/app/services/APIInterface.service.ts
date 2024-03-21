@@ -36,7 +36,7 @@ async getUser(id: string) {
     throw error;
   }
 }
-//get by username
+
   //Get ROUTEs
   async getRoutes() {
     try {
@@ -48,7 +48,26 @@ async getUser(id: string) {
       throw error;
     }
   }
+//Get trips
+async getTrips() {
+  try{
+    const response = await client.graphql({query: queries.listTrips});
+    return response.data.listTrips.items;
+  } catch (error){
+    throw error;
+  }
+}
 
+//Get Trip
+async getTrip(id:string){
+    try{
+      const response = await client.graphql({query: queries.getTrip, variables: { id: id }});
+      return response.data.getTrip;
+    } catch (error){
+      throw error;
+    }
+  }
+  
   //####################################################### UPDATE ################################
   async updateUser(id: any, username: any, email: any, userSub: any) {
     try {

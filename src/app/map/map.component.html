@@ -22,8 +22,23 @@
           <strong>{{ estimatedTime }}</strong>
         </div>        <!-- Buttons -->
         <button mat-raised-button color="primary" class="hover-button" (click)="drawSelectedRoute(route)">Show on Map</button>
-        <button mat-raised-button color="primary" class="hover-button" (click)="checkAvailability(route)">Availability</button>
+        <button mat-raised-button color="primary" class="hover-button" (click)="checkAvailability(route.id)">Availability</button>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="overlay" *ngIf="overlay">
+  <div class="overlay-content">
+    <h2>Available Routes</h2>
+    <ng-container *ngIf="availableRoutes && availableRoutes.length > 0; else noRoutes">
+      <div *ngFor="let route of availableRoutes">
+        <div>{{ route.origin.name }} to {{ route.destination.name }}</div>
+        <button mat-raised-button color="primary" (click)="requestRide(route)">Request</button>
+      </div>
+    </ng-container>
+    <ng-template #noRoutes>
+      <p>No rides available.</p>
+    </ng-template>
+    <button mat-raised-button color="primary" (click)="closeOverlay()">Close</button>
+  </div>
+</div>
